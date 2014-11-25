@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>N2CMS.Library</id>
+    <id>{NuGetPrefix}N2CMS.Library</id>
     <version>{Version}</version>
-    <title>N2CMS Library</title>
+    <title>{NuGetPrefix}N2CMS Library</title>
     <authors>Cristian Libardo</authors>
     <owners>Cristian Libardo</owners>
     <licenseUrl>http://n2cms.com/Project/License.aspx</licenseUrl>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>N2CMS.Search.Lucene</id>
+		<id>{NuGetPrefix}N2CMS.Search.Lucene</id>
 		<version>{Version}</version>
-		<title>N2 CMS - Lucene Search and Indexing (local index)</title>
+		<title>{NuGetPrefix}N2 CMS - Lucene Search and Indexing (local index)</title>
 		<authors>Cristian Libardo</authors>
 		<owners>Cristian Libardo</owners>
 		<licenseUrl>http://n2cms.com/Project/License.aspx</licenseUrl>
@@ -15,7 +15,7 @@
 		<language>en-US</language>
 		<tags>N2 CMS</tags>
 		<dependencies>
-			<dependency id="N2CMS.Library" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Library" version="{Version}" />
 			<dependency id="Lucene.Net" version="3.0.3" />
 		</dependencies>
 	</metadata>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>N2CMS.Config.SQLite</id>
+		<id>{NuGetPrefix}N2CMS.Config.SQLite</id>
 		<version>{Version}</version>
-		<title>N2 CMS SQLite config (x86)</title>
+		<title>{NuGetPrefix}N2 CMS SQLite config (x86)</title>
 		<authors>Cristian Libardo</authors>
 		<owners>Cristian Libardo</owners>
 		<licenseUrl>http://n2cms.com/Project/License.aspx</licenseUrl>

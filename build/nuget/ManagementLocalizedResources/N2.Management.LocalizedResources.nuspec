@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>N2CMS.Management.LocalizedResources</id>
+    <id>{NuGetPrefix}N2CMS.Management.LocalizedResources</id>
     <version>{Version}</version>
-    <title>N2 CMS Management Localization (multiple languages)</title>
+    <title>{NuGetPrefix}N2 CMS Management Localization (multiple languages)</title>
     <authors>Cristian Libardo</authors>
     <owners>Cristian Libardo</owners>
     <licenseUrl>http://n2cms.com/Project/License.aspx</licenseUrl>
@@ -15,7 +15,7 @@
     <language>en-US</language>
     <tags>N2 CMS, Localization</tags>
 		<dependencies>
-			<dependency id="N2CMS.Management" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Management" version="{Version}" />
 		</dependencies>
 	</metadata>
 </package>

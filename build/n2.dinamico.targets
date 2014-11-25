@@ -84,6 +84,7 @@
 		</ItemGroup>
 		<Copy SourceFiles="@(bundlesDinamicoNugetIncludes)" DestinationFolder="$(Bundle-Dinamico-NugetFolder)\%(RecursiveDir)" />
 		<FileUpdate Files="$(Bundle-Dinamico-NugetFolder)\N2.Bundles.Dinamico.nuspec" Regex="{Version}" ReplacementText="$(Version)" />
+		<FileUpdate Files="$(Bundle-Dinamico-NugetFolder)\N2.Bundles.Dinamico.nuspec" Regex="{NuGetPrefix}" ReplacementText="$(NuGetPrefix)" />
 
 		<Exec Command="$(BuildFolder)\lib\NuGet.exe pack -OutputDirectory .." WorkingDirectory="$(Bundle-Dinamico-NugetFolder)\" />
 	</Target>
@@ -98,6 +99,7 @@
 		</ItemGroup>
 		<Copy SourceFiles="@(dinamicoNugetIncludes)" DestinationFolder="$(Dinamico-NugetFolder)\%(RecursiveDir)" />
 		<FileUpdate Files="$(Dinamico-NugetFolder)\N2.Dinamico.nuspec" Regex="{Version}" ReplacementText="$(Version)" />
+		<FileUpdate Files="$(Dinamico-NugetFolder)\N2.Dinamico.nuspec" Regex="{NuGetPrefix}" ReplacementText="$(NuGetPrefix)" />
 
 		<Exec Command="$(BuildFolder)\lib\NuGet.exe pack -OutputDirectory .." WorkingDirectory="$(Dinamico-NugetFolder)\" />
 	</Target>
@@ -112,6 +114,7 @@
 		</ItemGroup>
 		<Copy SourceFiles="@(dinamicoDemoContentNugetIncludes)" DestinationFolder="$(DinamicoDemoContent-NugetFolder)\%(RecursiveDir)" />
 		<FileUpdate Files="$(DinamicoDemoContent-NugetFolder)\N2.Dinamico.DemoContent.nuspec" Regex="{Version}" ReplacementText="$(Version)" />
+		<FileUpdate Files="$(DinamicoDemoContent-NugetFolder)\N2.Dinamico.DemoContent.nuspec" Regex="{NuGetPrefix}" ReplacementText="$(NuGetPrefix)" />
 
 		<Exec Command="$(BuildFolder)\lib\NuGet.exe pack -OutputDirectory .." WorkingDirectory="$(DinamicoDemoContent-NugetFolder)\" />
 	</Target>

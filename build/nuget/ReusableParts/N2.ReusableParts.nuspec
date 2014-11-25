@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>N2CMS.ReusableParts</id>
+		<id>{NuGetPrefix}N2CMS.ReusableParts</id>
 		<version>{Version}</version>
-		<title>N2CMS Reusable Parts</title>
+		<title>{NuGetPrefix}N2CMS Reusable Parts</title>
 		<authors>Benjamin Herila</authors>
 		<owners>Benjamin Herila, Cristian Libardo</owners>
 		<licenseUrl>http://www.boost.org/users/license.html</licenseUrl>
@@ -15,7 +15,7 @@
 		<language>en-US</language>
 		<tags>N2 CMS</tags>
 		<dependencies>
-			<dependency id="N2CMS.Library" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Library" version="{Version}" />
 		</dependencies>
 	</metadata>
 </package>

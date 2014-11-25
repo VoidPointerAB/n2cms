@@ -34,9 +34,12 @@
 		<Platform Condition="'$(Platform)' == 'BPC'">Any CPU</Platform>
 		
 		<MSBuildCommunityTasksPath>$(RootFolder)\lib</MSBuildCommunityTasksPath>
+		
+		<NuGetPrefix></NuGetPrefix>
 	</PropertyGroup>
 
 	<Import Project="$(RootFolder)\build\lib\MSBuild.Community.Tasks.targets"/>
+	<Import Project="n2.voidpointer.targets"/>
 	<Import Project="n2.framework.targets"/>
 	<Import Project="n2.templates.webforms.targets"/>
 	<Import Project="n2.templates.mvc.targets"/>

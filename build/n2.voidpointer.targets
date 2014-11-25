@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+	<PropertyGroup>
+		<Major>1</Major>
+		<Minor>0</Minor>
+		<Build>0</Build>
+		<Revision>0</Revision>
+		
+		<NuGetPrefix Condition="'$(NuGetPrefix)' == ''">VP_</NuGetPrefix>
+	</PropertyGroup>
+	
+	<Target Name="VoidPointer">
+
+		<Version BuildType="Automatic" RevisionType="Automatic" Major="$(Major)" Minor="$(Minor)" StartDate="2014-11-25">
+			<Output TaskParameter="Build" PropertyName="Build" />
+			<Output TaskParameter="Revision" PropertyName="Revision" />
+        </Version>
+		
+		<PropertyGroup>
+			<Version>$(Major).$(Minor).$(Build).$(Revision)</Version>
+		</PropertyGroup>
+		
+		<PropertyGroup>
+			<DeployPrefix>vpn2cms_$(Major).$(Minor).$(Build).$(Revision)_</DeployPrefix>
+		</PropertyGroup>
+		
+		
+
+        <Message Text="Version: $(Version)"/>
+	
+	</Target>
+</Project>

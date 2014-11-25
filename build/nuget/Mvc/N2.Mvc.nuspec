@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>N2CMS.Mvc</id>
+    <id>{NuGetPrefix}N2CMS.Mvc</id>
     <version>{Version}</version>
-    <title>N2CMS MVC Support</title>
+    <title>{NuGetPrefix}N2CMS MVC Support</title>
     <authors>Cristian Libardo</authors>
     <owners>Cristian Libardo</owners>
     <licenseUrl>http://n2cms.com/Project/License.aspx</licenseUrl>
@@ -16,8 +16,8 @@
     <tags>N2 CMS</tags>
 		<dependencies>
       <group>
-        <dependency id="N2CMS.Library" version="{Version}" />
-        <dependency id="N2CMS.Razor" version="{Version}" />
+        <dependency id="{NuGetPrefix}N2CMS.Library" version="{Version}" />
+        <dependency id="{NuGetPrefix}N2CMS.Razor" version="{Version}" />
       </group>
       <group targetFramework="net40">
         <dependency id="Microsoft.AspNet.Mvc" version="[4.0.30506]" />

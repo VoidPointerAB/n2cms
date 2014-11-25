@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>N2CMS</id>
+		<id>{NuGetPrefix}N2CMS</id>
 		<version>{Version}</version>
-		<title>N2CMS</title>
+		<title>{NuGetPrefix}N2CMS</title>
 		<authors>Cristian Libardo</authors>
 		<owners>Cristian Libardo</owners>
 		<licenseUrl>http://n2cms.com/Project/License.aspx</licenseUrl>
@@ -15,10 +15,10 @@
 		<language>en-US</language>
 		<tags>N2 CMS</tags>
 		<dependencies>
-			<dependency id="N2CMS.Config" version="2.6.2" />
-			<dependency id="N2CMS.Library" version="{Version}" />
-			<dependency id="N2CMS.Management" version="{Version}" />
-			<dependency id="N2CMS.Search.Lucene" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Config" version="2.6.2" />
+			<dependency id="{NuGetPrefix}N2CMS.Library" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Management" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Search.Lucene" version="{Version}" />
 		</dependencies>
 	</metadata>
 </package>
