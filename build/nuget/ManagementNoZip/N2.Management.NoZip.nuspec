@@ -17,7 +17,7 @@
 		<dependencies>
 			<group>
 				<dependency id="{NuGetPrefix}N2CMS.Library" version="{Version}" />
-				<dependency id="{NuGetPrefix}N2CMS.Config" version="2.6.2" />
+				<dependency id="{NuGetPrefix}N2CMS.Config" version="{Version}" />
 			</group>
 		</dependencies>
 	</metadata>

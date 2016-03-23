@@ -358,6 +358,8 @@
   </Target>
 
   <Target Name="Build-NuGet" DependsOnTargets="VoidPointer;
+												Config-NuGet;
+												LocalResources-NuGet;
 												Framework-NuGet;
                                                Library-NuGet;
                                                SQLite-NuGet;

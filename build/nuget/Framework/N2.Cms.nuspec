@@ -15,7 +15,7 @@
 		<language>en-US</language>
 		<tags>N2 CMS</tags>
 		<dependencies>
-			<dependency id="{NuGetPrefix}N2CMS.Config" version="2.6.2" />
+			<dependency id="{NuGetPrefix}N2CMS.Config" version="{Version}" />
 			<dependency id="{NuGetPrefix}N2CMS.Library" version="{Version}" />
 			<dependency id="{NuGetPrefix}N2CMS.Management" version="{Version}" />
 			<dependency id="{NuGetPrefix}N2CMS.Search.Lucene" version="{Version}" />
