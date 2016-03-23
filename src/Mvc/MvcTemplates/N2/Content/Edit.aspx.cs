@@ -31,7 +31,8 @@ namespace N2.Edit
 	[ControlPanelLink("cpEdit", "{ManagementUrl}/Resources/icons/page_edit.png", "{ManagementUrl}/Content/Edit.aspx?{Selection.SelectedQueryKey}={Selected.Path}&n2versionIndex={Selected.VersionIndex}", "Edit page", 50, ControlPanelState.Visible | ControlPanelState.DragDrop,
 		CssClass = "complementary",
 		RequiredPermission = Permission.Write,
-		IconClass = "fa fa-pencil-square")]
+		IconClass = "fa fa-pencil-square",
+		Legacy = true)]
 	[ControlPanelPreviewPublish("Publish draft", 70,
 		RequiredPermission = Permission.Publish)]
 	[ControlPanelEditingSave("Save changes", 10,
@@ -154,7 +155,7 @@ namespace N2.Edit
 
 			Engine.AddActivity(new ManagementActivity { Operation = "Preview", PerformedBy = User.Identity.Name, Path = ie.CurrentItem.Path, ID = ie.CurrentItem.ID });
 
-			HandleResult(ctx, previewUrl);
+			HandleResult(ctx, Request["returnUrl"], previewUrl);
 		}
 
 		protected void OnSaveUnpublishedCommand(object sender, CommandEventArgs e)
@@ -214,7 +215,15 @@ namespace N2.Edit
 					Response.Redirect(ctx.RedirectUrl.ToUrl().AppendQuery("returnUrl", redirectUrl, unlessNull: true));
 
 				Refresh(ctx.Content, ToolbarArea.Navigation);
-				Refresh(ctx.Content, redirectUrl ?? Engine.GetContentAdapter<NodeAdapter>(ctx.Content).GetPreviewUrl(ctx.Content));
+				var previewUrl = (redirectUrl ?? Engine.GetContentAdapter<NodeAdapter>(ctx.Content).GetPreviewUrl(ctx.Content)).ToUrl();
+				previewUrl = previewUrl.SetQueryParameter("refresh", "true");
+				previewUrl = previewUrl.SetQueryParameter("n2scroll", Request["n2scroll"]);
+				if (!string.IsNullOrEmpty(Request["n2reveal"]))
+					previewUrl = previewUrl.SetQueryParameter("n2reveal", Request["n2reveal"]);
+				else if (!ctx.Content.IsPage)
+					previewUrl = previewUrl.SetQueryParameter("n2reveal", "part" + (string.IsNullOrEmpty(ctx.Content.GetVersionKey()) ? ctx.Content.ID.ToString() : ctx.Content.GetVersionKey()));
+
+				Refresh(ctx.Content, previewUrl);
 			}
 		}
 
@@ -299,22 +308,25 @@ namespace N2.Edit
 				}
 
 				Title = string.Format(format, definitionTitle);
-
 			}
 			else
 			{
 				string format = GetLocalResourceString("EditPage.TitleFormat.Update", "Edit \"{0}\"");
 				Title = string.Format(format, string.IsNullOrEmpty(ie.CurrentItem.Title) ? definitionTitle : ie.CurrentItem.Title);
 			}
-		}
+			Items["HelpText"] = definition.HelpText;
+			Items["EditingInstructions"] = definition.EditingInstructions;
+        }
 
 		private void InitItemEditor()
 		{
 			ie.AddPlaceHolder("Sidebar", phSidebar);
 
-			string dataType = Request["dataType"];
-			string discriminator = Request["discriminator"];
-			string template = Request["template"];
+			var request = new HttpRequestWrapper(Request);
+			
+			string dataType = EditExtensions.GetDataType(request);
+			string discriminator = EditExtensions.GetDiscriminator(request);
+			string template = EditExtensions.GetTemplate(request);
 
 			if (!string.IsNullOrEmpty(discriminator))
 			{
@@ -407,6 +419,12 @@ namespace N2.Edit
 		{
 			add { ie.Saved += value; }
 			remove { ie.Saved -= value; }
+		}
+
+		public event Action<object, CommandContext> CreatingContext
+		{
+			add { ie.CreatingContext += value; }
+			remove { ie.CreatingContext -= value; }
 		}
 
 		#endregion

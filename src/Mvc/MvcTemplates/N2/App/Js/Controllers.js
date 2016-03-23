@@ -5,16 +5,30 @@
 			format: 'M d, yyyy'
 		}
 	});
-})(angular.module('n2', ['n2.directives', 'n2.services', 'n2.localization', 'ui', '$strap.directives', "ngRoute"], function ($routeProvider, $locationProvider) {
-    if (history.pushState) {
-        $locationProvider.html5Mode(true);
-        $locationProvider.hashPrefix("!");
-    }
+})(angular.module('n2', ['n2.directives', 'n2.services', 'n2.localization', 'ui', '$strap.directives', "ngRoute", "ngSanitize"], function ($routeProvider, $locationProvider, $httpProvider, $provide) {
+	if (history.pushState) {
+		$locationProvider.html5Mode(true);
+		$locationProvider.hashPrefix("!");
+	}
 	$routeProvider.otherwise({
-	    templateUrl: "App/Partials/Framework.html",
-	    controller: "ManagementCtrl",
-	    reloadOnSearch: false
+		templateUrl: "App/Partials/Framework.html",
+		controller: "ManagementCtrl",
+		reloadOnSearch: false
 	});
+
+	$provide.factory('EmittingInterceptor', function ($q, $rootScope) {
+		return {
+			'request': function (config) {
+				$rootScope.$emit("request", config);
+				return config;
+			},
+			'responseError': function (rejection) {
+				$rootScope.$emit("responseError", rejection);
+				return $q.reject(rejection);
+			}
+		}
+	});
+	$httpProvider.interceptors.push('EmittingInterceptor');
 }))
 
 function findBranch(node, selectedPath) {
@@ -26,7 +40,7 @@ function findBranch(node, selectedPath) {
 	if (selectedPath.indexOf(node.Current.Path) < 0) {
 		return null;
 	}
-	
+
 	for (var i in node.Children) {
 		var n = findBranch(node.Children[i], selectedPath);
 		if (n) {
@@ -51,6 +65,10 @@ function findNodeRecursive(node, selectedPath) {
 		var n = findNodeRecursive(node.Children[i], selectedPath);
 		if (n) return n;
 	}
+	for (var i in node.Parts) {
+		var n = findNodeRecursive(node.Parts[i], selectedPath);
+		if (n) return n;
+	}
 	return null;
 }
 
@@ -67,25 +85,26 @@ function getParentPath(path) {
 	return parentPathExpr.exec(path) && parentPathExpr.exec(path)[1];;
 }
 
-function Uri(uri) {
-	this.uri = uri;
-	this.appendQuery = function(key, value) {
-		if (uri.indexOf("?") >= 0)
-			this.uri += "&" + key + "=" + value;
-		else
-			this.uri += "?" + key + "=" + value;
-		return this;
-	};
-	this.toString = function() {
-		return this.uri;
-	};
-};
-
-function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Context, Content, Profile, Security, FrameContext, Translate, Eventually, LocationKeeper) {
+function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, $rootScope, Context, Content, Profile, Security, FrameContext, Translate, Eventually, LocationKeeper, Notify, EbbCallbacks, Paths) {
 	$scope.Content = Content;
 	$scope.Security = Security;
 
-	$scope.appendPreviewOptions = function(url) {
+	$scope.Initialization = {
+		requests: [],
+		errors: [],
+		deregeristrators: [
+			$rootScope.$on("request", function (e, args) { $scope.Initialization.requests.push(args.url); }),
+			$rootScope.$on("responseError", function (e, rejection) { $scope.Initialization.errors.push(rejection); })
+		],
+		dispose: function () {
+			angular.forEach(this.deregeristrators, function (d) { d(); });
+			setTimeout(function () {
+				delete $scope.Initialization;
+			});
+		}
+	};
+
+	$scope.appendPreviewOptions = function (url) {
 		if (url == "Empty.aspx")
 			return url;
 
@@ -96,14 +115,26 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 		return url;
 	};
 
-	$scope.setPreviewQuery = function(key, value) {
+	function reloadTreePreviewOptionsRecursive(node) {
+		if (!node) return;
+		node.Url = $scope.appendPreviewOptions(node.Current.PreviewUrl);
+		angular.forEach(node.Children, reloadTreePreviewOptionsRecursive);
+		node.Parts && angular.forEach(node.Parts, reloadTreePreviewOptionsRecursive);
+	}
+
+	$scope.$watch("Context.PreviewQueries", function (q) {
+		if (!q) return;
+		reloadTreePreviewOptionsRecursive($scope.Context.Content);
+	}, true);
+
+	$scope.setPreviewQuery = function (key, value) {
 		if (value)
 			$scope.Context.PreviewQueries[key] = value;
 		else
 			delete $scope.Context.PreviewQueries[key];
 	};
 
-	$scope.appendQuery = function(url, key, value) {
+	$scope.appendQuery = function (url, key, value) {
 		if (!url) return url;
 
 		var hashIndex = url.indexOf("#");
@@ -119,24 +150,54 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 			return url + (url.indexOf("?") < 0 ? "?" : "&") + keyValue;
 	};
 
-	$scope.appendSelection = function(url, appendVersionIndex) {
+	$scope.appendSelection = function (url, appendPreviewQueries) {
 		var ctx = $scope.Context;
 		if (!ctx.CurrentItem)
 			return url;
 		url = $scope.appendQuery(url, ctx.Paths.SelectedQueryKey + "=" + ctx.CurrentItem.Path + "&" + ctx.Paths.ItemQueryKey + "=" + ctx.CurrentItem.ID);
-		if (appendVersionIndex)
-			url += "&n2versionIndex=" + ctx.CurrentItem.VersionIndex;
+		if (appendPreviewQueries) {
+			for (var key in $scope.Context.PreviewQueries) {
+				url += "&" + key + "=" + $scope.Context.PreviewQueries[key];
+			}
+			//console.log("appendSelection", url, appendVersionIndex);
+			//url += "&n2versionIndex=" + ctx.CurrentItem.VersionIndex;
+		}
 		return url;
 	};
 
-	$scope.previewUrl = function(url) {
+	$scope.previewUrl = function (url) {
 		if (window.frames.preview)
 			window.frames.preview.window.location = $scope.appendPreviewOptions(url) || "Empty.aspx";
 	};
 
+	function broadcastUpdaterequest(updaterequest) {
+		setTimeout(function () {
+			$scope.$apply(function () {
+				$scope.$broadcast("refreshnode", updaterequest);
+			});
+		});
+	}
+	decorate(FrameContext, "update", function (updaterequest) {
+		if (updaterequest.node && updaterequest.autosaved)
+		{
+			var node = findNodeRecursive($scope.Context.Content, updaterequest.path);
+			if (node)
+				return broadcastUpdaterequest(updaterequest);
+
+			var parentPath = getParentPath(updaterequest.path);
+			var parentNode = findNodeRecursive($scope.Context.Content, parentPath);
+			if (parentNode) {
+				$scope.reloadChildren(parentPath, /*callback*/function () {
+					$scope.expandTo(updaterequest.path, /*select*/true);
+					broadcastUpdaterequest(updaterequest);
+				});
+			}
+		}
+	});
+
 	decorate(FrameContext, "refresh", function (ctx) {
 		// legacy refresh call from frame
-	    if (ctx.force) {
+		if (ctx.force) {
 			$scope.reloadNode(ctx.path);
 			$scope.reloadChildren(ctx.path);
 			if (ctx.previewUrl) {
@@ -151,12 +212,12 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 
 		if (!findNodeRecursive($scope.Context.Content, ctx.path)) {
 			$scope.reloadChildren(getParentPath(ctx.path), /*callback*/function () {
-			    $scope.expandTo(ctx.path, /*select*/true);
+				$scope.expandTo(ctx.path, /*select*/true);
 			}, /*pathNotFound*/function () {
 				$scope.reloadTree(/*selectedPath*/ctx.path);
 			});
 		} else if (ctx.force) {
-		    $scope.expandTo(ctx.path, /*select*/true);
+			$scope.expandTo(ctx.path, /*select*/true);
 		}
 	});
 
@@ -165,10 +226,10 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 			PreviewUrl: "Empty.aspx"
 		},
 		SelectedNode: {
-			
+
 		},
 		ContextMenu: {
-			
+
 		},
 		Partials: {
 			Management: "App/Partials/Loading.html"
@@ -178,6 +239,79 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 			Settings: {}
 		}
 	};
+
+	$scope.$on("changecontext", function (e, args) {
+		var current = $scope.Context.Messages;
+		var latest = args.Messages;
+		angular.forEach(args, function (value, key) {
+			if (key == "Messages") {
+				var current = $scope.Context[key];
+				var changed = args[key];
+				if (!current || !changed)
+					$scope.Context[key] = changed;
+				else if (current.length != changed.length)
+					$scope.Context[key] = changed;
+				else
+					for (var i = 0; i < current.length; i++) {
+						if (current[i].Id != latest[i].Id)
+							$scope.Context[key] = changed;
+					}
+			}
+		});
+
+		if (!$scope.$$phase)
+			$scope.$digest();
+	});
+
+	var communicationattempts = 0;
+	$scope.$on("communicationfailure", function (e, args) {
+		if (communicationattempts)
+			return;
+
+		function retryStatus(message, retryTimeout) {
+			$scope.Context.Flags.CommunicationFailure = true;
+
+			communicationattempts++;
+
+			retryTimeout = retryTimeout || 10000;
+
+			if (message) {
+				Notify.show({
+					iconClass: "fa fa-wifi",
+					message: message + " Waiting " + (retryTimeout / 1000) + " seconds before retrying.",
+					type: "error"
+				});
+			}
+			$timeout(function () {
+				Context.status({}, function success(result) {
+					if (!result || result.Running) {
+						$scope.Context.Flags.CommunicationFailure = false;
+
+						communicationattempts = 0;
+						Notify.show({
+							iconClass: "fa fa-wifi",
+							message: "Server connection restored.",
+							type: "succes",
+							timeout: 5000
+						});
+					} else {
+						retryStatus(result.Message, retryTimeout + 10000)
+					}
+				}, function failure() {
+					retryStatus(message, retryTimeout + 10000)
+				});
+			}, retryTimeout);
+		}
+
+		Context.status({}, function success(result) {
+			if (result && !result.Running) {
+				retryStatus(result.Message);
+			} else
+				communicationattempts = 0;
+		}, function failure() {
+			retryStatus("Server connection lost.");
+		});
+	});
 
 	function translateMenuRecursive(node) {
 		var translation = node.Current && node.Current.Name && Translate(node.Current.Name);
@@ -191,9 +325,9 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 		}
 	}
 
-	$scope.watchChanges = function(watchExpression, listener, objectEquality) {
+	$scope.watchChanges = function (watchExpression, listener, objectEquality) {
 		var firstTime = true;
-		$scope.$watch(watchExpression, function() {
+		$scope.$watch(watchExpression, function () {
 			if (firstTime)
 				firstTime = false;
 			else
@@ -203,8 +337,9 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 
 	var query = $location.search();
 	Context.full(query, function (i) {
+		Paths.initialize(i.Interface.Paths)
+		$scope.Initialization.dispose();
 		$scope.Context.Partials.Management = "App/Partials/Management.html";
-		Content.paths = i.Interface.Paths;
 		translateMenuRecursive(i.Interface.MainMenu);
 		translateMenuRecursive(i.Interface.ActionMenu);
 		translateMenuRecursive(i.Interface.ContextMenu);
@@ -216,7 +351,7 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 
 		$scope.watchChanges("Context.User", function (user) {
 			Eventually(function () {
-				if (user.$saved){
+				if (user.$saved) {
 					delete user.$saved;
 					return;
 				}
@@ -228,13 +363,13 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 		}, true);
 		$scope.saveUserSettings = function () {
 			$scope.Context.User.$saved = true;
-			Profile.save({}, $scope.Context.User, function (data) {
-			});
+			Profile.save({}, $scope.Context.User, function (data) { });
 		}
 	});
 
-	$scope.refreshContext = function(node, versionIndex, keepFlags, callback) {
-		Context.get(Content.applySelection({ view: $scope.Context.User.Settings.ViewPreference, n2versionIndex: versionIndex }, node.Current), function(ctx) {
+	$scope.refreshContext = function (node, versionIndex, keepFlags, callback) {
+		var settings = $scope.Context.User.Settings;
+		Context.get(Content.applySelection({ view: settings.ViewPreference, n2versionIndex: versionIndex, lastDismissed: settings.LastDismissed }, node.Current), function (ctx) {
 			//console.log("select -> contextchanged", node, versionIndex, ctx);
 			if (keepFlags)
 				angular.extend($scope.Context, ctx, { Flags: $scope.Context.Flags });
@@ -246,7 +381,7 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 	};
 
 	$scope.expandTo = function (nodeOrPath, select) {
-	    var path = typeof nodeOrPath == "string" ? nodeOrPath : nodeOrPath && nodeOrPath.Current && nodeOrPath.Current.Path;
+		var path = typeof nodeOrPath == "string" ? nodeOrPath : nodeOrPath && nodeOrPath.Current && nodeOrPath.Current.Path;
 		if (!path)
 			return;
 		var branch = findBranch($scope.Context.Content, path);
@@ -266,13 +401,13 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 	}
 
 	$scope.select = function (nodeOrPath, versionIndex, keepFlags, forceContextRefresh, preventReload, disregardNodeUrl) {
-	    if (typeof nodeOrPath == "string") {
+		if (typeof nodeOrPath == "string") {
 			var path = nodeOrPath;
 			var node = findNodeRecursive($scope.Context.Content, path);
 			if (!node) {
 				var parentNode = findNodeRecursive($scope.Context.Content, getParentPath(path));
 				if (!preventReload && parentNode) {
-					$scope.reloadChildren(parentNode, function() {
+					$scope.reloadChildren(parentNode, function () {
 						// this is meant to refresh an item with changed path
 						$scope.select(path, versionIndex, keepFlags, forceContextRefresh, /*preventReload*/true, /*disregardNodeUrl*/true);
 					});
@@ -296,22 +431,26 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 				$scope.Context.AppliesTo = node.Current.PreviewUrl;
 			}
 
-			$timeout(function() {
+			$timeout(function () {
 				$scope.refreshContext(node, versionIndex, keepFlags)
-			}, 200);
+			}, 10);
 			return true;
 		}
 	};
 
-	$scope.reloadChildren = function(parentPathOrNode, callback, pathNotFound) {
+	$scope.reloadChildren = function (parentPathOrNode, callback, pathNotFound) {
 		var node = typeof parentPathOrNode == "string"
 			? findNodeRecursive($scope.Context.Content, parentPathOrNode)
 			: parentPathOrNode;
 
-		if (node)
-		    Content.loadChildren(node, callback);
+		if (node) {
+			Content.loadChildren(node, function () {
+				callback && callback.apply(this, arguments);
+				$scope.$emit("childrenloaded", { node: node });
+			});
+		}
 		else if (pathNotFound)
-		    pathNotFound(parentPathOrNode);
+			pathNotFound(parentPathOrNode);
 	};
 
 	$scope.reloadNode = function (pathOrNode, callback) {
@@ -319,17 +458,17 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 			? findNodeRecursive($scope.Context.Content, pathOrNode)
 			: pathOrNode;
 
-		Content.reload(node, function(node) {
+		Content.reload(node, function (node) {
 			callback && callback(node);
 		});
 	};
 
 	$scope.isFlagged = function (flag) {
-		return jQuery.inArray(flag, $scope.Context.Flags) >= 0;
+		return $scope.Context.Flags[flag];
 	};
-	
+
 	var viewExpression = /[?&]view=[^?&]*/;
-	$scope.$on("preiewloaded", function (scope, e) {
+	$rootScope.$on("preiewloaded", function (scope, e) {
 		if ($scope.Context.AppliesTo == (e.path + e.query)) {
 			//console.log("bailing out", $scope.Context.AppliesTo, "==", (e.path + e.query));
 			return;
@@ -337,13 +476,13 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 		//console.log("setting appliesTo (2)", e.path + e.query);
 		$scope.Context.AppliesTo = e.path + e.query;
 
-		$timeout(function () {
+		Eventually(function () {
 			Context.get({ selectedUrl: e.path + e.query }, function (ctx) {
 				//console.log("previewloaded -> contextchanged", e, ctx);
 				angular.extend($scope.Context, ctx);
 				$scope.$emit("contextchanged", $scope.Context);
 			});
-		}, 200);
+		}, 100);
 	});
 
 	$scope.evaluateExpression = function (expr) {
@@ -351,9 +490,9 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 	};
 
 	$scope.isDisplayable = function (item) {
-	    if (item.IsHidden) {
-	        return false;
-	    }
+		if (item.IsHidden) {
+			return false;
+		}
 		if ($scope.Context.CurrentItem && !Security.permissions.is(item.Current.RequiredPermission, $scope.Context.CurrentItem.MaximumPermission)) {
 			return false;
 		}
@@ -372,21 +511,21 @@ function ManagementCtrl($scope, $window, $timeout, $interpolate, $location, Cont
 }
 
 function ManagementConfirmCtrl($rootScope, $scope) {
-    $scope.confirm = function () {
-        $scope.settings.confirmed && $scope.settings.confirmed();
-        delete $scope.settings;
-    }
-    $scope.close = function () {
-        $scope.settings.cancelled && $scope.settings.cancelled();
-        delete $scope.settings;
-    }
-    $rootScope.$on("confirm", function (e, settings) {
-        $scope.settings = settings;
-        if (!$scope.$$phase) {
-            // specific sceanrio: move
-            $scope.$digest();
-        }
-    });
+	$scope.confirm = function () {
+		$scope.settings.confirmed && $scope.settings.confirmed();
+		delete $scope.settings;
+	}
+	$scope.close = function () {
+		$scope.settings.cancelled && $scope.settings.cancelled();
+		delete $scope.settings;
+	}
+	$rootScope.$on("confirm", function (e, settings) {
+		$scope.settings = settings;
+		if (!$scope.$$phase) {
+			// specific sceanrio: move
+			$scope.$digest();
+		}
+	});
 }
 
 function NavigationCtrl($scope, ContextMenuFactory) {
@@ -417,9 +556,15 @@ function ScopeHandler($scope, Content) {
 	return this;
 }
 
-function TrunkCtrl($scope, $rootScope, Content, SortHelperFactory) {
+function TrunkCtrl($scope, $rootScope, Content, SortHelperFactory, Uri, Notify) {
 	$scope.$watch("Context.Content", function (content) {
 		$scope.node = content;
+	});
+	$scope.$watch("Context.SelectedNode", function (node, prev) {
+		if (prev)
+			delete prev.Active;
+		if (node)
+			node.Active = true;
 	});
 	$rootScope.$on("contextchanged", function (scope, ctx) {
 		if (ctx.Actions.refresh) {
@@ -430,16 +575,21 @@ function TrunkCtrl($scope, $rootScope, Content, SortHelperFactory) {
 		}
 		else if (ctx.CurrentItem)
 			$scope.Context.SelectedNode = findNodeRecursive($scope.Context.Content, ctx.CurrentItem.Path);
-		else
-			$scope.Context.SelectedNode = null;
 	});
 	$scope.nodeClicked = function (node) {
 		$scope.Context.User.Settings.Selected = node.Current.Path;
 		$scope.select(node);
 	}
 	$scope.toggle = function (node) {
-		if (!node.Expanded && !node.Children.length) {
-			Content.loadChildren(node);
+		if (node.Expanded) {
+			if (node.Children.length && !node.Current.MetaInformation.placeholder)
+				Content.unloadChildren(node);
+		} else {
+			if (!node.Children.length) {
+				Content.loadChildren(node, function () {
+					$scope.$emit("childrenloaded", { node: node });
+				});
+			}
 		}
 		node.Expanded = !node.Expanded;
 	};
@@ -455,9 +605,9 @@ function TrunkCtrl($scope, $rootScope, Content, SortHelperFactory) {
 	}
 	$scope.sort = new SortHelperFactory($scope, Content);
 	$scope.parts = {
-		show: function(node) {
+		show: function (node) {
 			node.Loading = true;
-			Content.children(Content.applySelection({ pages: false }, node.Current), function(data) {
+			Content.children(Content.applySelection({ pages: false }, node.Current), function (data) {
 				var zones = {};
 				for (var i in data.Children) {
 					var part = data.Children[i];
@@ -473,7 +623,13 @@ function TrunkCtrl($scope, $rootScope, Content, SortHelperFactory) {
 					if (!zone)
 						continue;
 					var child = {
-						Current: { Title: zone, IconClass: "fa fa-columns silver", MetaInformation: [] },
+						Current: {
+							Title: zone,
+							IconClass: "fa fa-columns silver",
+							MetaInformation: { placeholder: { ToolTip: "", Text: "" } },
+							PreviewUrl: new Uri(node.Current.PreviewUrl).appendQuery("n2zone", zone).toString(),
+							Path: node.Current.Path
+						},
 						HasChildren: true,
 						Children: zones[zone]
 					};
@@ -483,7 +639,7 @@ function TrunkCtrl($scope, $rootScope, Content, SortHelperFactory) {
 				delete node.Loading;
 			});
 		},
-		hide: function(node) {
+		hide: function (node) {
 			delete node.Parts;
 			if (!node.HasChildren)
 				node.Expanded = false;
@@ -492,23 +648,79 @@ function TrunkCtrl($scope, $rootScope, Content, SortHelperFactory) {
 	$scope.scope = new ScopeHandler($scope, Content);
 }
 
-function BranchCtrl($scope, Content, Translate, SortHelperFactory) {
+function BranchCtrl($scope, $timeout, Content, Translate, SortHelperFactory, Notify) {
 	$scope.node = $scope.child;
 	$scope.sort = new SortHelperFactory($scope, Content);
-	$scope.tags = [];
-	if ($scope.node.Current) {
-		var mi = $scope.node.Current.MetaInformation;
-		if (mi) {
-			if (mi.authority) $scope.tags.push({ ToolTip: Translate("branch.tags.authority", "Site: ") + (mi.authority.ToolTip || " (*)"), IconClass: "fa fa-home", Url: "#" });
-			if (mi.hidden) $scope.tags.push({ ToolTip: Translate("branch.tags.hidden", "Hidden"), IconClass: "fa fa-eraser", Url: "#" });
-			if (mi.language) $scope.tags.push({ ToolTip: Translate("branch.tags.language", "Language: ") + mi.language.Text, IconClass: "fa fa-globe", Url: "#" });
-			if (mi.locked) $scope.tags.push({ ToolTip: Translate("branch.tags.locked", "Access restrictions"), IconClass: "fa fa-lock", Url: "#" });
-			if (mi.zone) $scope.tags.push({ ToolTip: Translate("branch.tags.zone", "In zone: ") + mi.zone.Text, IconClass: "fa fa-columns", Url: "#" });
-			if (mi.draft) $scope.tags.push({ ToolTip: Translate("branch.tags.draft", "Has draft: ") + mi.draft.ToolTip, IconClass: "fa fa-circle-o", Url: "#" });
-			if (mi.system) $scope.tags.push({ ToolTip: mi.system.ToolTip, IconClass: "fa fa-qrcode", Url: "#" });
-			if ($scope.node.Current.State == Content.states.Unpublished) $scope.tags.push({ ToolTip: Translate("branch.tags.unpublished", "Unpublished"), IconClass: "fa fa-stop", Url: "#" });
+	function refresheMetaInformation(node) {
+		$scope.tags = [];
+		if (node.Current) {
+			var mi = node.Current.MetaInformation;
+			if (mi) {
+				if (mi.authority) $scope.tags.push({ ToolTip: Translate("branch.tags.authority", "Site: ") + (mi.authority.ToolTip || " (*)"), IconClass: "fa fa-home", Url: "#" });
+				if (mi.hidden) $scope.tags.push({ ToolTip: Translate("branch.tags.hidden", "Hidden"), IconClass: "fa fa-eraser", Url: "#" });
+				if (mi.language) $scope.tags.push({ ToolTip: Translate("branch.tags.language", "Language: ") + mi.language.Text, IconClass: "fa fa-globe", Url: "#" });
+				if (mi.locked) $scope.tags.push({ ToolTip: Translate("branch.tags.locked", "Access restrictions"), IconClass: "fa fa-lock", Url: "#" });
+				if (mi.zone) $scope.tags.push({ ToolTip: Translate("branch.tags.zone", "In zone: ") + mi.zone.Text, IconClass: "fa fa-columns", Url: "#" });
+				if (mi.system) $scope.tags.push({ ToolTip: mi.system.ToolTip, IconClass: "fa fa-qrcode", Url: "#" });
+				if (mi.draft) $scope.tags.push({ ToolTip: Translate(mi.draft.VersionIndex == node.Current.VersionIndex ? "branch.tags.isDraft" : "branch.tags.draft", "Has draft: ") + mi.draft.ToolTip, IconClass: "fa fa-circle-o", Url: "#" });
+				if (node.Current.State == Content.states.Unpublished) $scope.tags.push({ ToolTip: Translate("branch.tags.unpublished", "Unpublished"), IconClass: "fa fa-stop", Url: "#" });
+			}
 		}
+		$scope.status = {
+			draft: !mi.system && (node.Current.State == Content.states.Draft || node.Current.State == Content.states.Waiting || node.Current.MetaInformation.draft),
+			unpublished: node.Current.State == Content.states.Unpublished || node.Current.State == Content.states.Deleted,
+			startpage: node.Current.MetaInformation.authority
+		};
 	}
+	refresheMetaInformation($scope.node);
+	$scope.$on("refreshnode", function (e, args) {
+		var node = $scope.node;
+		if (args.node.ID == node.Current.ID) {
+			node.Current.MetaInformation = args.node.MetaInformation;
+			node.Current.Title = args.node.Title;
+			refresheMetaInformation(node);
+			var mi = node.Current.MetaInformation;
+			if (args.autosaved && !isNaN(mi.draft && mi.draft.VersionIndex)) {
+				$scope.autoSaveWatch = $scope.$watch("node.Active", function (value, oldValue) {
+					if (!value) {
+						$scope.autoSaveWatch();
+						$timeout(function () {
+							if (!args.autosaved || isNaN(mi.draft && mi.draft.VersionIndex))
+								return;
+
+							Notify.show({
+								iconClass: "fa fa-thumbs-down",
+								message: Translate("branch.autosave.discardDraft", "An autosaved draft is left behind. Discard it?"),
+								type: "info",
+								onClick: function () {
+									Content.discard(Content.applySelection({ n2versionIndex: mi.draft.VersionIndex }, node.Current), function (result) {
+										if (result.Discarded) {
+											node.Current.MetaInformation = result.Node.MetaInformation;
+											refresheMetaInformation(node);
+										} else if (result.Removed) {
+											$scope.reloadChildren(result.Node.Path, /*callback*/function () {
+												$scope.expandTo(result.Node.Path, /*select*/true);
+											});
+										} else {
+											console.warn("Unexpected result", result);
+										}
+
+										Notify.show({
+											iconClass: "fa fa-trash",
+											message: Translate("branch.autosave.draftDiscarded", "The autosaved draft was removed."),
+											type: "info",
+											timeout: 2500
+										});
+									});
+								},
+								timeout: 30000
+							});
+						}, 5000);
+					}
+				});
+			}
+		}
+	});
 }
 
 function MenuCtrl($rootScope, $scope, Security) {
@@ -531,81 +743,65 @@ function MenuCtrl($rootScope, $scope, Security) {
 	};
 	$scope.$watch("Context.User.Settings.ViewPreference", function (viewPreference, previousPreference) {
 		$scope.setPreviewQuery("view", viewPreference);
-		var existingIndex = jQuery.inArray("View" + previousPreference, $scope.Context.Flags);
-		if (existingIndex >= 0)
-			$scope.Context.Flags.splice(existingIndex, 1);
-		$scope.Context.Flags.push("View" + viewPreference);
+		$scope.Context.Flags["View" + previousPreference] = false;
+		$scope.Context.Flags["View" + viewPreference] = true;
 	});
 	$rootScope.$on("contextchanged", function (scope, ctx) {
-		ctx.Flags.push("View" + ctx.User.Settings.ViewPreference);
+		ctx.Flags["View" + ctx.User.Settings.ViewPreference] = true;
 	});
 }
 
 function MenuNodeLastChildCtrl($scope, $timeout) {
-    function replace(item, replacement) {
-        var r = replacement.Current;
-        var copy = angular.copy(item.Current);
-        item.Current = angular.extend(copy, { Description: r.Title, Url: r.Url, Target: r.Target, IconClass: r.IconClass, ToolTip: r.ToolTip, IconUrl: r.IconUrl, RequiredPermission: r.RequiredPermission, ClientAction: r.ClientAction });
-    }
+	function replace(item, replacement) {
+		var r = replacement.Current;
+		var copy = angular.copy(item.Current);
+		item.Current = angular.extend(copy, { Description: r.Title, Url: r.Url, Target: r.Target, IconClass: r.IconClass, ToolTip: r.ToolTip, IconUrl: r.IconUrl, RequiredPermission: r.RequiredPermission, ClientAction: r.ClientAction });
+	}
 
-    $scope.$watch("item", function (item) {
-        if (!item.Children || !item.Children.length) {
-            item.IsHidden = true;
-            return;
-        }
-        var preferredItem = item.Children[0];
-        var preferredEditAction = $scope.Context.User.Settings.PreferredEditAction;
-        if (preferredEditAction) {
-        	for (var i in item.Children) {
-        		if (item.Children[i].Current.Name == preferredEditAction) {
-        			preferredItem = item.Children[i];
-        		}
-        	}
-        }
-        replace(item, preferredItem);
-    });
-    $scope.$on("nodeclicked", function (scope, node) {
-    	replace($scope.item, node);
-    	$scope.Context.User.Settings.PreferredEditAction = node.Current.Name;
-    	$scope.saveUserSettings();
-    });
-}
-
-function PageActionCtrl($scope, Content) {
-	$scope.dispose = function() {
-		Content.remove(Content.applySelection({}, node.Current), function() {
-			$scope.reloadChildren(getParentPath($scope.Context.CurrentItem.Path));
-		});
-	};
-}
-
-function PreviewCtrl($scope, $rootScope) {
-	$scope.frameLoaded = function (e) {
-		try {
-			var loco = e.target.contentWindow.location;
-			$scope.$emit("preiewloaded", { path: loco.pathname, query: loco.search, url: loco.toString() });
-		} catch (ex) {
-			window.console && console.log("frame access exception", ex);
+	$scope.$watch("item", function (item) {
+		if (!item.Children || !item.Children.length) {
+			item.IsHidden = true;
+			return;
 		}
-	};
+		var preferredItem = item.Children[0];
+		var preferredEditAction = $scope.Context.User.Settings.PreferredEditAction;
+		if (preferredEditAction) {
+			for (var i in item.Children) {
+				if (item.Children[i].Current.Name == preferredEditAction) {
+					preferredItem = item.Children[i];
+				}
+			}
+		}
+		replace(item, preferredItem);
+	});
+	$scope.$on("nodeclicked", function (scope, node) {
+		replace($scope.item, node);
+		$scope.Context.User.Settings.PreferredEditAction = node.Current.Name;
+		$scope.saveUserSettings();
+	});
+}
+
+function PreviewCtrl() {
+	console.warn("PreviewCtrl obsolete");
 }
 
 function AddCtrl($scope, Content) {
-	$scope.loadDefinitions = function(node) {
+	$scope.loadDefinitions = function (node) {
 		node.Selected = node.Current.Path;
 		node.Loading = true;
-		Content.definitions(Content.applySelection({}, $scope.Context.CurrentItem), function(data) {
+		Content.templates(Content.applySelection({}, $scope.Context.CurrentItem), function (data) {
 			node.Loading = false;
-			node.Children = data.Definitions;
+			node.Children = data.Templates;
+			node.Wizards = data.Wizards;
 		});
 	};
 }
 
 function LanguageCtrl($scope, Content) {
-	$scope.loadLanguages = function(node) {
+	$scope.loadLanguages = function (node) {
 		node.Selected = node.Current.Path;
 		node.Loading = true;
-		Content.translations(Content.applySelection({}, $scope.Context.CurrentItem), function(data) {
+		Content.translations(Content.applySelection({}, $scope.Context.CurrentItem), function (data) {
 			node.Loading = false;
 			node.Children = data.Translations;
 		});
@@ -613,10 +809,10 @@ function LanguageCtrl($scope, Content) {
 }
 
 function VersionsCtrl($scope, Content) {
-	$scope.loadVersions = function(node) {
+	$scope.loadVersions = function (node) {
 		$scope.Selected = node.Current.Path;
 		node.Loading = true;
-		Content.versions(Content.applySelection({}, $scope.Context.CurrentItem), function(data) {
+		Content.versions(Content.applySelection({}, $scope.Context.CurrentItem), function (data) {
 			node.Loading = false;
 			node.Children = data.Versions;
 		});
@@ -624,90 +820,94 @@ function VersionsCtrl($scope, Content) {
 }
 
 function SearchCtrl($scope, $rootScope, Content, Eventually) {
-    $scope.item.Children = [{}];
+	$scope.item.Children = [{}];
 
-    $scope.$parent.toggleSearch = function () {
-        $scope.$parent.search.show = !$scope.$parent.search.show;
-        $scope.$parent.search.query = null;
-    }
+	$scope.$parent.toggleSearch = function () {
+		$scope.$parent.search.show = !$scope.$parent.search.show;
+		$scope.$parent.search.query = null;
+	}
 
-    $scope.$parent.search = {
-        execute: function (searchQuery) {
-            if (!searchQuery)
-                return $scope.search.clear();
-            else if (searchQuery == $scope.search.searching)
-                return;
+	$scope.$parent.search = {
+		execute: function (searchQuery) {
+			if (!searchQuery)
+				return $scope.search.clear();
+			else if (searchQuery == $scope.search.searching)
+				return;
 
-            $scope.search.searching = searchQuery;
-            Content.search(Content.applySelection({ q: searchQuery, take: 20, pages: true }, $scope.Context.CurrentItem), function (data) {
-                $scope.search.hits = data.Hits;
-                $scope.item.Expanded = true;
-                $scope.search.searching = "";
-            });
-        },
-        clear: function () {
-            $scope.search.query = "";
-            $scope.search.searching = "";
-            $scope.search.hits = null;
-            delete $scope.item.Expanded;
-            $scope.search.focused = -1;
-        },
-        hits: null,
-        query: "",
-        searching: false,
-        focused: undefined,
-    };
-    $scope.$watch("search.query", function (searchQuery) {
-        Eventually(function () {
-            $scope.search.execute(searchQuery);
-            $scope.$digest();
-        }, 400);
-    });
+			$scope.search.searching = searchQuery;
+			Content.search(Content.applySelection({ q: searchQuery, take: 20, pages: true }, $scope.Context.CurrentItem), function (data) {
+				$scope.search.hits = data.Hits;
+				$scope.item.Expanded = true;
+				$scope.search.searching = "";
+			});
+		},
+		clear: function () {
+			$scope.search.query = "";
+			$scope.search.searching = "";
+			$scope.search.hits = null;
+			delete $scope.item.Expanded;
+			$scope.search.focused = -1;
+		},
+		hits: null,
+		query: "",
+		searching: false,
+		focused: undefined,
+	};
+	$scope.$watch("search.query", function (searchQuery) {
+		Eventually(function () {
+			$scope.search.execute(searchQuery);
+			$scope.$digest();
+		}, 400);
+	});
 }
 
 function PageInfoCtrl($scope, Content) {
-	$scope.exctractLanguage = function(language) {
+	$scope.exctractLanguage = function (language) {
 		return language && language.replace(/[(].*?[)]/, "");
 	};
 	$scope.$parent.showInfo = $scope.Context.User.Settings.ShowInfo;
-	$scope.toggleInfo = function() {
+	$scope.toggleInfo = function () {
 		$scope.$parent.showInfo = !$scope.$parent.showInfo;
 		$scope.Context.User.Settings.ShowInfo = $scope.$parent.showInfo;
 	};
+}
+
+function PageInfoDetailsCtrl($scope, Content) {
 	$scope.definitions = {};
 	Content.definitions({}, function (data) {
 		for (var i in data.Definitions) {
-			$scope.definitions[data.Definitions[i].TypeName] = data.Definitions[i];
+			if (data.Definitions[i])
+				$scope.definitions[data.Definitions[i].TypeName] = data.Definitions[i];
 		}
 	});
 }
 
 function PagePublishCtrl($scope, $rootScope, $modal, Content, Confirm, Translate) {
 	$scope.publish = function () {
-		Content.publish({ selected: $scope.Context.CurrentItem.Path, n2versionIndex: $scope.Context.CurrentItem.VersionIndex }, function (result) {
+		Content.publish(Content.applySelection({ n2versionIndex: $scope.Context.CurrentItem.VersionIndex }, $scope.Context.CurrentItem), function (result) {
 			$scope.previewUrl(result.Current.PreviewUrl);
 
 			$scope.reloadNode(result.Current.Path, $scope.refreshContext);
 		});
 	};
 	$scope.unpublish = function () {
-	    var settings = {
-	        title: Translate("confirm.unpublish.title"),
-	        item: $scope.Context.CurrentItem,
-	        template: "<b class='ico' ng-show='settings.item.IconClass || settings.item.IconUrl' ng-class='settings.item.IconClass' x-background-image='settings.item.IconUrl'></b> {{settings.item.Title}}",
-	        confirmed: function () {
-	            Content.unpublish(Content.applySelection({}, $scope.Context.CurrentItem), function (result) {
-	                $scope.previewUrl(result.Current.PreviewUrl);
+		var settings = {
+			title: Translate("confirm.unpublish.title"),
+			item: $scope.Context.CurrentItem,
+			template: "<b class='ico' ng-show='settings.item.IconClass || settings.item.IconUrl' ng-class='settings.item.IconClass' x-background-image='settings.item.IconUrl'></b> {{settings.item.Title}}",
+			confirmed: function () {
+				Content.unpublish(Content.applySelection({}, $scope.Context.CurrentItem), function (result) {
+					$scope.previewUrl(result.Current.PreviewUrl);
 
-	                $scope.reloadNode(result.Current.Path, $scope.refreshContext);
-	            })
-	        }
-	    };
-	    if ($scope.Context.CurrentItem.MetaInformation.authority) {
-	        settings.template = "<div class='alert alert-warnig'>{{settings.warning}}</div>" + settings.template;
-	        settings.warning = Translate("confirm.unpublish.startpagewarning");
-	    }
-	    Confirm(settings);
+					$scope.reloadNode(result.Current.Path, $scope.refreshContext);
+				})
+			}
+		};
+		if ($scope.Context.CurrentItem.MetaInformation.authority) {
+			settings.template = "<div class='alert alert-warnig'>{{settings.warning}}</div>" + settings.template;
+			settings.warning = Translate("confirm.unpublish.startpagewarning");
+		}
+		Confirm(settings);
 	};
 }
 
@@ -740,9 +940,9 @@ function FrameActionCtrl($scope, $rootScope, $timeout, FrameManipulator) {
 		$scope.$parent.action = null;
 		$scope.$parent.item.Children = [];
 		var extraFlags = FrameManipulator.getFlags();
-		for (var i in extraFlags) {
-			$scope.Context.Flags.push(extraFlags[i]);
-		}
+		angular.forEach(extraFlags, function (flag) {
+			$scope.Context.Flags[flag] = true;
+		})
 
 		if ($scope.isFlagged("Management")) {
 			function loadActions() {
@@ -780,15 +980,79 @@ function FrameActionCtrl($scope, $rootScope, $timeout, FrameManipulator) {
 function NotifyCtrl($scope, $timeout, Notify) {
 	var defaults = { visible: true, type: "warning" };
 
-	function clear() {
+	$scope.clear = function() {
 		$scope.Notify = {};
 	};
 
 	Notify.subscribe(function (options) {
 		setTimeout(function () {
 			$scope.Notify = angular.extend({}, defaults, options);
-			options.timeout && $timeout(clear, options.timeout);
+			options.timeout && $timeout($scope.clear, options.timeout);
 			$scope.$digest();
 		}, 10);
 	});
+
+}
+
+function MessagesCtrl($scope, $rootScope, $sce, Context, Content, Confirm) {
+	$scope.messages = {
+		show: false,
+		list: null,
+		toggle: function () {
+			if (this.show) {
+				this.close();
+			} else {
+				this.open($scope.Context.Messages)
+			}
+		},
+		open: function (messages) {
+			this.show = true;
+			this.list = messages
+		},
+		close: function (messages) {
+			this.show = false;
+			this.list = null;
+		},
+		removePermanently: function (message) {
+			Confirm({
+				title: "Remove permanently for all users?",//Translate("confirm.unpublish.title"),
+				message: message,
+				template: "<b class='ico fa fa-envelope'></b> {{settings.message.Title}}",
+				confirmed: function () {
+					Content.removeMessage({ ID: message.ID, Source: message.Source.Name }, $scope.messages.loadAll);
+				}
+			});
+		},
+		clear: function () {
+			var max = null;
+			angular.forEach(this.list, function (message) {
+				if (!max || max < message.Updated)
+					max = message.Updated;
+			});
+			$scope.Context.User.Settings.LastDismissed = max;
+			$scope.Context.Messages = [];
+			$scope.saveUserSettings();
+			this.close();
+		},
+		loadAll: function () {
+			delete $scope.Context.User.Settings.LastDismissed;
+			Context.messages(Content.applySelection({}, $scope.Context.CurrentItem), function (result) {
+				$scope.messages.list = result.Messages;
+				$scope.Context.Messages = result.Messages;
+			});
+			$scope.saveUserSettings();
+		}
+	};
+
+	$scope.$watch("Context.Messages", function (messages) {
+		if (messages && messages.length) {
+			angular.forEach(messages, function (message) {
+				if (message.Alert) {
+					message.Expanded = true;
+					$scope.messages.open(messages);
+				}
+			});
+		} else if ($scope.messages.show)
+			$scope.messages.list = messages;
+	})
 }

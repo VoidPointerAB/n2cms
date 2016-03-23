@@ -440,5 +440,55 @@ namespace N2.Tests.Edit.Versioning
 			var savedDraft = (Items.NormalPage)repository.DeserializeVersion(repository.GetVersion(page));
             ((Items.NormalItem)savedDraft.Children[0]).EditableLink.ShouldBe(persister.Get(root.ID));
         }
+
+		[Test]
+		public void Part_PresentOnDraft_IsConsideredToHaveADraft()
+		{
+			var pastTime = new TimeCapsule(DateTime.Now.AddSeconds(-10));
+
+			var page = CreateOneItem<Items.NormalPage>(0, "page", null);
+			persister.Save(page);
+
+			var part = CreateOneItem<Items.NormalItem>(0, "part", page);
+			part.ZoneName = "TheZone";
+			persister.Save(part);
+
+			pastTime.Dispose();
+
+			var version = page.Clone(true);
+			version.State = ContentState.Draft;
+			version.VersionOf = page;
+			version.VersionIndex++;
+
+			var draft = repository.Save(version);
+
+			drafts.HasDraft(part).ShouldBe(true);
+		}
+
+		[Test]
+		public void Part_PresentOnDraft_HaveInfo()
+		{
+			var pastTime = new TimeCapsule(DateTime.Now.AddSeconds(-10));
+
+			var page = CreateOneItem<Items.NormalPage>(0, "page", null);
+			persister.Save(page);
+
+			var part = CreateOneItem<Items.NormalItem>(0, "part", page);
+			part.ZoneName = "TheZone";
+			persister.Save(part);
+
+			pastTime.Dispose();
+
+			var version = page.Clone(true);
+			version.State = ContentState.Draft;
+			version.VersionOf = page;
+			version.VersionIndex++;
+
+			var draft = repository.Save(version);
+
+			var info = drafts.GetDraftInfo(part);
+			info.ItemID.ShouldBe(part.ID);
+			info.VersionIndex.ShouldBe(version.Children[0].VersionIndex);
+		}
     }
 }

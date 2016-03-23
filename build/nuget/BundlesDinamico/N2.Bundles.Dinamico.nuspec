@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
+		
 		<id>{NuGetPrefix}N2CMS.Bundles.Dinamico</id>
 		<version>{Version}</version>
+		
 		<title>{NuGetPrefix}N2CMS-Bundle: Dinamico Templates</title>
 		<authors>Cristian Libardo</authors>
 		<owners>Cristian Libardo</owners>
@@ -15,6 +17,7 @@
 		<language>en-US</language>
 		<tags>N2 CMS, CMS, Bundle, Dinamico, MVC, Razor</tags>
 		<dependencies>
+
 			<dependency id="{NuGetPrefix}N2CMS.Config" version="2.6.2" />
 			<dependency id="{NuGetPrefix}N2CMS.Config.SQLite" version="{Version}" />
 			<dependency id="{NuGetPrefix}N2CMS.Library" version="{Version}" />
@@ -22,6 +25,9 @@
 			<dependency id="{NuGetPrefix}N2CMS.Dinamico" version="{Version}" />
 			<dependency id="{NuGetPrefix}N2CMS.Dinamico.DemoContent" version="{Version}" />
 			<dependency id="{NuGetPrefix}N2CMS.Search.Lucene" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Management.Statistics" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Management.Targeting" version="{Version}" />
+			<dependency id="{NuGetPrefix}N2CMS.Management.Collaboration" version="{Version}" />
 		</dependencies>
 	</metadata>
 </package>
