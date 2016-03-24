@@ -366,7 +366,7 @@
                                                Razor-NuGet;
                                                Mvc-NuGet;
                                                Dinamico-NuGet;
-																							 Dinamico-DemoContent-Nuget;
+											Dinamico-DemoContent-Nuget;
                                                Bundle-Dinamico-Nuget;
                                                Windsor3-NuGet;
                                                MongoDB-NuGet;
@@ -375,6 +375,8 @@
                                                ReusableParts-NuGet;
                                                LuceneSearch-NuGet;
                                                LuceneSearch-NuGet;
+											   Management-Zip-NuGet;
+											   Management-NoZip-NuGet;
 																							 Management-Targeting-NuGet;
 																							 Management-Collaboration-NuGet;
 																							 Management-Statistics-NuGet;
