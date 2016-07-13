@@ -50,10 +50,10 @@ namespace N2.Resources
 		}
 
 		/// <summary>The jQuery version used by N2.</summary>
-		public const string JQueryVersion = "1.11.3";
+		public const string JQueryVersion = "1.12.3";
 		public const string JQueryUiVersion = "1.11.4";
-		public const string AngularJsVersion = "1.2.20";
-		public const string CkEditorVersion = "4.5.4";
+		public const string AngularJsVersion = "1.5.5";
+		public const string CkEditorVersion = "4.5.8";
 		public const string DefaultBootstrapVersion = "2.3.2";
 
 		public const string DefaultFlagsCssPath = "{ManagementUrl}/Resources/icons/flags.css";
@@ -81,6 +81,7 @@ namespace N2.Resources
 
 		/// <summary>Path to jQuery.</summary>
 		public static string JQueryJsPath { get; set; }
+		public static string PreviewJQueryJsPath { get; set; }
 
 		/// <summary>The path to jQuery UI javascript bundle.</summary>
 		public static string JQueryUiPath { get; set; }
@@ -90,6 +91,7 @@ namespace N2.Resources
 
 		/// <summary> The path to angularjs folder used by N2. </summary>
 		public static string AngularJsRoot { get; set; }
+		public static string PreviewAngularJsRoot { get; set; }
 
 		/// <summary> The path to angularjs used by N2. </summary>
 		public static string AngularJsPath { get { return AngularJsRoot + "angular.js"; } }

@@ -22,7 +22,7 @@ namespace N2.Configuration
 			get { return (string)base["jQueryJsPath"]; }
 			set { base["jQueryJsPath"] = value; }
 		}
-
+		
 		/// <summary>The path to the included jQuery UI javascript resource.</summary>
 		[ConfigurationProperty("jQueryUiPath", DefaultValue = Register.DefaultJQueryUiJsPath)]
 		public string JQueryUiPath
