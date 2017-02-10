@@ -356,8 +356,7 @@ namespace N2.Web.UI.WebControls
 				cvr.Save(path.CurrentPage);
 			}
 
-			var url = Engine.ManagementPaths.GetEditExistingItemUrl(path.CurrentPage.FindPartVersion(parentItem), Page.Request["returnUrl"]);
-			Page.Response.Redirect(url);
+			RedirectToVersionOfSelf(path.CurrentPage);
 		}
 
 		private void MoveItemUpClick(object sender, CommandEventArgs e)
@@ -378,12 +377,18 @@ namespace N2.Web.UI.WebControls
             if (path.CurrentItem != null && path.CurrentItem != path.CurrentPage)
 			{
 				var parent = path.CurrentItem.Parent;
-				var siblings = parent.Children;
-				var newIndex = siblings.IndexOf(path.CurrentItem) + offset;
-				if (newIndex >= 0 && newIndex < path.CurrentItem.Parent.Children.Count - 1)
+				var siblings = GetItems().Select(ci => parent.Children.FirstOrDefault(s => s.VersionOf.Value == ci || s == ci)).ToList();
+				var currentIndex = siblings.IndexOf(path.CurrentItem);
+				var newIndex = currentIndex + offset;
+				if (newIndex >= 0)
 				{
+					if (newIndex < siblings.Count - 1)
+						newIndex = parent.Children.IndexOf(siblings[newIndex]);
+					else
+						newIndex = parent.Children.Count;
+
 					Utility.Insert(path.CurrentItem, parent, newIndex);
-					Utility.UpdateSortOrder(siblings).ToList();
+					Utility.UpdateSortOrder(parent.Children).ToList();
 
 					UpdateItemFromTopEditor(path);
 
@@ -435,7 +440,9 @@ namespace N2.Web.UI.WebControls
 
 		private void RedirectToVersionOfSelf(ContentItem versionOfPage)
 		{
-			var url = Engine.ManagementPaths.GetEditExistingItemUrl(versionOfPage.FindPartVersion(ParentItem), Page.Request["returnUrl"]);
+			var url = Engine.ManagementPaths.GetEditExistingItemUrl(versionOfPage.FindPartVersion(ParentItem), Page.Request["returnUrl"], Page.Request.Url.AbsolutePath);
+			//if (Page.Request.Url.AbsolutePath.EndsWith("EditRecursive.aspx"))
+			//	Page.Response.Redirect(Page.Request.Url.AbsolutePath + "?" + url.ToUrl().Query);
 			Page.Response.Redirect(url);
 		}
 

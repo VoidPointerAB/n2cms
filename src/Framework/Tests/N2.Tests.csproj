@@ -223,6 +223,8 @@
     <Compile Include="Engine\TypeFinderTests.cs" />
     <Compile Include="Fakes\FakeCacheWrapper.cs" />
     <Compile Include="Fakes\FakeHttpCachePolicy.cs" />
+    <Compile Include="Fakes\FakeLanguageGateway.cs" />
+    <Compile Include="Fakes\FakeNodeAdapter.cs" />
     <Compile Include="Fakes\FakeProvider.cs" />
     <Compile Include="Fakes\FakeUrlParser.cs" />
     <Compile Include="Installation\ImageSizesMigrationTests.cs" />
@@ -273,6 +275,7 @@
     <Compile Include="Types.cs" />
     <Compile Include="Web\SlugTests.cs" />
     <Compile Include="Web\Targeting\TargetingTests.cs" />
+    <Compile Include="Web\Mvc\RegisterHelperTests.cs" />
     <Compile Include="Web\UrlParser_IUrlSource_VirtualDirectory.cs" />
     <Compile Include="Web\UrlParser_IUrlSource_MultipleSites.cs" />
     <Compile Include="Web\Items\UrlSourcePage.cs" />

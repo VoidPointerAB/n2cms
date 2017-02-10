@@ -118,9 +118,9 @@ namespace N2.Persistence.NH
             if (config.Isolation.HasValue)
                 Properties[NHibernate.Cfg.Environment.Isolation] = config.Isolation.ToString();
 
-            foreach (string key in config.HibernateProperties.AllKeys)
+            foreach (NameValueConfigurationElement setting in config.HibernateProperties)
             {
-                Properties[key] = config.HibernateProperties[key].Value;
+	            Properties[setting.Name] = setting.Value;
             }
         }
 
@@ -172,9 +172,13 @@ namespace N2.Persistence.NH
                     break;
                 case DatabaseFlavour.MySql:
                     Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.MySqlDataDriver).AssemblyQualifiedName;
-                    Properties[NHibernate.Cfg.Environment.Dialect] = typeof(NHibernate.Dialect.MySQL5Dialect).AssemblyQualifiedName;
+                    Properties[NHibernate.Cfg.Environment.Dialect] = typeof(NHibernate.Dialect.MySQLDialect).AssemblyQualifiedName;
                     break;
-                case DatabaseFlavour.SqLite:
+				case DatabaseFlavour.Postgresql:
+					Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.NpgsqlDriver).AssemblyQualifiedName;
+					Properties[NHibernate.Cfg.Environment.Dialect] = typeof(NHibernate.Dialect.PostgreSQLDialect).AssemblyQualifiedName;
+					break;
+				case DatabaseFlavour.SqLite:
                     Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.SQLite20Driver).AssemblyQualifiedName;
                     Properties[NHibernate.Cfg.Environment.Dialect] = typeof(NHibernate.Dialect.SQLiteDialect).AssemblyQualifiedName;
                     break;
@@ -226,6 +230,8 @@ namespace N2.Persistence.NH
                 return DatabaseFlavour.Oracle;
             if (provider.StartsWith("System.Data.SqlServerCe"))
                 return DatabaseFlavour.SqlCe;
+	        if (provider.StartsWith("Npgsql"))
+		        return DatabaseFlavour.Postgresql;
             if (css.ConnectionString.StartsWith("mongodb:"))
                 throw new ConfigurationErrorsException("Cannot auto-detect MongoDB. This needs to be configured as flavor=\"MongoDB\" in the n2/database config section");
 

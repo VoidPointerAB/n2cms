@@ -14,11 +14,13 @@ namespace N2.Edit.Collaboration
 	{
 		private Queue<CollaborationMessage> messages = new Queue<CollaborationMessage>();
 		private TraceEventType reportingLevel;
+		private bool enabled;
 
 		public TraceReaderMessageProvider(N2.Configuration.ConfigurationManagerWrapper config, ConnectionMonitor monitor)
 		{
 			monitor.Online += monitor_Online;
 			reportingLevel = config.Sections.Management.Collaboration.ErrorReportingLevel;
+			enabled = config.Sections.Management.Collaboration.ErrorReportingEnabled;
 		}
 
 		void monitor_Online(object sender, EventArgs e)
@@ -67,7 +69,7 @@ namespace N2.Edit.Collaboration
 
 			public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string format, params object[] args)
 			{
-				if (eventType <= messageProvider.reportingLevel)
+				if (messageProvider.enabled && eventType <= messageProvider.reportingLevel)
 				{
 					var titleBody = Split(string.Format(format, args));
 					messageProvider.Add(new CollaborationMessage { Title = titleBody[0], Text = titleBody[1], Alert = false, Updated = eventCache.DateTime, RequiredPermission = Permission.Administer });
@@ -77,12 +79,20 @@ namespace N2.Edit.Collaboration
 
 			public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
 			{
-				if (eventType <= messageProvider.reportingLevel)
+				if (messageProvider.enabled && eventType <= messageProvider.reportingLevel)
 				{
 					var titleBody = Split(message);
+					RemoveErrorHandlerTitle(titleBody);
 					messageProvider.Add(new CollaborationMessage { Title = titleBody[0], Text = titleBody[1], Alert = false, Updated = eventCache.DateTime, RequiredPermission = Permission.Administer });
 				}
 				base.TraceEvent(eventCache, source, eventType, id, message);
+			}
+
+			private void RemoveErrorHandlerTitle(string[] titleBody)
+			{
+				var i = titleBody[0].IndexOf("ErrorHandler.Notify: Url: ");
+				if (i >= 0)
+					titleBody[0] = "Error: " + titleBody[0].Substring(i + "ErrorHandler.Notify: Url: ".Length);
 			}
 
 			private string[] Split(string message)
