@@ -104,7 +104,7 @@ namespace N2.Web.Parts
         {
             return new ItemList(GetParts(parentItem, zoneName, Interfaces.Viewing));
         }
-        
+
         /// <summary>Retrieves content items added to a zone of the parnet item.</summary>
         /// <param name="belowParentItem">The item whose items to get.</param>
         /// <param name="inZoneNamed">The zone in which the items should be contained.</param>
@@ -112,8 +112,8 @@ namespace N2.Web.Parts
         /// <returns>A list of items in the zone.</returns>
         public virtual IEnumerable<ContentItem> GetParts(ContentItem belowParentItem, string inZoneNamed, string filteredForInterface)
         {
-            var state = WebContext.HttpContext == null 
-                ? ControlPanelState.Unknown 
+            var state = WebContext.HttpContext == null
+                ? ControlPanelState.Unknown
                 : ControlPanel.GetState(Engine);
 
             return GetParts(belowParentItem, inZoneNamed, filteredForInterface, state);
@@ -127,14 +127,14 @@ namespace N2.Web.Parts
         /// <returns>A list of items in the zone.</returns>
         public virtual IEnumerable<ContentItem> GetParts(ContentItem belowParentItem, string inZoneNamed, string filteredForInterface, ControlPanelState state)
         {
-            if(belowParentItem == null)
+            if (belowParentItem == null)
                 return new ItemList();
 
             var items = belowParentItem.Children.FindParts(inZoneNamed)
                 .Where(new AccessFilter(WebContext.User, Security));
 
-            if(filteredForInterface == Interfaces.Viewing 
-                && !state.IsFlagSet(ControlPanelState.Previewing) 
+            if (filteredForInterface == Interfaces.Viewing
+                && !state.IsFlagSet(ControlPanelState.Previewing)
                 && !belowParentItem.VersionOf.HasValue)
                 items = items.Where(new PublishedFilter());
 
@@ -160,9 +160,10 @@ namespace N2.Web.Parts
         {
             return new[] { parentItem }
                 .Concat(parentItem.Children.FindParts().SelectMany(Find.EnumerateTree))
-				.SelectMany(ci => Definitions.GetAllowedChildren(ci))
-				.Where(d => d.Enabled)
-				.Where(d => d.AllowedIn != Integrity.AllowedZones.None)
+                .SelectMany(ci => Definitions.GetAllowedChildren(ci))
+                .Where(d => d.Enabled)
+                .Where(d => d.AllowedIn != Integrity.AllowedZones.None)
+                .WhereAuthorized(Security, user, parentItem)
                 .Distinct();
         }
 
@@ -316,10 +317,10 @@ namespace N2.Web.Parts
                 {
                     var newPath = currentPath.Clone(currentPath.CurrentPage, item);
                     helper.ViewContext.RouteData.ApplyCurrentPath(newPath);
-					if (writer == null)
-						helper.RenderAction("Index", values);
-					else
-						writer.Write(helper.Action("Index", values));
+                    if (writer == null)
+                        helper.RenderAction("Index", values);
+                    else
+                        writer.Write(helper.Action("Index", values));
                 }
                 finally
                 {
