@@ -165,15 +165,14 @@
     <Content Include="Externals\External.ascx" />
     <Content Include="Files\Crop.aspx" />
     <Content Include="Files\Css\Files.css" />
-    <Content Include="Files\Css\Jcrop.gif" />
-    <Content Include="Files\Css\jquery.Jcrop.min.css" />
     <Content Include="Files\FileSystem\FileUpload.ascx" />
     <Content Include="Files\FileSystem\Export.aspx" />
     <Content Include="Files\FileSystem\FileUpload.js" />
+    <Content Include="Files\Js\cropper\cropper.common.js" />
+    <Content Include="Files\Js\cropper\cropper.min.css" />
+    <Content Include="Files\Js\cropper\cropper.min.js" />
     <Content Include="Files\Rebuild.aspx" />
     <Content Include="Files\Js\FileSelection.js" />
-    <Content Include="Files\Js\jquery.color.js" />
-    <Content Include="Files\Js\jquery.Jcrop.min.js" />
     <Content Include="Files\Js\jquery.MultiFile.js" />
     <Content Include="Installation\Relations.aspx" />
     <Content Include="Installation\UpgradeVersions.aspx" />
@@ -194,6 +193,7 @@
     <Content Include="Resources\icons\glyphicons.css" />
     <Content Include="Resources\icons\glyphicons.png" />
     <Content Include="Resources\img\arrow-down.png" />
+    <Content Include="Resources\img\folder_plus.gif" />
     <Content Include="Resources\img\grabber.png" />
     <Content Include="Resources\img\logo.png" />
     <Content Include="Resources\img\minus.png" />

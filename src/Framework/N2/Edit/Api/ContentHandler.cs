@@ -261,7 +261,7 @@ namespace N2.Management.Api
 			var requestBody = context.GetOrDeserializeRequestStreamJsonDictionary<object>();
 			var discriminator = EditExtensions.GetDiscriminator(context.Request);
 
-			var versions = engine.Resolve<VersionManager>();
+			var versions = engine.Resolve<IVersionManager>();
 			ContentItem item;
 			if (string.IsNullOrEmpty(discriminator))
 			{
@@ -701,7 +701,7 @@ namespace N2.Management.Api
 			if (context.Request["pages"] != null)
 				query.OnlyPages = Convert.ToBoolean(context.Request["pages"]);
 			if (Selection.SelectedItem.ChildState.IsAny(CollectionState.IsLarge))
-				query.Limit = new Range(0, SyncChildCollectionStateAttribute.LargeCollecetionThreshold);
+				query.Limit = new Range(0, SyncChildCollectionStateAttribute.LargeCollectionThreshold);
 			if (context.Request["skip"] != null)
 				query.Skip(int.Parse(context.Request["skip"]));
 			if (context.Request["take"] != null)

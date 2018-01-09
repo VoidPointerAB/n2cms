@@ -160,9 +160,9 @@ namespace N2.Web.Parts
         {
             return new[] { parentItem }
                 .Concat(parentItem.Children.FindParts().SelectMany(Find.EnumerateTree))
-                .SelectMany(ci => Definitions.GetAllowedChildren(ci))
-                .Where(d => d.Enabled)
-                .Where(d => d.AllowedIn != Integrity.AllowedZones.None)
+				.SelectMany(ci => Definitions.GetAllowedChildren(ci))
+				.Where(d => d.Enabled)
+				.Where(d => d.AllowedIn != Integrity.AllowedZones.None)
                 .WhereAuthorized(Security, user, parentItem)
                 .Distinct();
         }

@@ -10,7 +10,6 @@ using NUnit.Framework;
 using N2.Web;
 using N2.Edit;
 using N2.Engine.Castle;
-using N2.Security;
 
 namespace N2.Tests.Web
 {

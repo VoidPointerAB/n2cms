@@ -96,11 +96,24 @@ namespace N2.Management.Content.Templates
             templateItem.Name = null;
             templateItem.AddTo(templates);
 
-			using (var tx = repository.BeginTransaction())
-			{
-				repository.SaveOrUpdate(templateItem);
-				tx.Commit();
-			}
+            using (var tx = repository.BeginTransaction())
+            {
+                repository.SaveOrUpdate(templateItem);
+
+                AddChildrenOfContentItem(templateItem);
+                
+                tx.Commit();
+            }
+        }
+
+        private void AddChildrenOfContentItem(ContentItem parent)
+        {
+            foreach (var templateItemChild in parent.Children)
+            {
+                repository.SaveOrUpdate(templateItemChild);
+
+                AddChildrenOfContentItem(templateItemChild);
+            }
         }
 
         public void RemoveTemplate(string templateKey)
