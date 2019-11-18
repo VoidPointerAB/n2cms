@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using N2.Engine;
-using Raven.Client.Embedded;
 using Raven.Client.Listeners;
 using System.Diagnostics;
 using Raven.Client;
@@ -13,6 +12,7 @@ using N2.Configuration;
 using Raven.Json.Linq;
 using N2.Definitions.Static;
 using N2.Definitions;
+using Raven.Client.Embedded;
 
 namespace N2.Raven
 {

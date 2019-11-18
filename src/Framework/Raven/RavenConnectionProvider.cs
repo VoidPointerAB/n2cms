@@ -6,7 +6,6 @@ using Raven.Client;
 using Raven.Client.Document;
 using N2.Engine;
 using N2.Web;
-using Raven.Client.Embedded;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using Raven.Client.Listeners;
