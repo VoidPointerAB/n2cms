@@ -234,6 +234,7 @@ namespace N2.Engine
             if (WriterFactory != null)
                 return WriterFactory(typeof(T));
 
+            // VS2017: Changed default logger to Log4Net
             //return new TraceLogWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff [") + Thread.CurrentThread.ManagedThreadId + "] " + typeof(T).Name + ": ");
             return new Log4NetWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff [") + Thread.CurrentThread.ManagedThreadId + "] " + typeof(T).Name + ": ");
         }
@@ -244,6 +245,8 @@ namespace N2.Engine
             {
                 if (WriterFactory != null)
                     return WriterFactory(null);
+
+                // VS2017: Changed default logger to Log4Net
                 //return new TraceLogWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff: ")); 
                 return new Log4NetWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff: "));
             }
@@ -439,7 +442,7 @@ namespace N2.Engine
         }
     }
 
-    // Void Pointer, 2019-11-19
+    // VS2017: New Logger, 2019-11-19
     public class Log4NetWriter : LogWriterBase
     {
         private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

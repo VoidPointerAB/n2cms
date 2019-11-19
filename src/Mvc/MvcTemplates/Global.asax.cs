@@ -16,7 +16,7 @@ namespace N2.Templates.Mvc
 	{
 		protected void Application_Start()
 		{
-            // Void Pointer, 2019-11-19
+            // VS2017: Init Log4Net, since changed default loggning behaviour from trace to Log4net.
 		    XmlConfigurator.Configure();
 
             var cmsEngine = N2.Context.Initialize(false);
