@@ -3,6 +3,7 @@ using N2.Details;
 using System.Collections.Generic;
 using N2.Web;
 using N2.Definitions;
+using N2.Security.Details;
 
 namespace N2.Addons.Wiki.Items
 {
@@ -85,7 +86,7 @@ namespace N2.Addons.Wiki.Items
             set { SetDetail("ImageWidth", value, 500); }
         }
 
-        //[EditableRoles(Title = "Role required for write access", ContainerName = Wiki.WikiTab)]
+        [EditableRoles(Title = "Role required for write access", ContainerName = Wiki.WikiTab)]
         public virtual IEnumerable<string> ModifyRoles
         {
             get { return GetDetailCollection("ModifyRoles", true).Enumerate<string>(); }
