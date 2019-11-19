@@ -63,7 +63,7 @@ namespace N2.Tests.Engine
             Assert.That(service, Is.InstanceOf<InterfacedService>());
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void RegisteringService_AlsoRegisters_ConcreteType()
         {
             container.AddComponent("key", typeof(AbstractService), typeof(ConcreteService));

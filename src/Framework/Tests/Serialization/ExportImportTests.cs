@@ -985,7 +985,7 @@ Public License instead of this License.
 ";
         #endregion
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void CanExportAndImportWithCompression()
         {
             XmlableItem item = CreateOneItem<XmlableItem>(1, "item", null);

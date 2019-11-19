@@ -10,6 +10,7 @@ using N2.Details;
 using N2.Web.Mvc;
 using System.Web.UI.WebControls;
 using System.Web.Mvc;
+using NUnit.Framework.Interfaces;
 
 namespace N2.Tests.Definitions.Runtime
 {

@@ -158,7 +158,7 @@ namespace N2.Tests.Details
             Assert.That(cloned.ID, Is.EqualTo(0));
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void UpdatedEnclosingItem_UpdatesDetails()
         {
             DetailCollection collection = new DetailCollection();

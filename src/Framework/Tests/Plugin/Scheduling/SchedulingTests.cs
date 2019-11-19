@@ -150,7 +150,7 @@ namespace N2.Tests.Plugin.Scheduling
             Assert.That(action.wasClosed);
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void ScheduledAction_WillBeInjected_WithDependencies()
         {
             throw new NotImplementedException("TODO test");

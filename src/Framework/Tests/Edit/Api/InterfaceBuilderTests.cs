@@ -107,7 +107,7 @@ namespace N2.Tests.Edit.Api
             definition.Paths.SelectedQueryKey.ShouldNotBeEmpty();
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void Site_ShouldBeCurrentSite()
         {
             var definition = builder.GetInterfaceDefinition(new FakeHttpContext("http://localhost/N2/Api/Context.ashx?mode=full&selected=" + item.Path), new SelectionUtility(item, null));

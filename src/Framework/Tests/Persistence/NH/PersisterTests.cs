@@ -90,7 +90,7 @@ namespace N2.Tests.Persistence.NH
             return null;
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void Get_Children_AreEagerlyFetched()
         {
             ContentItem item = CreateOneItem<Definitions.PersistableItem>(0, "gettableRoot", null);

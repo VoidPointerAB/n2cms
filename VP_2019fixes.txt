@@ -1,36 +1,26 @@
-Framework:
-
-Log4Net 1.2.10.0
-
-N2
------------------
-NHibernate = 4.0.3.4000 -> 4.0.4.4000
-Iesi.Collections = 4.0.1.4000 -> 4.0.2
-
-N2.Management
------------------
+Reference NuGet:
+-----------------------------------------------------
+Lucene.Net -> 3.0.3
+NUnit -> 3.6.0
+Shouldly = 2.5.0 -> 3.0.2
 SharpZipLib = 0.86 -> 1.0.0
-System.Data.SQLite.Linq = 1.0.112 (NY)
+System.Data.SQLite.Core -> 1.0.96
+Castle.Core -> 4.4.0
+Castle.Windsor -> 4.1.1
+Iesi.Collections = 4.0.1.4000 -> 4.0.2
+Log4Net -> 1.2.10.0
+System.Data.SQLite.Core = 1.0.112 (NY)
 
-N2.Raven
------------------
+NHibernate = 4.0.3.4000 -> 4.0.4.4000
 ICSharpCode.NRefactory -> 5.5.0
 NLog -> 4.6.8
 Spatial4n.Core -> 0.4.1
 Newtonsoft.Json -> 12.0.1
 Mono.Cecil = 0.9.5.4 -> 0.11.1
-SharpZipLib = 0.86 -> 1.0.0
 
-RavenDB.Client = 
-RavenDB 1.0.573
-RavenDB.Client 2.5.25031
-RavenDB-Embedded 1.0.573
-Orleans.Serialization.RavenDB. 0.9
 
-N2.Extension.Test
------------------
-Lucene.Net -> 3.0.3
 
-N2.Packaging
------------------
-SharpZipLib = 0.86.0 ->
+
+
+
+  

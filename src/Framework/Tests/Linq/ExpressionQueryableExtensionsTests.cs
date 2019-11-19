@@ -344,7 +344,7 @@ namespace N2.Extensions.Tests.Linq
             Assert.That(items.Contains(item));
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void CanSelectItems_Where_DetailBackingProperty_Equals_ContentItemField2()
         {
             var query = engine.QueryItems<LinqItem>()

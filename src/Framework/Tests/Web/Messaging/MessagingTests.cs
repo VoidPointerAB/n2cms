@@ -73,21 +73,27 @@ namespace N2.Tests.Web.Messaging
             receiver.LastMessage.Text.ShouldBe("Hello World");
         }
 
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void NoSecret_IsNotAllowed()
         {
-            var msg = Envelope.Create<TestMessage>(new TestMessage { Text = "Hello World" });
-            msg.SenderName = "Unknown";
-            broker.Receive(new JavaScriptSerializer().Serialize(msg));
+            Assert.That(() =>
+            {
+                var msg = Envelope.Create<TestMessage>(new TestMessage { Text = "Hello World" });
+                msg.SenderName = "Unknown";
+                broker.Receive(new JavaScriptSerializer().Serialize(msg));
+            }, Throws.ArgumentException);
         }
 
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void InvalidSecret_IsNotAllowed()
         {
-            var msg = Envelope.Create<TestMessage>(new TestMessage { Text = "Hello World" });
-            msg.SenderName = "Unknown";
-            msg.Secret = "some ticket";
-            broker.Receive(new JavaScriptSerializer().Serialize(msg));
+            Assert.That(() =>
+            {
+                var msg = Envelope.Create<TestMessage>(new TestMessage { Text = "Hello World" });
+                msg.SenderName = "Unknown";
+                msg.Secret = "some ticket";
+                broker.Receive(new JavaScriptSerializer().Serialize(msg));
+            }, Throws.ArgumentException);
         }
     }
 }
