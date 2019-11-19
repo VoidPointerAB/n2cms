@@ -1,10 +1,16 @@
-<item id="3" name="test" parent="2" title="test" zoneName="" templateKey="" state="16" created="05/06/2014 12:43:30" updated="05/06/2014 19:54:18" published="05/06/2014 12:43:24" expires="" sortOrder="-10" url="/test" visible="True" savedBy="admin" typeName="N2.Templates.Mvc.Models.Pages.TextPage, N2.Templates.Mvc" discriminator="TextPage" versionIndex="0" ancestralTrail="/1/2/" alteredPermissions="0" childState="0">
+<item id="3" name="test-223445" parent="2" title="test 223445" zoneName="" templateKey="" state="16" created="05/06/2014 12:43:30" updated="11/19/2019 15:30:22" published="05/06/2014 12:43:24" expires="" sortOrder="-10" url="/test-223445" visible="True" savedBy="admin" typeName="N2.Templates.Mvc.Models.Pages.TextPage, N2.Templates.Mvc" discriminator="TextPage" versionIndex="6" ancestralTrail="/1/2/" alteredPermissions="0" childState="4">
   <details>
     <detail name="Text" typeName="System.String, mscorlib" meta="" encoded="True"><![CDATA[&lt;p&gt;test&lt;/p&gt;
 ]]></detail>
     <detail name="HeadTitle" typeName="System.String, mscorlib" meta="" />
     <detail name="MetaKeywords" typeName="System.String, mscorlib" meta="" />
     <detail name="MetaDescription" typeName="System.String, mscorlib" meta="" />
+    <detail name="ParentID" typeName="System.Int32, mscorlib" meta="">2</detail>
+    <detail name="VersionKey" typeName="System.String, mscorlib" meta="" encoded="True"><![CDATA[aac330c8-5b37-4354-adf6-e1c2c3ed9fb6]]></detail>
+    <detail name="Image" typeName="System.String, mscorlib" meta="" />
+    <detail name="Pdf" typeName="System.String, mscorlib" meta="" />
+    <detail name="DirectUrl" typeName="System.String, mscorlib" meta="" />
+    <detail name="ShowTitle" typeName="System.Boolean, mscorlib" meta="">True</detail>
   </details>
   <detailCollections />
   <children />

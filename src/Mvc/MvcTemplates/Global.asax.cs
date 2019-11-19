@@ -2,6 +2,7 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using log4net.Config;
 using N2.Engine;
 using N2.Templates.Mvc.Controllers;
 using N2.Web.Mvc;
@@ -15,7 +16,10 @@ namespace N2.Templates.Mvc
 	{
 		protected void Application_Start()
 		{
-			var cmsEngine = N2.Context.Initialize(false);
+            // Void Pointer, 2019-11-19
+		    XmlConfigurator.Configure();
+
+            var cmsEngine = N2.Context.Initialize(false);
 
 			RegisterControllerFactory(ControllerBuilder.Current, cmsEngine);
 

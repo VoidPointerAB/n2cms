@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Threading;
 using N2.Engine.Globalization;
-using NHibernate.Hql.Ast.ANTLR.Tree;
+using log4net;
+using log4net.Config;
+using System.Reflection;
 
 namespace N2.Engine
 {
@@ -231,7 +233,9 @@ namespace N2.Engine
         {
             if (WriterFactory != null)
                 return WriterFactory(typeof(T));
-            return new TraceLogWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff [") + Thread.CurrentThread.ManagedThreadId + "] " + typeof(T).Name + ": ");
+
+            //return new TraceLogWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff [") + Thread.CurrentThread.ManagedThreadId + "] " + typeof(T).Name + ": ");
+            return new Log4NetWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff [") + Thread.CurrentThread.ManagedThreadId + "] " + typeof(T).Name + ": ");
         }
 
         public static LogWriterBase Writer
@@ -240,7 +244,8 @@ namespace N2.Engine
             {
                 if (WriterFactory != null)
                     return WriterFactory(null);
-                return new TraceLogWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff: ")); 
+                //return new TraceLogWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff: ")); 
+                return new Log4NetWriter(DateTime.UtcNow.ToString("yyy-MM-dd HH:mm:ss.fff: "));
             }
         }
 
@@ -431,6 +436,67 @@ namespace N2.Engine
 
         public override void Unindent()
         {
+        }
+    }
+
+    // Void Pointer, 2019-11-19
+    public class Log4NetWriter : LogWriterBase
+    {
+        private readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public string Prefix { get; set; }
+
+        public Log4NetWriter(string prefix)
+        {
+            Prefix = prefix;
+        }
+
+        public override void Error(string message)
+        {
+            _log.Error(Prefix + message);
+        }
+
+        public override void Error(string format, object[] args)
+        {
+            _log.Error(Prefix + format);
+        }
+
+        public override void Warning(string message)
+        {
+            _log.Warn(Prefix + message);
+        }
+        public override void Warning(string format, object[] args)
+        {
+            _log.Warn(Prefix + format);
+        }
+
+        public override void Information(string message)
+        {
+            _log.Info(Prefix + message);
+        }
+        public override void Information(string format, object[] args)
+        {
+            _log.Info(Prefix + format);
+        }
+
+        public override void Debug(string message)
+        {
+            System.Diagnostics.Debug.WriteLine(Prefix + message);
+        }
+
+        public override void Debug(string format, object[] args)
+        {
+            System.Diagnostics.Debug.WriteLine(Prefix + string.Format(format, args));
+        }
+
+        public override void Indent()
+        {
+            System.Diagnostics.Debug.Indent();
+        }
+
+        public override void Unindent()
+        {
+            System.Diagnostics.Debug.Unindent();
         }
     }
 }

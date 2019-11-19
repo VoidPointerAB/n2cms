@@ -87,3 +87,4 @@ src/Framework/Extensions/x86/
 *.jpg
 *.pdf
 /.vs
+/src/Mvc/MvcTemplates/N2.Web_LOG.txt
