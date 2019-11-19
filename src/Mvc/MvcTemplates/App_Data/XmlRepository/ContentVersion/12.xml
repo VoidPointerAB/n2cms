@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-16"?><ContentVersion xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><ID>12</ID><VersionIndex>7</VersionIndex><Title>test 2234456</Title><Master><ID>3</ID></Master><State>Unpublished</State><Published>2019-11-19T20:52:23.6728601+01:00</Published><FuturePublish xsi:nil="true" /><Expired>2019-11-19T20:58:19.1584459+01:00</Expired><Saved>2019-11-19T20:58:19.1354455+01:00</Saved><SavedBy>admin</SavedBy><ItemCount>1</ItemCount><VersionDataXml>&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;n2 version="2.9.6.16" exportVersion="2" exportDate="11/19/2019 19:58:19"&gt;
+  &lt;item id="0" name="test-2234456" title="test 2234456" zoneName="" templateKey="" state="32" created="05/06/2014 12:43:30" updated="11/19/2019 19:58:18" published="05/06/2014 12:43:24" expires="" sortOrder="-10" url="/test-2234456?n2versionIndex=7" visible="True" savedBy="admin" typeName="N2.Templates.Mvc.Models.Pages.TextPage, N2.Templates.Mvc" discriminator="TextPage" versionIndex="7" ancestralTrail="/" alteredPermissions="0" childState="0" versionOf="3"&gt;
+    &lt;details&gt;
+      &lt;detail name="Text" typeName="System.String, mscorlib" meta="" encoded="True"&gt;&lt;![CDATA[&amp;lt;p&amp;gt;test&amp;lt;/p&amp;gt;
+]]&gt;&lt;/detail&gt;
+      &lt;detail name="HeadTitle" typeName="System.String, mscorlib" meta="" /&gt;
+      &lt;detail name="MetaKeywords" typeName="System.String, mscorlib" meta="" /&gt;
+      &lt;detail name="MetaDescription" typeName="System.String, mscorlib" meta="" /&gt;
+      &lt;detail name="ParentID" typeName="System.Int32, mscorlib" meta=""&gt;2&lt;/detail&gt;
+      &lt;detail name="VersionKey" typeName="System.String, mscorlib" meta="" encoded="True"&gt;&lt;![CDATA[aac330c8-5b37-4354-adf6-e1c2c3ed9fb6]]&gt;&lt;/detail&gt;
+      &lt;detail name="Image" typeName="System.String, mscorlib" meta="" /&gt;
+      &lt;detail name="Pdf" typeName="System.String, mscorlib" meta="" /&gt;
+      &lt;detail name="DirectUrl" typeName="System.String, mscorlib" meta="" /&gt;
+      &lt;detail name="ShowTitle" typeName="System.Boolean, mscorlib" meta=""&gt;True&lt;/detail&gt;
+      &lt;detail name="Syndicate" typeName="System.Boolean, mscorlib" meta=""&gt;False&lt;/detail&gt;
+    &lt;/details&gt;
+    &lt;detailCollections /&gt;
+    &lt;children /&gt;
+    &lt;authorizations /&gt;
+    &lt;properties&gt;
+      &lt;property name="Syndicate" typeName="System.Boolean, mscorlib"&gt;False&lt;/property&gt;
+      &lt;property name="Summary" typeName="System.String, mscorlib"&gt;&lt;![CDATA[test
+]]&gt;&lt;/property&gt;
+    &lt;/properties&gt;
+  &lt;/item&gt;
+&lt;/n2&gt;</VersionDataXml></ContentVersion>

@@ -1,3 +1,4 @@
+using System.Linq;
 using N2.Persistence;
 
 namespace N2.Edit.Workflow.Commands
@@ -27,7 +28,11 @@ namespace N2.Edit.Workflow.Commands
 
         private void AddChildrenOfContentItem(ContentItem parent)
         {
-            foreach (var templateItemChild in parent.Children)
+            // VS2017: Fix to create the children to array first since it might be raised an enumerable exception
+            // when changing the list
+            var children = parent.Children.ToArray();
+
+            foreach (var templateItemChild in children)
             {
                 persister.Save(templateItemChild);
 
