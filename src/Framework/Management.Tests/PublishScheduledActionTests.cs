@@ -82,7 +82,7 @@ namespace N2.Management.Tests
             unpublished.Title.ShouldBe("Original");
         }
 
-        [Test, Ignore]
+        [Test, Explicit]
         public void VersionToBePublished_IsNotStoredInVersionList()
         {
             using (engine.SecurityManager.Disable())
