@@ -1,7 +1,7 @@
 using System.Web.UI.WebControls;
 using N2.Details;
 using N2.Integrity;
-using N2.Security.Details;
+//using N2.Security.Details;
 
 namespace N2.Templates.Items
 {
@@ -57,7 +57,7 @@ namespace N2.Templates.Items
             set { SetDetail("VerificationSender", value, string.Empty); }
         }
 
-        [EditableRoles(Title = "Assign users to these roles", ContainerName = "registration")]
+        //[EditableRoles(Title = "Assign users to these roles", ContainerName = "registration")]
         public virtual DetailCollection Roles
         {
             get { return GetDetailCollection("Roles", true); }
