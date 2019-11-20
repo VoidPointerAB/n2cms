@@ -27,6 +27,21 @@ Mono.Cecil (0.9.5.4) -> 0.11.1
 Microsoft.AspNet.WebPages -> 3.2.3, 3.2.4
 Microsoft.AspNet.Mvc -> 5.2.4
 
+Still some warnings:
+-----------------------------------------------------
+Severity	Code	Description	Project	File	Line	Suppression State
+Warning	IDE0006	Error encountered while loading the project. Some project features, such as full solution analysis for the failed project and projects that depend on it, have been disabled.	N2.Extensions.Tests		1	Active
+Warning		This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\..\packages\System.Data.SQLite.Core.1.0.112.0\build\net45\System.Data.SQLite.Core.targets.	N2.Extensions.Tests	G:\Code\GIT\n2cms\src\Framework\Extensions.Tests\N2.Extensions.Tests.csproj	206	
+Warning	IDE0006	Error encountered while loading the project. Some project features, such as full solution analysis for the failed project and projects that depend on it, have been disabled.	N2.Templates		1	Active
+Warning		This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\..\packages\System.Data.SQLite.Core.1.0.112.0\build\net45\System.Data.SQLite.Core.targets.	N2.Templates	G:\Code\GIT\n2cms\src\WebForms\WebFormsTemplates\N2.Templates.csproj	881	
+Warning	IDE0006	Error encountered while loading the project. Some project features, such as full solution analysis for the failed project and projects that depend on it, have been disabled.	N2.Templates.Mvc		1	Active
+Warning		This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\..\packages\System.Data.SQLite.Core.1.0.112.0\build\net45\System.Data.SQLite.Core.targets.	N2.Templates.Mvc	G:\Code\GIT\n2cms\src\Mvc\MvcTemplates\N2.Templates.Mvc.csproj	743	
+Warning	IDE0006	Error encountered while loading the project. Some project features, such as full solution analysis for the failed project and projects that depend on it, have been disabled.	Dinamico		1	Active
+Warning		This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\..\packages\System.Data.SQLite.Core.1.0.112.0\build\net45\System.Data.SQLite.Core.targets.	Dinamico	G:\Code\GIT\n2cms\src\Mvc\Dinamico\Dinamico.csproj	346	
+Warning	IDE0006	Error encountered while loading the project. Some project features, such as full solution analysis for the failed project and projects that depend on it, have been disabled.	N2.Templates.Mvc.Tests		1	Active
+Warning		This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is ..\..\..\packages\System.Data.SQLite.Core.1.0.112.0\build\net45\System.Data.SQLite.Core.targets.	N2.Templates.Mvc.Tests	G:\Code\GIT\n2cms\src\Mvc\MvcTemplates.Tests\N2.Templates.Mvc.Tests.csproj	175	
+
+
 
 
 
