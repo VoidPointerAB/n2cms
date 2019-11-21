@@ -160,8 +160,22 @@ namespace N2.Web
                         throw new ConfigurationErrorsException("Upload path configured for site '" + configElement.Name + "' cannot be empty.");
                     s.UploadFolders.Add(new FileSystemRoot(folder, s));
                 }
-	            foreach (NameValueConfigurationElement setting in configElement.Settings)
-		            s.Settings[setting.Name] = setting.Value;
+
+                foreach (var settingItem in configElement.Settings)
+                {
+                    if (settingItem is KeyValueConfigurationElement)    // VS2017: fix! settingItem is of type KeyValueConfigurationElement
+                    {
+                        var setting = settingItem as KeyValueConfigurationElement;
+                        s.Settings[setting.Key] = setting.Value;
+                    }
+                    else
+                    {
+                        // Old code
+                        var setting = settingItem as NameValueConfigurationElement;
+                        s.Settings[setting.Name] = setting.Value;
+                    }
+                }
+		           
                 sites.Add(s);
             }
             return sites;
