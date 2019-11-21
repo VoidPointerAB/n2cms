@@ -74,9 +74,10 @@ namespace N2.Tests.Details
 
             editable.UpdateEditor(item, editor);
             
-            ItemUtility.FindInChildren<N2.Web.UI.WebControls.NameEditor>(editor).Single().Text = "Hello child";
+            ItemUtility.FindInChildren<NameEditor>(editor).Single().Text = "Hello child";
 
-            enclosingEditor.UpdateObject(new N2.Edit.Workflow.CommandContext(definition, item, Interfaces.Editing, engine.RequestContext.User));
+            var ctx = new CommandContext(definition, item, Interfaces.Editing, engine.RequestContext.User);
+            enclosingEditor.UpdateObject(ctx);
 
             item.Children.Single().ShouldBe(item.TheItem);
         }
@@ -94,7 +95,7 @@ namespace N2.Tests.Details
 
             editable.UpdateEditor(item, editor);
 
-            var ctx = new N2.Edit.Workflow.CommandContext(definition, item, Interfaces.Editing, engine.RequestContext.User);
+            var ctx = new CommandContext(definition, item, Interfaces.Editing, engine.RequestContext.User);
             enclosingEditor.UpdateObject(ctx);
 
             ctx.GetItemsToSave().ShouldContain(item.TheItem);

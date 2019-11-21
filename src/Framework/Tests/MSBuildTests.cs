@@ -151,7 +151,9 @@ namespace N2.Tests
         [Test]
         public void CanOperate_OnProject()
         {
-            string input = File.ReadAllText(@"..\..\N2.Tests.csproj");
+            // VS2017: Fix changing the path to test project since it is wrong!
+            var dir = Path.GetDirectoryName(typeof(MSBuildTests).Assembly.Location);
+            string input = File.ReadAllText(dir + @"..\..\..\N2.Tests.csproj");
 
             string result = Regex.Replace(input, pattern, replacement, RegexOptions.Singleline);
 
