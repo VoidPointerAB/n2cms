@@ -12,6 +12,8 @@ using N2.Web;
 using NUnit.Framework;
 using Shouldly;
 using N2.Edit.Versioning;
+using System.Threading;
+using System.Security.Principal;
 
 namespace N2.Tests.Persistence.NH
 {
@@ -28,9 +30,12 @@ namespace N2.Tests.Persistence.NH
         ContentItem item3;
         ContentItem[] all;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetUp()
         {
+            // VS2017: Add admin user to the webcontext with fully rights
+            Thread.CurrentPrincipal = SecurityUtilities.CreatePrincipal("admin", "Administrators", "Editors", "Writers");
+
             base.TestFixtureSetUp();
 
             CreateRootItem();
@@ -506,6 +511,8 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void All()
         {
+            Thread.CurrentPrincipal = null;
+
             IList<ContentItem> items = finder.All.Select();
 
             Assert.AreEqual(5, items.Count);

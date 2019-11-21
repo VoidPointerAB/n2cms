@@ -12,7 +12,7 @@ namespace N2.Tests
         protected IEngine engine;
         protected PersistenceTestHelper helper;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void TestFixtureSetUp()
         {
             helper = new PersistenceTestHelper();
@@ -32,7 +32,7 @@ namespace N2.Tests
             base.TearDown();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public virtual void TestFixtureTearDown()
         {
             helper.TestFixtureTearDown();
