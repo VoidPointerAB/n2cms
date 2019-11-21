@@ -14,6 +14,7 @@ using log4net;
 using log4net.Core;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using Shouldly;
 using System.Web;
 using N2.Edit.Versioning;
@@ -37,6 +38,9 @@ namespace N2.Tests.Persistence.NH
         [SetUp]
         public override void SetUp()
         {
+            // VS2017: Add admin user to the webcontext with fully rights
+            Thread.CurrentPrincipal = SecurityUtilities.CreatePrincipal("admin", "Administrators", "Editors", "Writers");
+
             base.SetUp();
             sessionProvider = helper.SessionProvider;
 

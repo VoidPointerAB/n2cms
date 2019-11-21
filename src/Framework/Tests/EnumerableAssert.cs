@@ -53,10 +53,16 @@ namespace N2.Tests
         [Test]
         public void Count_Fails_OnInvalidCount()
         {
-            ExceptionAssert.Throws<Exception>(delegate
+            //VS2017: Changed from Exception to AssertionException
+            var ex = Assert.Throws<AssertionException>(() =>
             {
                 EnumerableAssert.Count(3, new string[] { "one", "two" });
             });
+
+            //ExceptionAssert.Throws<Exception>(delegate
+            //{
+            //    EnumerableAssert.Count(3, new string[] { "one", "two" });
+            //});
         }
 
         [Test]
@@ -68,19 +74,31 @@ namespace N2.Tests
         [Test]
         public void Contains_Fails_OnNonExistingObject()
         {
-            ExceptionAssert.Throws<Exception>(delegate
+            // VS2017: Changed from Exception to AssertionException
+            var ex = Assert.Throws<AssertionException>(() =>
             {
                 EnumerableAssert.Contains(new string[] { "one", "two" }, "three");
             });
+
+            //ExceptionAssert.Throws<Exception>(delegate
+            //{
+            //    EnumerableAssert.Contains(new string[] { "one", "two" }, "three");
+            //});
         }
 
         [Test]
         public void DoesntContain_Fails_OnExistingObject()
-        {
-            ExceptionAssert.Throws<Exception>(delegate
+        {    
+            //VS2017: Changed from Exception to AssertionException
+            var ex = Assert.Throws<AssertionException>(() =>
             {
                 EnumerableAssert.DoesntContain(new string[] { "one", "two" }, "one");
             });
+
+            //ExceptionAssert.Throws<Exception>(delegate
+            //{
+            //    EnumerableAssert.DoesntContain(new string[] { "one", "two" }, "one");
+            //});
         }
 
         [Test]
