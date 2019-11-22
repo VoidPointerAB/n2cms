@@ -27,6 +27,15 @@ Mono.Cecil (0.9.5.4) -> 0.11.1
 Microsoft.AspNet.WebPages -> 3.2.3, 3.2.4
 Microsoft.AspNet.Mvc -> 5.2.4
 
+<package id="VP_N2CMS" version="1.0.1141.22850" targetFramework="net45" />
+<package id="VP_N2CMS.Config" version="2.6.2" targetFramework="net45" />
+<package id="VP_N2CMS.Config.SQLite" version="1.0.1141.22850" targetFramework="net45" />
+<package id="VP_N2CMS.Library" version="1.0.1141.22850" targetFramework="net45" />
+<package id="VP_N2CMS.Management" version="1.0.1141.22850" targetFramework="net45" />
+<package id="VP_N2CMS.Mvc" version="1.0.1141.22850" targetFramework="net45" />
+<package id="VP_N2CMS.Razor" version="1.0.1141.22850" targetFramework="net45" />
+<package id="VP_N2CMS.Search.Lucene" version="1.0.1141.22850" targetFramework="net45" />
+
 Still some warnings:
 -----------------------------------------------------
 Severity	Code	Description	Project	File	Line	Suppression State
