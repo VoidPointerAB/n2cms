@@ -26,6 +26,8 @@ Newtonsoft.Json -> 12.0.1
 Mono.Cecil (0.9.5.4) -> 0.11.1
 Microsoft.AspNet.WebPages -> 3.2.3, 3.2.4
 Microsoft.AspNet.Mvc -> 5.2.4
+mongocsharpdriver (1.8.3) -> 2.9.3
+Microsoft.AspNet.Identity.Core (2.2.1) -> 2.2.2
 
 <package id="VP_N2CMS" version="1.0.1141.22850" targetFramework="net45" />
 <package id="VP_N2CMS.Config" version="2.6.2" targetFramework="net45" />
