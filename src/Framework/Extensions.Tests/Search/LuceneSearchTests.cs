@@ -1,23 +1,17 @@
 using System;
-using System.Configuration;
 using System.Linq;
 using N2.Configuration;
-using N2.Persistence.NH;
-using N2.Tests.Fakes;
 using NUnit.Framework;
 using N2.Web;
 using N2.Persistence.Search;
-using N2.Persistence;
 using N2.Tests.Persistence.Definitions;
 using System.Diagnostics;
-using System.IO;
 using N2.Definitions;
 using Shouldly;
 using System.Threading;
 using System.Collections.Generic;
 using System.Text;
 using N2.Tests;
-using N2.Engine;
 using N2.Search.Remote.Server;
 using N2.Search.Remote.Client;
 
@@ -54,7 +48,7 @@ namespace N2.Extensions.Tests.Search
     {
         private IndexerServer server;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetUp()
         {
             base.TestFixtureSetUp();
@@ -64,7 +58,7 @@ namespace N2.Extensions.Tests.Search
             server.Start();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             server.Stop();
@@ -92,7 +86,7 @@ namespace N2.Extensions.Tests.Search
         protected IDefinitionManager definitions;
         protected PersistableItem root;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void TestFixtureSetUp()
         {
             definitions = TestSupport.SetupDefinitions(typeof(PersistableItem), typeof(PersistableItem2), typeof(PersistablePart));

@@ -10,12 +10,21 @@ namespace N2.Tests.Web.Drawing
     [TestFixture]
     public class ImageResizerTests
     {
-        // VS2017: Fix for setting the Current Directory to the assembly location
-        [OneTimeSetUp]
-        public void OneTimeSetUp()
+        // VS2017: Fix for setting the environment path of the Current Directory!
+        [SetUp]
+        public void SetUp()
         {
-            var dir = Path.GetDirectoryName(typeof(ImageResizerTests).Assembly.Location);
-            Environment.CurrentDirectory = dir;
+            var path = "\\Web\\Drawing\\ajax-loader.gif";
+            if (!File.Exists(Environment.CurrentDirectory + path))   // This works sometimes!
+            {
+                // Get the directory of the tests directory
+                var dir = Directory.GetParent(TestContext.CurrentContext.TestDirectory).Parent.FullName;
+                Environment.CurrentDirectory = dir;
+                if (!File.Exists(Environment.CurrentDirectory + path))
+                {
+                    throw new ArgumentException("Failed to set the environment path of the current directory!");
+                }
+            }
         }
 
         ImageResizer ir = new ImageResizer();
