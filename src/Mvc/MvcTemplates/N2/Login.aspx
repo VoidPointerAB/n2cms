@@ -12,7 +12,7 @@
     
 	<link rel="stylesheet" href="Resources/Css/All.css" type="text/css" runat="server" />
 	<style>
-		body { background:#fff url(Resources/Img/logo.png) no-repeat 98% 10px; }
+		body { background:#fff url(Resources/Img/logo_vp.png) no-repeat 98% 10px; }
 		.container { width:400px; position:absolute; top:50%; left:50%; margin-top:-100px; margin-left:-200px; }
 		label { margin-right:10px; }
 	</style>

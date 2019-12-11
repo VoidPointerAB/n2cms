@@ -187,7 +187,9 @@
     <Content Include="Resources\img\folder_plus.gif" />
     <Content Include="Resources\img\grabber.png" />
     <Content Include="Resources\img\logo.png" />
+    <Content Include="Resources\img\logo_vp.png" />
     <Content Include="Resources\img\minus.png" />
+    <Content Include="Resources\img\n2_vp.png" />
     <Content Include="Resources\img\plus.png" />
     <Content Include="Resources\img\search.png" />
     <Content Include="Resources\img\sliding-loader.png" />

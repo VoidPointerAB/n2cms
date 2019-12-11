@@ -154,6 +154,7 @@
     <Content Include="Dinamico\Themes\MyTheme\Content\Site.css" />
     <Content Include="Dinamico\Themes\MyTheme\readme.txt" />
     <Content Include="favicon.ico" />
+    <Content Include="favicon_vp.ico" />
     <Content Include="Global.asax" />
     <Content Include="Dinamico\Themes\MyTheme\Views\Web.config" />
     <Content Include="Dinamico\Themes\Default\Views\Redirect\Index.cshtml" />

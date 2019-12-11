@@ -88,7 +88,7 @@ a { text-decoration: none; color: #000; }
 #menu { height: 39px; background-color: #18a0de; font-size: 18px; }
 	#menu > ul { white-space:nowrap; }
         #menu li { position:relative; }
-		#logo { padding-left:60px; background-image: url(../img/n2.png); background-repeat: no-repeat; background-position: 10px 50%; width:60px; text-align:right; }
+		#logo { padding-left:60px; background-image: url(../img/n2_vp.png); background-repeat: no-repeat; background-position: 10px 50%; width:60px; text-align:right; }
 		#menu a { color:#fff; }
 		#menu .dropdown-menu a { color:#000; }
         #menu > ul > li > .page-action,
@@ -104,7 +104,7 @@ a { text-decoration: none; color: #000; }
 			#menu > ul > li .page-action:hover { background-color: #3aaee3; }
 
 			#menu > ul > li .dropdown-toggle { line-height: 22px; padding: 8px; float:left; }
-			#menu > ul > li .dropdown-toggle .caret { border-top-color:#fff; bordr-bottom-color:fff; }
+			#menu > ul > li .dropdown-toggle .caret { border-top-color:#fff; border-bottom-color:fff; }
 			#menu > ul > li .dropdown-toggle:hover,
 			#menu > ul > li.open .dropdown-toggle { background-color:#3aaee3 }
 			#menu > ul > li .dropdown-menu { }
