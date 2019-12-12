@@ -30,7 +30,7 @@
 
 	<div class="fileContents">
 		<asp:TextBox ID="txtContent" runat="server" CssClass="fileContents" Visible="false" TextMode="MultiLine" />
-		<edit:ResizedImage MaxHeight="200" MaxWidth="300" ImageUrl="<%# SelectedFile.LocalUrl %>" runat="server" Hash="<%# SelectedFile.Updated.ToString() %>" />
+		<edit:ResizedImage MaxHeight="200" MaxWidth="300" ImageUrl="<%# SelectedFile != null ? SelectedFile.LocalUrl : null %>" runat="server" Hash="<%# SelectedFile != null ? SelectedFile.Updated.ToString() : null %>" />
 	</div>
 	</div>
 

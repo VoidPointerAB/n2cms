@@ -351,6 +351,14 @@ namespace N2.Edit.Navigation
             FS = Engine.Resolve<IFileSystem>();
             var parentDirectory = context.Request["selected"];
             var filenames = Selection.RequestValueAccessor("filenames");
+            if (!string.IsNullOrEmpty(filenames))
+            {
+                var decodedFileName = HttpUtility.UrlDecode(filenames);
+                var fileNameNoEncoded = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(decodedFileName);
+                filenames = HttpUtility.UrlEncode(fileNameNoEncoded);
+            }
+            
+
             var selected = new Directory(DirectoryData.Virtual(parentDirectory), null);
 
             if (string.IsNullOrEmpty(parentDirectory) || !Engine.SecurityManager.IsAuthorized(context.User, selected, N2.Security.Permission.Read))
@@ -411,6 +419,8 @@ namespace N2.Edit.Navigation
 
                     var stream = fileContent.InputStream;
                     var fileName = fileContent.FileName;
+                    fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+
                     if (string.IsNullOrEmpty(fileName)) continue;
 
                     var newPath = Url.Combine(baseDir, fileName);

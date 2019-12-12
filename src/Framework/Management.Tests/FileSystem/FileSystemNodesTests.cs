@@ -43,7 +43,7 @@ namespace N2.Edit.Tests.FileSystem
         List<string> operations;
         List<FileEventArgs> arguments;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetUp()
         {
             base.TestFixtureSetUp();
@@ -66,7 +66,7 @@ namespace N2.Edit.Tests.FileSystem
             System.IO.Directory.Move(basePath, backupPath);
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public override void TestFixtureTearDown()
         {
             base.TestFixtureTearDown();

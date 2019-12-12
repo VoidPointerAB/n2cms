@@ -6,6 +6,7 @@ using N2.Edit.FileSystem;
 using N2.Web;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using N2.Definitions;
 using System.Text.RegularExpressions;
 
@@ -63,7 +64,13 @@ namespace N2.Management.Files.FileSystem
 
 			var fileUpload = context.Request.Files[0];
 			var inputStream = fileUpload.InputStream;
-			var virtualPath = Url.Combine(selection.SelectedItem.Url, fileName);
+
+		    if (string.IsNullOrEmpty(fileName))     // VP: Null when testing? Using fileUpload name insted.
+		    {
+		        fileName = fileUpload.FileName;
+		    }
+		    fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+            var virtualPath = Url.Combine(selection.SelectedItem.Url, fileName);
 
 			if (!IsFilenameTrusted(fileName))
 			{
@@ -96,6 +103,8 @@ namespace N2.Management.Files.FileSystem
 			{
 				var file = context.Request.Files[i];
 				var fileName = Path.GetFileName(file.FileName);
+			    fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+
 				var virtualPath = Url.Combine(((IFileSystemNode)selection.SelectedItem).LocalUrl, fileName);
 
 				if (!IsFilenameTrusted(fileName))

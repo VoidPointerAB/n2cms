@@ -1,12 +1,7 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Web;
-using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 using N2.Details;
 using N2.Edit.FileSystem.Items;
 
@@ -43,7 +38,9 @@ namespace N2.Edit.FileSystem.Editables
             File f = item as File;
             if (ce.Upload.PostedFile != null && ce.Upload.PostedFile.ContentLength > 0)
             {
-                f.Name = System.IO.Path.GetFileName(ce.Upload.PostedFile.FileName);
+                var fileName = System.IO.Path.GetFileName(ce.Upload.PostedFile.FileName);
+                fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+                f.Name = fileName;
                 f.WriteToDisk(ce.Upload.PostedFile.InputStream);
 
                 return true;

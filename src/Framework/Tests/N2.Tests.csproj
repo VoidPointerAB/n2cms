@@ -208,6 +208,7 @@
     <Compile Include="Edit\ContentHandlerTests_AutoSave.cs" />
     <Compile Include="Edit\EditUrlManagerTests.cs" />
     <Compile Include="Edit\FileSystem\DefaultFolderFinderTest.cs" />
+    <Compile Include="Edit\CloudReady\FileHelperTests.cs" />
     <Compile Include="Edit\Items\ItemWithSecuredContainer.cs" />
     <Compile Include="Edit\Items\NotVersionableItem.cs" />
     <Compile Include="Edit\Items\WidthType.cs" />
