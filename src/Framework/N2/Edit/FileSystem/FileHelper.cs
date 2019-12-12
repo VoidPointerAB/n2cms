@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace N2.Edit.FileSystem
@@ -13,6 +14,7 @@ namespace N2.Edit.FileSystem
             }
 
             fileName = GetCloudReadyFileString(fileName);
+            fileName = RemoveIllegalCharacters(fileName, new[] { '.', '-' });
 
             return fileName;
         }
@@ -24,13 +26,14 @@ namespace N2.Edit.FileSystem
             {
                 var dirName = localPath.Substring(lastIndexOf + 1);
                 dirName = GetCloudReadyFileString(dirName);
+                dirName = RemoveIllegalCharacters(dirName, new[] { '-' });
                 return localPath.Substring(0, lastIndexOf + 1) + dirName;
             }
 
             return localPath;
         }
 
-        private static string GetCloudReadyFileString(string fileStringInput)
+        public static string GetCloudReadyFileString(string fileStringInput)
         {
             var fileString = fileStringInput.ToLower();
 
@@ -45,6 +48,9 @@ namespace N2.Edit.FileSystem
             return fileString;
         }
 
-        
+        public static string RemoveIllegalCharacters(string fileStringInput, params char[] allowedCharacters)
+        {
+            return new string(Array.FindAll(fileStringInput.ToCharArray(), c => char.IsLetterOrDigit(c) || ((IList) allowedCharacters).Contains(c)));
+        }
     }
 }

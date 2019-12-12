@@ -473,6 +473,7 @@ namespace N2.Edit.Navigation
             }
 
             var name = context.Request["name"];
+            name = FileHelper.GetCloudReadyFileString(name);
             if (string.IsNullOrWhiteSpace(name))
             {
                 context.Response.WriteJson(new { Status = "Error", Message = "Directory name required" });
