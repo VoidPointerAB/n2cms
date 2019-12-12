@@ -69,7 +69,7 @@ namespace N2.Management.Files.FileSystem
 		    {
 		        fileName = fileUpload.FileName;
 		    }
-		    fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+		    fileName = FileHelper.GetCloudReadyFileName(fileName);
             var virtualPath = Url.Combine(selection.SelectedItem.Url, fileName);
 
 			if (!IsFilenameTrusted(fileName))
@@ -103,7 +103,7 @@ namespace N2.Management.Files.FileSystem
 			{
 				var file = context.Request.Files[i];
 				var fileName = Path.GetFileName(file.FileName);
-			    fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+			    fileName = FileHelper.GetCloudReadyFileName(fileName);
 
 				var virtualPath = Url.Combine(((IFileSystemNode)selection.SelectedItem).LocalUrl, fileName);
 

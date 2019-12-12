@@ -111,8 +111,11 @@ namespace N2.Edit.FileSystem.Items
                 FileSystem.MoveDirectory(oldPath, newPath);
                 ClearUrl();
             }
-            if (!FileSystem.DirectoryExists(LocalUrl))
-                FileSystem.CreateDirectory(LocalUrl);
+
+            var safeLocalUrl = FileHelper.GetCloudReadyLocalPath(LocalUrl);
+
+            if (!FileSystem.DirectoryExists(safeLocalUrl))
+                FileSystem.CreateDirectory(safeLocalUrl);
         }
 
         private void ClearUrl()

@@ -354,7 +354,7 @@ namespace N2.Edit.Navigation
             if (!string.IsNullOrEmpty(filenames))
             {
                 var decodedFileName = HttpUtility.UrlDecode(filenames);
-                var fileNameNoEncoded = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(decodedFileName);
+                var fileNameNoEncoded = FileHelper.GetCloudReadyFileName(decodedFileName);
                 filenames = HttpUtility.UrlEncode(fileNameNoEncoded);
             }
             
@@ -419,7 +419,7 @@ namespace N2.Edit.Navigation
 
                     var stream = fileContent.InputStream;
                     var fileName = fileContent.FileName;
-                    fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+                    fileName = FileHelper.GetCloudReadyFileName(fileName);
 
                     if (string.IsNullOrEmpty(fileName)) continue;
 

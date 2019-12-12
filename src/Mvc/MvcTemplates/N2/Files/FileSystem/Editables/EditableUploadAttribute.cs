@@ -39,7 +39,7 @@ namespace N2.Edit.FileSystem.Editables
             if (ce.Upload.PostedFile != null && ce.Upload.PostedFile.ContentLength > 0)
             {
                 var fileName = System.IO.Path.GetFileName(ce.Upload.PostedFile.FileName);
-                fileName = FileHelper.GetSafeFileNameToUseAlsoForCloudStorage(fileName);
+                fileName = FileHelper.GetCloudReadyFileName(fileName);
                 f.Name = fileName;
                 f.WriteToDisk(ce.Upload.PostedFile.InputStream);
 

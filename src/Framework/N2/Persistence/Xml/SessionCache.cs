@@ -78,8 +78,11 @@ namespace N2.Persistence.Xml
 
 		public virtual void Set(object id, TEntity entity)
 		{
-			entityCache[id] = new CacheBox<TEntity> { Value = entity };
-			secondLevelCache.Set(id, entity);
+		    if (id != null)     // VP: Is null sometimes when deleting files!
+		    {
+		        entityCache[id] = new CacheBox<TEntity> { Value = entity };
+		        secondLevelCache.Set(id, entity);
+            }
 		}
 
 		public virtual void Remove(object id)
