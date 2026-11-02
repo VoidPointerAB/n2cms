@@ -71,7 +71,7 @@ namespace N2.Tests
 
             var connectionStrings = (ConnectionStringsSection)ConfigurationManager.GetSection("connectionStrings");
             var map = new DefinitionMap();
-            var configurationBuilder = new ConfigurationBuilder(definitionProviders, new ClassMappingGenerator(map), new ThreadContext(), participators, config, connectionStrings);
+            var configurationBuilder = new N2.Persistence.NH.ConfigurationBuilder(definitionProviders, new ClassMappingGenerator(map), new ThreadContext(), participators, config, connectionStrings);
             var configurationSource = new ConfigurationSource(configurationBuilder);
 
             sessionProvider = new FakeSessionProvider(configurationSource, new NHInterceptorFactory(proxyFactory, notifier), context);
