@@ -21,7 +21,7 @@ namespace N2.Tests.Persistence.NH
         protected InterceptingProxyFactory proxyFactory;
         protected Type[] persistedTypes = new[] { typeof(Definitions.PersistableItem), typeof(Definitions.PersistableItem2), typeof(Definitions.NonVirtualItem) };
             
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void TestFixtureSetup()
         {
             ItemFinder finder;

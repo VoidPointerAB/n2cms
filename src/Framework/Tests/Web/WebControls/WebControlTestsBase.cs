@@ -19,7 +19,7 @@ namespace N2.Tests.Web.WebControls
         protected DataItem data;
         private ContentEngine engine;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void TestFixtureSetUp()
         {
             engine = new ContentEngine(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None),

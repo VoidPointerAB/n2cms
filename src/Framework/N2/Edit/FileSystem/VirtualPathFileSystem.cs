@@ -290,7 +290,7 @@ namespace N2.Edit.FileSystem
         /// <param name="outputStream">The stream to which the file contents should be written.</param>
         public virtual void ReadFileContents(string virtualPath, Stream outputStream)
         {
-            using (Stream sourceFile = OpenFile(virtualPath))
+            using (Stream sourceFile = OpenFile(virtualPath, false))
             {
                 byte[] buffer = new byte[32768];
                 while (true)

@@ -7,7 +7,7 @@ namespace N2.Tests.NewVersion
     {
         N2.Engine.ContentEngine engine;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void TestFixtureSetUp()
         {
             engine = new N2.Engine.ContentEngine();

@@ -19,7 +19,7 @@ namespace N2.Tests.Collections
 
         private FirstItem root;
         
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             map = new N2.Definitions.Static.DefinitionMap();

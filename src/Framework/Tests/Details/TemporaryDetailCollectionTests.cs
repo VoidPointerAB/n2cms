@@ -27,7 +27,7 @@ namespace N2.Tests.Details
     {
         private PersistenceTestHelper helper;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void TestFixtureSetUp()
         {
             helper = new PersistenceTestHelper();
@@ -54,7 +54,7 @@ namespace N2.Tests.Details
             helper.TearDown();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public virtual void TestFixtureTearDown()
         {
             helper.TestFixtureTearDown();

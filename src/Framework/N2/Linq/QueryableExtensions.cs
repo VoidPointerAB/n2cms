@@ -10,12 +10,14 @@ namespace N2.Linq
     {
         public static IQueryable<T> Cached<T>(IQueryable<T> query, NHibernate.CacheMode mode = NHibernate.CacheMode.Normal, string cacheRegion = null)
         {
-            query = query.Cacheable();
-            if (mode != NHibernate.CacheMode.Normal)
-                query = query.CacheMode(mode);
-            if (cacheRegion != null)
-                query = query.CacheRegion(cacheRegion);
-            return query;
+            return query.WithOptions(options =>
+            {
+                options.SetCacheable(true);
+                if (mode != NHibernate.CacheMode.Normal)
+                    options.SetCacheMode(mode);
+                if (cacheRegion != null)
+                    options.SetCacheRegion(cacheRegion);
+            });
         }
 
         public static IQueryable<TSource> WherePublished<TSource>(this IQueryable<TSource> source) where TSource : ContentItem

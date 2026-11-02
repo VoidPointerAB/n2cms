@@ -17,7 +17,7 @@ namespace N2.Tests.Edit.Versioning
         ContentPersister persister;
         VersionManager versioner;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetUp()
         {
             base.TestFixtureSetUp();
@@ -27,7 +27,7 @@ namespace N2.Tests.Edit.Versioning
             engine.SecurityManager.ScopeEnabled = false;
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public override void TestFixtureTearDown()
         {
             N2.Utility.CurrentTime = () => DateTime.Now;

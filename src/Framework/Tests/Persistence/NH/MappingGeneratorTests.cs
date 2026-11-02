@@ -52,7 +52,7 @@ namespace N2.Tests.Persistence.NH
     [TestFixture]
     public class MappingGeneratorTests : PersisterTestsBase
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetup()
         {
             InterceptingProxyFactory proxyFactory;

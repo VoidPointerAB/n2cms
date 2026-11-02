@@ -161,6 +161,8 @@ namespace N2.Web.UI.WebControls
 
         public event EventHandler DataSourceChanged;
 
+        // The legacy data source still exposes this view through IHierarchicalDataSource.
+#pragma warning disable 612
         public HierarchicalDataSourceView GetHierarchicalView(string viewPath)
         {
             if (string.IsNullOrEmpty(viewPath))
@@ -168,6 +170,7 @@ namespace N2.Web.UI.WebControls
 
             return new ItemHierarchicalDataSourceView(ItemUtility.WalkPath(CurrentItem, viewPath));
         }
+#pragma warning restore 612
 
         #endregion
 

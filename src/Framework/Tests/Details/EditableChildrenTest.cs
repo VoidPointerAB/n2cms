@@ -206,7 +206,7 @@ namespace N2.Tests.Details
             }
 
             public event EventHandler<ItemEventArgs> Saved = delegate { };
-			public event Action<object, CommandContext> CreatingContext;
+			public event Action<object, CommandContext> CreatingContext { add { } remove { } }
 
 			#endregion
 

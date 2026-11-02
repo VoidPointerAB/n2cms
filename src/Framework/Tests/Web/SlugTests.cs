@@ -87,7 +87,7 @@ namespace N2.Tests.Web
             return new Slug(cmw);
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             this.caseInvariantSlug = this.CreateCaseInvariantSlug();

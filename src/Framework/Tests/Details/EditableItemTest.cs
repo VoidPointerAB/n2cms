@@ -35,7 +35,7 @@ namespace N2.Tests.Details
     {
         private Fakes.FakeEngine engine;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             TestSupport.InitializeHttpContext("/", "");
@@ -55,7 +55,7 @@ namespace N2.Tests.Details
             engine.AddComponentInstance(new N2.Web.Slug(new N2.Configuration.ConfigurationManagerWrapper()));
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             N2.Context.Replace(null);

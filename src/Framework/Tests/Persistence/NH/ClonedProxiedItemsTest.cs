@@ -7,7 +7,7 @@ namespace N2.Tests.Persistence.NH
     [TestFixture]
     public class ClonedProxiedItemsTest : PersisterTestsBase
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetup()
         {
             base.persistedTypes = new[] { typeof(Definitions.PersistableItem), typeof(InterceptableInheritorItem) };

@@ -11,7 +11,7 @@ namespace N2.Tests.Web.WebControls
     {
         CultureInfo startCulture = Thread.CurrentThread.CurrentCulture;
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             Thread.CurrentThread.CurrentCulture = startCulture;

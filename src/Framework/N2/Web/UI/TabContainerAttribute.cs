@@ -30,7 +30,6 @@ namespace N2.Web.UI
     public class TabContainerAttribute : EditorContainerAttribute
     {
         string tabText;
-        bool registerTabCss;
         string cssClass;
 
         public TabContainerAttribute(string name)
@@ -70,7 +69,6 @@ namespace N2.Web.UI
             TabPanel p = new TabPanel();
             p.ID = Name;
             p.TabText = GetLocalizedText("TabText") ?? TabText;
-            p.RegisterTabCss = registerTabCss;
             if (string.IsNullOrEmpty(CssClass))
             {
                 p.CssClass = "tabPanel primaryTabs";

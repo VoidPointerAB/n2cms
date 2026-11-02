@@ -9,11 +9,11 @@ namespace N2.Tests.Fakes
 {
 	public class FakeUrlParser : IUrlParser
 	{
-		public event EventHandler<PageNotFoundEventArgs> PageNotFound;
+		public event EventHandler<PageNotFoundEventArgs> PageNotFound { add { } remove { } }
 
-		public event EventHandler<UrlEventArgs> BuildingUrl;
+		public event EventHandler<UrlEventArgs> BuildingUrl { add { } remove { } }
 
-		public event EventHandler<UrlEventArgs> BuiltUrl;
+		public event EventHandler<UrlEventArgs> BuiltUrl { add { } remove { } }
 		
 		private ContentItem startPage;
 

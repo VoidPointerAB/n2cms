@@ -195,15 +195,12 @@ namespace N2.Persistence.NH
                     Properties[NHibernate.Cfg.Environment.Dialect] = typeof(NHibernate.Dialect.DB2Dialect).AssemblyQualifiedName;
                     break;
                 case DatabaseFlavour.Oracle9i:
-                    Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.OracleClientDriver).AssemblyQualifiedName;
+                    Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.OracleManagedDataClientDriver).AssemblyQualifiedName;
                     Properties[NHibernate.Cfg.Environment.Dialect] = typeof(NHibernate.Dialect.Oracle9iDialect).AssemblyQualifiedName;
                     break;
                 case DatabaseFlavour.Oracle:
                 case DatabaseFlavour.Oracle10g:
-                    // if you have OracleOdpDriver installed
-                    // use the following line instead of the the later one (NOTICE both apply to the same property)
-                    // Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.OracleDataClientDriver).AssemblyQualifiedName;
-                    Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.OracleClientDriver).AssemblyQualifiedName;
+                    Properties[NHibernate.Cfg.Environment.ConnectionDriver] = typeof(NHibernate.Driver.OracleManagedDataClientDriver).AssemblyQualifiedName;
                     Properties[NHibernate.Cfg.Environment.Dialect] = typeof(NHibernate.Dialect.Oracle10gDialect).AssemblyQualifiedName;
                     break;
                 case DatabaseFlavour.MongoDB:
@@ -226,7 +223,7 @@ namespace N2.Persistence.NH
                 return DatabaseFlavour.SqLite;
             if (provider.StartsWith("MySql.Data.MySqlClient"))
                 return DatabaseFlavour.MySql;
-            if (provider.StartsWith("System.Data.OracleClient"))
+            if (provider.StartsWith("System.Data.OracleClient") || provider.StartsWith("Oracle.ManagedDataAccess.Client"))
                 return DatabaseFlavour.Oracle;
             if (provider.StartsWith("System.Data.SqlServerCe"))
                 return DatabaseFlavour.SqlCe;

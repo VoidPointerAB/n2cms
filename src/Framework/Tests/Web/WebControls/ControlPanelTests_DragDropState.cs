@@ -9,7 +9,7 @@ namespace N2.Tests.Web.WebControls
     [TestFixture]
     public class ControlPanelTests_DragDropState : WebControlTestsBase
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetUp()
         {
             base.TestFixtureSetUp();

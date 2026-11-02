@@ -18,6 +18,7 @@ namespace N2.Tests.Web.Items
             get { return TemplateUrl.TrimStart('~') + "?n2page=" + ID; }
         }
 
+        [Obsolete]
         public override ItemList GetChildren()
         {
             return GetChildren(new ItemFilter[0]);

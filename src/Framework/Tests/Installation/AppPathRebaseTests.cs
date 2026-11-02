@@ -289,7 +289,19 @@ namespace N2.Tests.Installation
             var items = new List<ContentItem> { root, item };
 
             var finder = MockRepository.GenerateStub<IItemFinder>();
-            finder.Stub(f => f.All.Select()).IgnoreArguments().Return(items);
+            var builder = MockRepository.GenerateStub<IQueryBuilder>();
+            var criteria = MockRepository.GenerateStub<IComparisonCriteria<int>>();
+            var query = MockRepository.GenerateStub<IQueryAction>();
+            var orderBy = MockRepository.GenerateStub<IOrderBy>();
+            var direction = MockRepository.GenerateStub<ISortDirection>();
+            finder.Stub(f => f.Where).Return(builder);
+            builder.Stub(b => b.ID).Return(criteria);
+            criteria.Stub(c => c.Ge(int.MinValue)).Return(query);
+            query.Stub(q => q.OrderBy).Return(orderBy);
+            orderBy.Stub(o => o.ID).Return(direction);
+            direction.Stub(d => d.Asc).Return(query);
+            query.Stub(q => q.MaxResults(100)).Return(query);
+            query.Stub(q => q.Select()).Return(items);
 
             var persister = MockRepository.GenerateStub<IPersister>();
             persister.Stub(p => p.Repository.BeginTransaction()).Return(MockRepository.GenerateStub<ITransaction>());

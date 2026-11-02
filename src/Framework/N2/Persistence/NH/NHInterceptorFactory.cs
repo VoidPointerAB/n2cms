@@ -26,7 +26,7 @@ namespace N2.Persistence.NH
             logger.Debug("Creating NH session");
 
             var nhi = new NHInterceptor(interceptor, notifier);
-            var s = sessionFactory.OpenSession(nhi);
+            var s = sessionFactory.WithOptions().Interceptor(nhi).OpenSession();
             nhi.Session = s;
             return s;
         }

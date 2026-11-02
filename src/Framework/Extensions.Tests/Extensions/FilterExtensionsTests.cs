@@ -11,14 +11,14 @@ namespace N2.Extensions.Tests.Extensions
     {
         Func<ISecurityManager> backup;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             backup = AccessFilter.CurrentSecurityManager;
             FakeSecurityManager securityManager = new FakeSecurityManager();
             AccessFilter.CurrentSecurityManager = () => securityManager;
         }
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             AccessFilter.CurrentSecurityManager = backup;

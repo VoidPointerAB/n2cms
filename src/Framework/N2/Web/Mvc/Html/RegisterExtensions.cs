@@ -32,7 +32,7 @@ namespace N2.Web.Mvc.Html
                     if (typeof(ContentItem).IsAssignableFrom(contentType) && re.ContentType == null)
                     {
                         re.ContentType = contentType;
-                        re.Title = contentType.Name;
+                        re.Definition.Title = contentType.Name;
                     }
                 }
                 re.IsDefined = true;

@@ -11,7 +11,7 @@ namespace N2.Tests.Engine
     [TestFixture]
     public class WindsorContentAdapterProviderTest : ContentAdapterProviderTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             provider = new ContentAdapterProvider(new ContentEngine(), new AppDomainTypeFinder());
@@ -22,7 +22,7 @@ namespace N2.Tests.Engine
     [TestFixture]
     public class MediumTrustContentAdapterProviderTest : ContentAdapterProviderTest
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             provider = new ContentAdapterProvider(new ContentEngine(new MediumTrustServiceContainer(), EventBroker.Instance, new ContainerConfigurer()), new AppDomainTypeFinder());

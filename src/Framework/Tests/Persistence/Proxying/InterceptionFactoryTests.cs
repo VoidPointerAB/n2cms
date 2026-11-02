@@ -145,7 +145,7 @@ namespace N2.Tests.Persistence.Proxying
         InterceptableItem item;
         private DefinitionMap map;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             factory = new InterceptingProxyFactory();

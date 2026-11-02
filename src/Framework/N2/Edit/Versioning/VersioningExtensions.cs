@@ -238,7 +238,6 @@ namespace N2.Edit.Versioning
 
 	    public static VersionInfo GetVersionInfo(this ContentItem version)
 	    {
-		    int pc = 0;
 		    try
 		    {
 			    return new VersionInfo

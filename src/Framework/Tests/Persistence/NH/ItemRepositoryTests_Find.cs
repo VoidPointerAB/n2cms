@@ -14,7 +14,7 @@ namespace N2.Tests.Persistence.NH
     public class ItemRepositoryTests_Finds : DatabasePreparingBase
     {
         ContentItemRepository repository;
-        new ISessionProvider sessionProvider;
+        ISessionProvider sessionProvider;
         private PersistableItem root;
         private PersistableItem child1;
         private PersistableItem grandchild1;

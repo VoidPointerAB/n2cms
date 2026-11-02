@@ -8,7 +8,7 @@ namespace N2.Tests.Collections
     {
         FirstItem item1, item2;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             item1 = new FirstItem();

@@ -17,7 +17,6 @@ namespace N2.Tests.Web
     {
         struct TestStruct
         {
-            int AnInteger;
         }
 
         enum TestEnumWithoutFlags

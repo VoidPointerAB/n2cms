@@ -11,7 +11,7 @@ namespace N2.Tests.Web.WebControls
     [TestFixture]
     public class ControlPanelTests_HiddenState : WebControlTestsBase
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void TestFixtureSetUp()
         {
             base.TestFixtureSetUp();

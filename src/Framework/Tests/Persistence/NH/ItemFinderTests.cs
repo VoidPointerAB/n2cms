@@ -513,7 +513,7 @@ namespace N2.Tests.Persistence.NH
         {
             Thread.CurrentPrincipal = null;
 
-            IList<ContentItem> items = finder.All.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).Select();
 
             Assert.AreEqual(5, items.Count);
             EnumerableAssert.Contains(items, rootItem);
@@ -523,7 +523,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void OrderByPropertyAsc()
         {
-            IList<ContentItem> items = finder.All.OrderBy.Title.Asc.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).OrderBy.Title.Asc.Select();
 
             Assert.AreEqual(5, items.Count);
             Assert.AreEqual(rootItem, items[3]);
@@ -533,7 +533,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void OrderByPropertyDesc()
         {
-            IList<ContentItem> items = finder.All.OrderBy.Title.Desc.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).OrderBy.Title.Desc.Select();
 
             Assert.AreEqual(5, items.Count);
             Assert.AreEqual(startPage, items[0]);
@@ -543,7 +543,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithCountFilter()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new CountFilter(0, 2))
                 .OrderBy.ID.Asc.Select();
             
@@ -555,7 +555,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithFilterAndMaxResults()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new CountFilter(1, 2))
                 .MaxResults(2)
                 .OrderBy.ID.Asc.Select();
@@ -568,7 +568,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithFilter_AndFirstResult()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new CountFilter(1, 2))
                 .FirstResult(1)
                 .OrderBy.ID.Asc.Select();
@@ -581,7 +581,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithFilter_AndFirstResult_AndMaxResults()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new CountFilter(1, 2))
                 .FirstResult(2)
                 .MaxResults(2)
@@ -595,7 +595,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithFilterAndHugeMaxResults()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new CountFilter(1, 2))
                 .MaxResults(200)
                 .OrderBy.ID.Asc.Select();
@@ -606,7 +606,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithNoneFilteredAndMaxResults()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new NullFilter())
                 .MaxResults(2)
                 .OrderBy.ID.Asc.Select();
@@ -617,7 +617,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithNoneFilteredAndHugeMaxResults()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new NullFilter())
                 .MaxResults(200)
                 .OrderBy.ID.Asc.Select();
@@ -631,7 +631,7 @@ namespace N2.Tests.Persistence.NH
             IList<ItemFilter> filters = new List<ItemFilter>();
             filters.Add(new AncestorFilter(startPage));
             filters.Add(new CountFilter(0, 2));
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(filters)
                 .OrderBy.ID.Asc.Select();
 
@@ -643,7 +643,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void WithTheZone()
         {
-            IList<ContentItem> items = finder.All
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue)
                 .Filters(new ZoneFilter("TheZone"))
                 .OrderBy.ID.Asc.Select();
 
@@ -654,7 +654,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void OrderByDetailDesc()
         {
-            IList<ContentItem> items = finder.All.OrderBy.Detail("IntDetail").Desc.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).OrderBy.Detail("IntDetail").Desc.Select();
 
             Assert.AreEqual(5, items.Count);
             Assert.AreEqual(startPage, items[0]);
@@ -664,7 +664,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void FilterCount()
         {
-            IList<ContentItem> items = finder.All.OrderBy.Detail("IntDetail").Desc.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).OrderBy.Detail("IntDetail").Desc.Select();
 
             Assert.AreEqual(5, items.Count);
             Assert.AreEqual(startPage, items[0]);
@@ -709,7 +709,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void AllWithFirstResult()
         {
-            IList<ContentItem> items = finder.All.FirstResult(3).OrderBy.ID.Desc.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).FirstResult(3).OrderBy.ID.Desc.Select();
             Assert.AreEqual(2, items.Count);
             Assert.AreEqual(startPage, items[0]);
             Assert.AreEqual(rootItem, items[1]);
@@ -718,7 +718,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void AllWithMaxResults()
         {
-            IList<ContentItem> items = finder.All.MaxResults(2).OrderBy.ID.Asc.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).MaxResults(2).OrderBy.ID.Asc.Select();
             Assert.AreEqual(2, items.Count);
             Assert.AreEqual(rootItem, items[0]);
             Assert.AreEqual(startPage, items[1]);
@@ -727,7 +727,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void AllWithFirstAndMaxResults()
         {
-            IList<ContentItem> items = finder.All.FirstResult(2).MaxResults(2).OrderBy.ID.Asc.Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).FirstResult(2).MaxResults(2).OrderBy.ID.Asc.Select();
             Assert.AreEqual(2, items.Count);
             Assert.AreEqual(item1, items[0]);
             Assert.AreEqual(item2, items[1]);
@@ -868,7 +868,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void CanCountAll()
         {
-            int count = finder.All.Count();
+            int count = finder.Where.ID.Ge(int.MinValue).Count();
             Assert.AreEqual(5, count);
         }
 
@@ -941,7 +941,7 @@ namespace N2.Tests.Persistence.NH
         [Test]
         public void CanSelect_All_WithMaxRestriction()
         {
-            IList<ContentItem> items = finder.All.MaxResults(1).Select();
+            IList<ContentItem> items = finder.Where.ID.Ge(int.MinValue).MaxResults(1).Select();
 
             Assert.That(items.Count, Is.EqualTo(1));
         }
@@ -950,7 +950,7 @@ namespace N2.Tests.Persistence.NH
         public void CanSelect_AllItems_ByAncestralTrail()
         {
             IList<ContentItem> items = finder.Where.AncestralTrail.Like(rootItem.AncestralTrail + "%").Select();
-            int allCount = finder.All.Count();
+            int allCount = finder.Where.ID.Ge(int.MinValue).Count();
 
             Assert.That(items.Count, Is.EqualTo(allCount));
         }
@@ -959,7 +959,7 @@ namespace N2.Tests.Persistence.NH
         public void CanSelect_Descendantds_ByAncestralTrail()
         {
             IList<ContentItem> items = finder.Where.AncestralTrail.Like(startPage.AncestralTrail + "%").Select();
-            int allCount = finder.All.Count();
+            int allCount = finder.Where.ID.Ge(int.MinValue).Count();
 
             Assert.That(items.Count, Is.EqualTo(allCount - 1));
         }
@@ -1102,7 +1102,7 @@ namespace N2.Tests.Persistence.NH
         public void FilterByProperty_String_Like_NonMatchingValue()
         {
             var items = finder.Where.Property("StringPersistableProperty").Like("non in table%").Select();
-            var all = new List<ContentItem>(finder.All.Select());
+            var all = new List<ContentItem>(finder.Where.ID.Ge(int.MinValue).Select());
             Assert.That(items.Count, Is.EqualTo(0));
         }
         [Test]

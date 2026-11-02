@@ -22,7 +22,7 @@ namespace N2.Extensions.Tests.Search.Remote
         private SearcherClient searcher;
         private TextExtractor extractor;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             definitions = TestSupport.SetupDefinitions(typeof(PersistableItem), typeof(PersistableItem2), typeof(PersistablePart));
@@ -30,7 +30,7 @@ namespace N2.Extensions.Tests.Search.Remote
             server.Start();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             server.Stop();

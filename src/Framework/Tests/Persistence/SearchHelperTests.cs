@@ -29,7 +29,7 @@ namespace N2.Tests.Persistence
             engine.Persister.Repository.SaveOrUpdate(root);
             engine.Persister.Repository.SaveOrUpdate(root.Children.ToArray());
 
-            new SearchHelper(() => engine).Find.All.Count().ShouldBe(7);
+            new SearchHelper(() => engine).Find.Where.ID.Ge(int.MinValue).Count().ShouldBe(7);
                              
             new SearchHelper(() => engine).Items.Count().ShouldBe(7);
             new SearchHelper(() => engine).Pages.Count().ShouldBe(7);

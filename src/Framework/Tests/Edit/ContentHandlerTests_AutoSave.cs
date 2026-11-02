@@ -91,7 +91,7 @@ namespace N2.Tests.Edit
 		public void ExistingPartOnPageDraft_UpdatesDraft()
 		{
 			var draft = versionManager.AddVersion(page, asPreviousVersion: false);
-			var partDraft = engine.Definitions.CreateInstance<ContentHandlerTestsPart>(draft);
+			var partDraft = engine.Resolve<N2.Persistence.ContentActivator>().CreateInstance<ContentHandlerTestsPart>(draft);
 			partDraft.Title = "New title";
 			partDraft.AddTo(draft);
 			versionManager.UpdateVersion(draft);
@@ -110,7 +110,7 @@ namespace N2.Tests.Edit
 		[Test]
 		public void ExistingPartOnPage_CreatesNewDraftOfPage()
 		{
-			var part = engine.Definitions.CreateInstance<ContentHandlerTestsPart>(page);
+			var part = engine.Resolve<N2.Persistence.ContentActivator>().CreateInstance<ContentHandlerTestsPart>(page);
 			part.Title = "New title";
 			part.AddTo(page);
 			engine.Persister.Save(part);

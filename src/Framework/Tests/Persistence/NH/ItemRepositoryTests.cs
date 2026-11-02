@@ -14,7 +14,7 @@ namespace N2.Tests.Persistence.NH
     public class ItemRepositoryTests : DatabasePreparingBase
     {
         ContentItemRepository repository;
-        new ISessionProvider sessionProvider;
+        ISessionProvider sessionProvider;
 
         protected override T CreateOneItem<T>(int id, string name, ContentItem parent)
         {

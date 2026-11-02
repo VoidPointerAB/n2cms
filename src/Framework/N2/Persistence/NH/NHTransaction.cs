@@ -21,13 +21,13 @@ namespace N2.Persistence.NH
             context = sessionProvider.OpenSession;
             
             ISession session = context.Session;
-            transaction = session.Transaction;
-            if (transaction.IsActive)
+            transaction = session.GetCurrentTransaction();
+            if (transaction != null && transaction.IsActive)
                 isOriginator = false; // The method that first opened the transaction should also close it
             else if (sessionProvider.Isolation.HasValue)
-                transaction.Begin(sessionProvider.Isolation.Value);
+                transaction = session.BeginTransaction(sessionProvider.Isolation.Value);
             else
-                transaction.Begin();
+                transaction = session.BeginTransaction();
 
             logger.InfoFormat("Begin {0}, transaction:{1}, isOriginator:{2}, isolation:{3} [", GetHashCode(), transaction.GetHashCode(), isOriginator, sessionProvider.Isolation);
             logger.Indent();

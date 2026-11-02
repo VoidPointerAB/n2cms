@@ -364,7 +364,6 @@ namespace N2.Management.Api
 				ToolTip = np.ToolTip,
 				IconUrl = string.IsNullOrEmpty(np.IconClass) ? Retoken(np.IconUrl) : null,
 				Url = Retoken(np.NavigateUrl),
-				IsDivider = np is ControlPanelSeparatorAttribute,
 				IconClass = np.IconClass
 			});
 			return node;
