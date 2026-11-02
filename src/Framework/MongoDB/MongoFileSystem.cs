@@ -242,7 +242,7 @@ namespace N2.Persistence.MongoDB
             IndexOptionsBuilder options = IndexOptions.SetName("directory_name").SetBackground(false);
             MongoGridFS mongoGridFs = GetGridFS();
             mongoGridFs.EnsureIndexes();
-            mongoGridFs.Files.EnsureIndex(keys, options);
+            mongoGridFs.Files.CreateIndex(keys, options);
         }
 
         private static BsonDocument CreateMetadata(string fixedPath, bool isDirectory)
@@ -279,7 +279,10 @@ namespace N2.Persistence.MongoDB
             settings.ConnectTimeout = TimeSpan.FromSeconds(10);
             var client = new MongoClient(settings);
 
+            // The legacy MongoGridFS API requires a MongoDatabase.
+#pragma warning disable 618
             var server = client.GetServer();
+#pragma warning restore 618
             var databaseSettings = new MongoDatabaseSettings()
             {
                 ReadPreference = ReadPreference.Nearest,

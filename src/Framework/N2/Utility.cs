@@ -768,19 +768,14 @@ namespace N2
 			return sc.Session.CreateCriteria<T>();
 		}
 
-		public static IMultiCriteria MultiCriteria<T>(this SessionContext sc)
-		{
-			return sc.Session.CreateMultiCriteria();
-		}
-
 		public static IQuery Query(this SessionContext sc, string queryString)
 		{
 			return sc.Session.CreateQuery(queryString);
 		}
 
-		public static IMultiQuery MultiQuery(this SessionContext sc)
+		public static NHibernate.Multi.IQueryBatch QueryBatch(this SessionContext sc)
 		{
-			return sc.Session.CreateMultiQuery();
+			return sc.Session.CreateQueryBatch();
 		}
 
 		// Content Extensions

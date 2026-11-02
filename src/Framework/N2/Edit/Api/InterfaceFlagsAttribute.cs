@@ -7,6 +7,10 @@ namespace N2.Management.Api
 {
     public class InterfaceFlagsAttribute : Attribute
     {
+        public InterfaceFlagsAttribute() : this(new string[0])
+        {
+        }
+
         public InterfaceFlagsAttribute(params string[] additionalFlags)
         {
             AdditionalFlags = additionalFlags;

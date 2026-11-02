@@ -1,6 +1,6 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson.Serialization.Options;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using N2.Definitions;
 using N2.Details;
@@ -114,7 +114,10 @@ namespace N2.Persistence.MongoDB
             var settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
             settings.ConnectTimeout = TimeSpan.FromSeconds(10);
             var client = new MongoClient(settings);
+            // The legacy MongoDatabase API requires a MongoServer.
+#pragma warning disable 618
             var server = client.GetServer();
+#pragma warning restore 618
             var databaseSettings = new MongoDatabaseSettings()
             {
                 ReadPreference = ReadPreference.Nearest,
@@ -123,8 +126,8 @@ namespace N2.Persistence.MongoDB
             Database = server.GetDatabase(config.Sections.Database.TablePrefix, databaseSettings);
             try
             {
-                GetCollection<ContentItem>().EnsureIndex("Details.Name", "Details.LinkedItem", "Details.StringValue");
-                //GetCollection<ContentItem>().EnsureIndex("DetailCollections.Details.Name", "DetailCollections.Details.LinkedItem", "DetailCollections.Details.StringValue");
+                GetCollection<ContentItem>().CreateIndex("Details.Name", "Details.LinkedItem", "Details.StringValue");
+                //GetCollection<ContentItem>().CreateIndex("DetailCollections.Details.Name", "DetailCollections.Details.LinkedItem", "DetailCollections.Details.StringValue");
             }
             catch (Exception ex)
             {
@@ -177,7 +180,7 @@ namespace N2.Persistence.MongoDB
                 cm.UnmapProperty(cd => cd.Value);
                 cm.MapProperty(cd => cd.LinkedItem).SetSerializer(new ContentRelationSerializer(this));
                 cm.UnmapProperty(cd => cd.LinkValue);
-                cm.GetMemberMap(cd => cd.DateTimeValue).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
+                cm.GetMemberMap(cd => cd.DateTimeValue).SetSerializer(new NullableSerializer<DateTime>(new DateTimeSerializer(DateTimeKind.Local)));
                 cm.SetIgnoreExtraElements(true);
             });
             BsonClassMap.RegisterClassMap<DetailCollection>(cm =>
@@ -201,10 +204,10 @@ namespace N2.Persistence.MongoDB
                 {
                     cm.AutoMap();
                     cm.MapIdProperty(cv => cv.ID).SetIdGenerator(new IntIdGenerator());
-                    cm.GetMemberMap(cv => cv.Published).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
-                    cm.GetMemberMap(cv => cv.Saved).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
-                    cm.GetMemberMap(cv => cv.FuturePublish).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
-                    cm.GetMemberMap(cv => cv.Expired).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
+                    cm.GetMemberMap(cv => cv.Published).SetSerializer(new NullableSerializer<DateTime>(new DateTimeSerializer(DateTimeKind.Local)));
+                    cm.GetMemberMap(cv => cv.Saved).SetSerializer(new DateTimeSerializer(DateTimeKind.Local));
+                    cm.GetMemberMap(cv => cv.FuturePublish).SetSerializer(new NullableSerializer<DateTime>(new DateTimeSerializer(DateTimeKind.Local)));
+                    cm.GetMemberMap(cv => cv.Expired).SetSerializer(new NullableSerializer<DateTime>(new DateTimeSerializer(DateTimeKind.Local)));
                 cm.SetIgnoreExtraElements(true);
                 });
             BsonClassMap.RegisterClassMap<ContentItem>(cm =>
@@ -214,10 +217,10 @@ namespace N2.Persistence.MongoDB
                 cm.UnmapProperty(ci => ci.Children);
                 cm.GetMemberMap(ci => ci.Parent).SetSerializer(new ContentItemReferenceSerializer(this));
                 cm.UnmapProperty(ci => ci.VersionOf);
-                cm.GetMemberMap(ci => ci.Created).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
-                cm.GetMemberMap(ci => ci.Updated).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
-                cm.GetMemberMap(ci => ci.Published).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
-                cm.GetMemberMap(ci => ci.Expires).SetSerializationOptions(new DateTimeSerializationOptions(DateTimeKind.Local));
+                cm.GetMemberMap(ci => ci.Created).SetSerializer(new DateTimeSerializer(DateTimeKind.Local));
+                cm.GetMemberMap(ci => ci.Updated).SetSerializer(new DateTimeSerializer(DateTimeKind.Local));
+                cm.GetMemberMap(ci => ci.Published).SetSerializer(new NullableSerializer<DateTime>(new DateTimeSerializer(DateTimeKind.Local)));
+                cm.GetMemberMap(ci => ci.Expires).SetSerializer(new NullableSerializer<DateTime>(new DateTimeSerializer(DateTimeKind.Local)));
                 cm.SetIsRootClass(isRootClass: true);
                 cm.SetIgnoreExtraElements(true);
             });

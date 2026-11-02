@@ -35,7 +35,7 @@ namespace N2.Persistence.MongoDB
             }
             if (typeof(DetailCollection) == type)
             {
-                return new BsonClassMapSerializer(BsonClassMap.LookupClassMap(type));
+                return ContentSerializer.CreateClassMapSerializer(type);
             }
 
             return null;

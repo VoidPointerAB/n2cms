@@ -35,16 +35,32 @@ namespace N2.Edit.Installation
         {
             using(var tx = persister.Repository.BeginTransaction())
             {
-                foreach (var item in finder.All.Select())
+                const int pageSize = 100;
+                int? lastId = null;
+                while (true)
                 {
-                    bool changed = false;
-                    foreach (var info in Rebase(item, fromUrl, toUrl))
+                    IQueryEnding query = lastId.HasValue
+                        ? finder.Where.ID.Gt(lastId.Value)
+                        : finder.Where.ID.Ge(int.MinValue);
+                    var items = query.OrderBy.ID.Asc.MaxResults(pageSize).Select();
+                    if (items.Count == 0)
+                        break;
+
+                    lastId = items[items.Count - 1].ID;
+                    foreach (var item in items)
                     {
-                        changed = true;
-                        yield return info;
+                        bool changed = false;
+                        foreach (var info in Rebase(item, fromUrl, toUrl))
+                        {
+                            changed = true;
+                            yield return info;
+                        }
+                        if(changed)
+                            persister.Repository.SaveOrUpdate(item);
                     }
-                    if(changed)
-                        persister.Repository.SaveOrUpdate(item);
+
+                    if (items.Count < pageSize)
+                        break;
                 }
 
                 ContentItem root = persister.Get(host.DefaultSite.RootItemID);

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace N2.Persistence.MongoDB
 {
-    public class ContentItemReferenceSerializer : BsonBaseSerializer
+    public class ContentItemReferenceSerializer : SerializerBase<ContentItem>
     {
         private MongoDatabaseProvider database;
 
@@ -18,25 +18,20 @@ namespace N2.Persistence.MongoDB
             this.database = database;
         }
 
-        public override object Deserialize(BsonReader bsonReader, Type nominalType, Type actualType, IBsonSerializationOptions options)
+        public override ContentItem Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         {
-            return Deserialize(bsonReader, nominalType, options);
-        }
-
-        public override object Deserialize(BsonReader bsonReader, Type nominalType, IBsonSerializationOptions options)
-        {
-            var id = bsonReader.ReadInt32();
+            var id = context.Reader.ReadInt32();
             if (id == 0)
                 return null;
             return database.IdentityMap.GetOrCreate(id, (i) => database.GetCollection<ContentItem>().FindOne(Query.EQ("_id", i)));
         }
 
-        public override void Serialize(BsonWriter bsonWriter, Type nominalType, object value, IBsonSerializationOptions options)
+        public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, ContentItem value)
         {
             if (value == null)
-                bsonWriter.WriteInt32(0);
+                context.Writer.WriteInt32(0);
             else
-                bsonWriter.WriteInt32(((ContentItem)value).ID);
+                context.Writer.WriteInt32(value.ID);
         }
     }
 }

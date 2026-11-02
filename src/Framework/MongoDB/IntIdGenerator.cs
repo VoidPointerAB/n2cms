@@ -14,7 +14,13 @@ namespace N2.Persistence.MongoDB
             var query = Query.EQ("_id", ((MongoCollection)container).Name);
 
             return idSequenceCollection
-                .FindAndModify(query, null, Update.Inc("seq", 1), true, true)
+                .FindAndModify(new FindAndModifyArgs
+                {
+                    Query = query,
+                    Update = Update.Inc("seq", 1),
+                    Upsert = true,
+                    VersionReturned = FindAndModifyDocumentVersion.Modified
+                })
                 .ModifiedDocument["seq"]
                 .AsInt32;
         }

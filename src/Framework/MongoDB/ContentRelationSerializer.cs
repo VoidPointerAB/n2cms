@@ -9,7 +9,7 @@ using System.Text;
 
 namespace N2.Persistence.MongoDB
 {
-    public class ContentRelationSerializer : BsonBaseSerializer
+    public class ContentRelationSerializer : SerializerBase<ContentRelation>
     {
         private MongoDatabaseProvider database;
 
@@ -18,14 +18,9 @@ namespace N2.Persistence.MongoDB
             this.database = database;
         }
 
-        public override object Deserialize(BsonReader bsonReader, Type nominalType, Type actualType, IBsonSerializationOptions options)
+        public override ContentRelation Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         {
-            return Deserialize(bsonReader, nominalType, options);
-        }
-
-        public override object Deserialize(BsonReader bsonReader, Type nominalType, IBsonSerializationOptions options)
-        {
-            var id = bsonReader.ReadInt32();
+            var id = context.Reader.ReadInt32();
             if (id == 0)
                 return ContentRelation.Empty;
             
@@ -37,14 +32,12 @@ namespace N2.Persistence.MongoDB
             return database.IdentityMap.GetOrCreate(id, (i) => database.GetCollection<ContentItem>().FindOne(Query.EQ("_id", (int)i)));
         }
 
-        public override void Serialize(BsonWriter bsonWriter, Type nominalType, object value, IBsonSerializationOptions options)
+        public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, ContentRelation value)
         {
-            var relation = value as ContentRelation;
-
-            if (relation == null || !relation.ID.HasValue || relation.ID.Value == 0)
-                bsonWriter.WriteInt32(0);
+            if (value == null || !value.ID.HasValue || value.ID.Value == 0)
+                context.Writer.WriteInt32(0);
             else
-                bsonWriter.WriteInt32(relation.ID.Value);
+                context.Writer.WriteInt32(value.ID.Value);
         }
     }
 }

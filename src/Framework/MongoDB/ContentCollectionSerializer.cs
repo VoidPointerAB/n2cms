@@ -9,41 +9,25 @@ using System.Text;
 
 namespace N2.Persistence.MongoDB
 {
-    public class ContentCollectionSerializer<T> : BsonBaseSerializer, IBsonArraySerializer
+    public class ContentCollectionSerializer<T> : SerializerBase<ContentList<T>>, IBsonArraySerializer
         where T : class, INameable
     {
-        EnumerableSerializer<T> serializer = new EnumerableSerializer<T>();
+        private readonly EnumerableInterfaceImplementerSerializer<ContentList<T>, T> serializer =
+            new EnumerableInterfaceImplementerSerializer<ContentList<T>, T>();
 
-        public Type CollectionType { get; set; }
-
-        public ContentCollectionSerializer()
+        public override ContentList<T> Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         {
-            CollectionType = typeof(ContentList<T>);
+            return serializer.Deserialize(context, args);
         }
 
-        public override object Deserialize(BsonReader bsonReader, Type nominalType, Type actualType, IBsonSerializationOptions options)
+        public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, ContentList<T> value)
         {
-            return serializer.Deserialize(bsonReader, nominalType, CollectionType, options);
+            serializer.Serialize(context, args, value);
         }
 
-        public override object Deserialize(BsonReader bsonReader, Type nominalType, IBsonSerializationOptions options)
+        public bool TryGetItemSerializationInfo(out BsonSerializationInfo serializationInfo)
         {
-            return serializer.Deserialize(bsonReader, nominalType, options);
-        }
-
-        public override IBsonSerializationOptions GetDefaultSerializationOptions()
-        {
-            return serializer.GetDefaultSerializationOptions();
-        }
-
-        public override void Serialize(BsonWriter bsonWriter, Type nominalType, object value, IBsonSerializationOptions options)
-        {
-            serializer.Serialize(bsonWriter, nominalType, value, options);
-        }
-
-        public BsonSerializationInfo GetItemSerializationInfo()
-        {
-            return new BsonSerializationInfo("item", this, typeof(T), GetDefaultSerializationOptions());
+            return serializer.TryGetItemSerializationInfo(out serializationInfo);
         }
     }
 }

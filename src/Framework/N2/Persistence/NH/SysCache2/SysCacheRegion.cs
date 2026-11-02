@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Caching;
 using NHibernate.Cache;
@@ -12,7 +14,10 @@ namespace NHibernate.Caches.SysCache2
     /// <summary>
     /// Pluggable cache implementation using the System.Web.Caching classes
     /// </summary>
+    // ICacheProvider.BuildCache in NHibernate 5.7 still requires ICache.
+#pragma warning disable 618
     public class SysCacheRegion : ICache
+#pragma warning restore 618
     {
         /// <summary>The name of the cache prefix to differntaite the nhibernate cache elements from
         /// other items in the cache</summary>
@@ -22,7 +27,7 @@ namespace NHibernate.Caches.SysCache2
         private static readonly TimeSpan defaultRelativeExpiration = TimeSpan.FromSeconds(300);
 
         /// <summary>logger for the type</summary>
-        private static readonly IInternalLogger log = LoggerProvider.LoggerFor((typeof(SysCacheRegion)));
+        private static readonly SysCacheLog log = new SysCacheLog(typeof(SysCacheRegion));
 
         /// <summary>
         /// List of dependencies that need to be enlisted before being hooked to a cache item
@@ -92,6 +97,47 @@ namespace NHibernate.Caches.SysCache2
         }
 
         #region ICache Members
+
+        public Task<object> GetAsync(object key, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return Task.FromResult(Get(key));
+        }
+
+        public Task PutAsync(object key, object value, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Put(key, value);
+            return Task.CompletedTask;
+        }
+
+        public Task RemoveAsync(object key, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Remove(key);
+            return Task.CompletedTask;
+        }
+
+        public Task ClearAsync(CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Clear();
+            return Task.CompletedTask;
+        }
+
+        public Task LockAsync(object key, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Lock(key);
+            return Task.CompletedTask;
+        }
+
+        public Task UnlockAsync(object key, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            Unlock(key);
+            return Task.CompletedTask;
+        }
 
         /// <summary>
         /// Clear the Cache

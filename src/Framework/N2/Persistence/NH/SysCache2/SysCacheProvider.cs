@@ -16,7 +16,7 @@ namespace NHibernate.Caches.SysCache2
         private static readonly CacheRegionCollection cacheRegionSettingsList;
 
         /// <summary>log4net logger</summary>
-        private static readonly IInternalLogger log = LoggerProvider.LoggerFor(typeof(SysCacheProvider));
+        private static readonly SysCacheLog log = new SysCacheLog(typeof(SysCacheProvider));
 
         /// <summary>synchronizing object for the cache regions dictionaly</summary>
         private static readonly Object regionsSyncRoot = new Object();
@@ -54,7 +54,10 @@ namespace NHibernate.Caches.SysCache2
         /// <param name="regionName">the name of the cache region</param>
         /// <param name="properties">configuration settings</param>
         /// <returns></returns>
+        // NHibernate 5.7 still declares ICacheProvider.BuildCache with an ICache return type.
+#pragma warning disable 618
         public ICache BuildCache(string regionName, IDictionary<string, string> properties)
+#pragma warning restore 618
         {
             //return a configured cache region if we have one for the region already
             //the only way this will really happen is if there is a query cache specified for a region that is configured
@@ -127,5 +130,35 @@ namespace NHibernate.Caches.SysCache2
         public void Stop() {}
 
         #endregion
+    }
+
+    internal sealed class SysCacheLog
+    {
+        private readonly INHibernateLogger _logger;
+
+        public SysCacheLog(System.Type type)
+        {
+            _logger = NHibernateLogger.For(type);
+        }
+
+        public bool IsDebugEnabled
+        {
+            get { return _logger.IsEnabled(NHibernateLogLevel.Debug); }
+        }
+
+        public void Info(string message)
+        {
+            _logger.Log(NHibernateLogLevel.Info, new NHibernateLogValues(message, new object[0]), null);
+        }
+
+        public void Debug(string message)
+        {
+            _logger.Log(NHibernateLogLevel.Debug, new NHibernateLogValues(message, new object[0]), null);
+        }
+
+        public void DebugFormat(string format, params object[] args)
+        {
+            _logger.Log(NHibernateLogLevel.Debug, new NHibernateLogValues(format, args), null);
+        }
     }
 }

@@ -371,66 +371,66 @@ namespace N2.Engine
     /// </summary>
     public class NhLoggerProviderWriter : LogWriterBase
     {
-        private NHibernate.IInternalLogger logger;
+        private readonly NHibernate.INHibernateLogger logger;
 
         public NhLoggerProviderWriter(Type type, string prefix)
         {
-            logger = NHibernate.LoggerProvider.LoggerFor(type);
+            logger = NHibernate.NHibernateLogger.For(type);
             Prefix = prefix;
         }
 
         public NhLoggerProviderWriter(string keyName, string prefix)
         {
-            logger = NHibernate.LoggerProvider.LoggerFor(keyName);
+            logger = NHibernate.NHibernateLogger.For(keyName);
             Prefix = prefix;
         }
 
         public string Prefix { get; set; }
 
+        private void Write(NHibernate.NHibernateLogLevel level, string format, object[] args)
+        {
+            if (logger.IsEnabled(level))
+                logger.Log(level, new NHibernate.NHibernateLogValues(Prefix + format, args), null);
+        }
+
         public override void Error(string message)
         {
-            if (logger.IsErrorEnabled)
-                logger.Error(Prefix + message);
+            Write(NHibernate.NHibernateLogLevel.Error, message, new object[0]);
         }
 
         public override void Error(string format, object[] args)
         {
-            if (logger.IsErrorEnabled)
-                logger.ErrorFormat(Prefix + format, args);
+            Write(NHibernate.NHibernateLogLevel.Error, format, args);
         }
 
         public override void Warning(string message)
         {
-            if (logger.IsWarnEnabled)
-                logger.Warn(Prefix + message);
+            Write(NHibernate.NHibernateLogLevel.Warn, message, new object[0]);
         }
+
         public override void Warning(string format, object[] args)
         {
-            if (logger.IsWarnEnabled)
-                logger.WarnFormat(Prefix + format, args);
+            Write(NHibernate.NHibernateLogLevel.Warn, format, args);
         }
 
         public override void Information(string message)
         {
-            if (logger.IsInfoEnabled)
-                logger.Info(Prefix + message);
+            Write(NHibernate.NHibernateLogLevel.Info, message, new object[0]);
         }
+
         public override void Information(string format, object[] args)
         {
-            if (logger.IsInfoEnabled)
-                logger.InfoFormat(Prefix + format, args);
+            Write(NHibernate.NHibernateLogLevel.Info, format, args);
         }
 
         public override void Debug(string message)
         {
-            if (logger.IsDebugEnabled)
-                logger.Debug(Prefix + message);
+            Write(NHibernate.NHibernateLogLevel.Debug, message, new object[0]);
         }
 
         public override void Debug(string format, object[] args)
         {
-            if (logger.IsDebugEnabled)
-                logger.DebugFormat(Prefix + format, args);
+            Write(NHibernate.NHibernateLogLevel.Debug, format, args);
         }
 
         public override void Indent()

@@ -22,13 +22,23 @@ namespace N2.Persistence.MongoDB
 
         public IEnumerable<DiscriminatorCount> FindDescendantDiscriminators(ContentItem ancestor)
         {
-            var map = "function() { emit(this._t, 1); }";
-            var reduce = "function(key, emits) { var total = 0; for (var i in emits) { total += emits[i]; }; return total; }";
-            var results = ancestor != null
-                ? Collection.MapReduce(ItselfOrBelow(ancestor), map, reduce)
-                : Collection.MapReduce(map, reduce);
+            var pipeline = new List<BsonDocument>();
+            if (ancestor != null)
+            {
+                pipeline.Add(new BsonDocument("$match", new BsonDocument("$or", new BsonArray
+                {
+                    new BsonDocument("_id", ancestor.ID),
+                    new BsonDocument("AncestralTrail", new BsonRegularExpression("^" + ancestor.GetTrail() + ".*"))
+                })));
+            }
+            pipeline.Add(new BsonDocument("$group", new BsonDocument
+            {
+                { "_id", "$_t" },
+                { "value", new BsonDocument("$sum", 1) }
+            }));
+            var results = Collection.Aggregate(new AggregateArgs { Pipeline = pipeline });
 
-            return results.InlineResults
+            return results
                 .Where(doc => !doc["_id"].IsBsonNull)
                 .Select(doc => new DiscriminatorCount { Discriminator = ((BsonArray)doc["_id"]).Last().ToString(), Count = (int)doc["value"].ToDouble() })
                 .OrderByDescending(dc => dc.Count)

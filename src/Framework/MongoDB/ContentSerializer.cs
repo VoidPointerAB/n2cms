@@ -2,6 +2,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver.Builders;
 using N2.Collections;
 using N2.Persistence.Proxying;
@@ -15,7 +16,7 @@ namespace N2.Persistence.MongoDB
     public class ContentSerializer : IBsonSerializer, IBsonIdProvider, IBsonDocumentSerializer
     {
         private BsonClassMap classMap;
-        private BsonClassMapSerializer serializer;
+        private IBsonSerializer serializer;
         private MongoDatabaseProvider database;
         private IProxyFactory proxies;
 
@@ -23,21 +24,30 @@ namespace N2.Persistence.MongoDB
         {
             this.database = database;
             classMap = BsonClassMap.LookupClassMap(type);
-            serializer = new BsonClassMapSerializer(classMap);
+            serializer = CreateClassMapSerializer(type);
             this.proxies = proxies;
         }
 
-        public object Deserialize(BsonReader bsonReader, Type nominalType, Type actualType, IBsonSerializationOptions options)
+        internal static IBsonSerializer CreateClassMapSerializer(Type type)
         {
-            var doc = BsonDocument.ReadFrom(bsonReader);
+            var serializerType = typeof(BsonClassMapSerializer<>).MakeGenericType(type);
+            return (IBsonSerializer)Activator.CreateInstance(serializerType, BsonClassMap.LookupClassMap(type));
+        }
+
+        public Type ValueType { get { return classMap.ClassType; } }
+
+        public object Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
+        {
+            var doc = BsonDocumentSerializer.Instance.Deserialize(context, new BsonDeserializationArgs { NominalType = typeof(BsonDocument) });
             var id = Convert.ToInt32(doc["_id"]);
-            //return Inject(serializer.Deserialize(bsonReader, nominalType, actualType, options));
-            //return Inject(serializer.Deserialize(BsonReader.Create(doc), nominalType, actualType, options));
 
             string key = MongoIdentityMap.GetKey<ContentItem>(id);
 
             var item = database.IdentityMap.Get(key);
-            var type = actualType ?? BsonSerializer.LookupActualType(nominalType, doc["_t"].AsBsonArray.Last());
+            var nominalType = args.NominalType ?? classMap.ClassType;
+            var type = doc.Contains("_t")
+                ? BsonSerializer.LookupActualType(nominalType, doc["_t"].IsBsonArray ? doc["_t"].AsBsonArray.Last() : doc["_t"])
+                : classMap.ClassType;
             if (item == null)
             {
                 item = BsonClassMap.LookupClassMap(type).CreateInstance();
@@ -54,10 +64,12 @@ namespace N2.Persistence.MongoDB
             try
             {
                 database.IdentityMap.Current = item;
-                var deserializedItem = (actualType == null)
-                    ? serializer.Deserialize(BsonReader.Create(doc), nominalType, options)
-                    : serializer.Deserialize(BsonReader.Create(doc), nominalType, actualType, options);
-                return Inject(deserializedItem);
+                using (var reader = new BsonDocumentReader(doc))
+                {
+                    var innerContext = BsonDeserializationContext.CreateRoot(reader);
+                    var deserializedItem = GetSerializer(type).Deserialize(innerContext, new BsonDeserializationArgs { NominalType = type });
+                    return Inject(deserializedItem);
+                }
             }
             finally
             {
@@ -65,9 +77,9 @@ namespace N2.Persistence.MongoDB
             }
         }
 
-        public object Deserialize(BsonReader bsonReader, Type nominalType, IBsonSerializationOptions options)
+        private IBsonSerializer GetSerializer(Type type)
         {
-            return serializer.Deserialize(bsonReader, nominalType, options);
+            return type == classMap.ClassType ? serializer : CreateClassMapSerializer(type);
         }
 
         private ContentItem Inject(object value)
@@ -101,30 +113,25 @@ namespace N2.Persistence.MongoDB
             item.Parent = parents[0];
         }
 
-        public IBsonSerializationOptions GetDefaultSerializationOptions()
-        {
-            return serializer.GetDefaultSerializationOptions();
-        }
-
-        public void Serialize(BsonWriter bsonWriter, Type nominalType, object value, IBsonSerializationOptions options)
+        public void Serialize(BsonSerializationContext context, BsonSerializationArgs args, object value)
         {
             proxies.OnSaving(value);
-            serializer.Serialize(bsonWriter, nominalType, value, options);
+            serializer.Serialize(context, args, value);
         }
 
         public bool GetDocumentId(object document, out object id, out Type idNominalType, out IIdGenerator idGenerator)
         {
-            return serializer.GetDocumentId(document, out id, out idNominalType, out idGenerator);
+            return ((IBsonIdProvider)serializer).GetDocumentId(document, out id, out idNominalType, out idGenerator);
         }
 
         public void SetDocumentId(object document, object id)
         {
-            serializer.SetDocumentId(document, id);
+            ((IBsonIdProvider)serializer).SetDocumentId(document, id);
         }
 
-        public BsonSerializationInfo GetMemberSerializationInfo(string memberName)
+        public bool TryGetMemberSerializationInfo(string memberName, out BsonSerializationInfo serializationInfo)
         {
-            return serializer.GetMemberSerializationInfo(memberName);
+            return ((IBsonDocumentSerializer)serializer).TryGetMemberSerializationInfo(memberName, out serializationInfo);
         }
     }
 }

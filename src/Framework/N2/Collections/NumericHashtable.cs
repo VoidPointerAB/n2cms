@@ -17,6 +17,7 @@ namespace N2.Collections
     /// Efficient implementation of a hashtable for 64-bit integer keys.
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [CLSCompliant(false)]
     public class NumericHashtable64<T>
     {
         private class element
@@ -101,6 +102,7 @@ namespace N2.Collections
     /// <summary>
     /// Efficient implementation of a hashtable for 32-bit integer keys.
     /// </summary>
+    [CLSCompliant(false)]
     public class NumericHashtable32
     {
         // ReSharper disable InconsistentNaming

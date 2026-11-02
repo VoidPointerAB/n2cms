@@ -23,13 +23,13 @@ namespace N2.Persistence.NH
             this.notifier = notifier;
         }
 
-        public override object Instantiate(string clazz, EntityMode entityMode, object id)
+        public override object Instantiate(string clazz, object id)
         {
-            logger.Debug("Instantiate: " + clazz + " " + entityMode + " " + id);
+            logger.Debug("Instantiate: " + clazz + " " + id);
             object instance = interceptor.Create(clazz, id);
             if (instance != null)
             {
-                Session.SessionFactory.GetClassMetadata(clazz).SetIdentifier(instance, id, entityMode);
+                Session.SessionFactory.GetClassMetadata(clazz).SetIdentifier(instance, id);
             }
             return instance;
         }

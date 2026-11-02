@@ -9,7 +9,7 @@ using System.Text;
 
 namespace N2.Persistence.MongoDB
 {
-    public class RelationValueAccessorSerializer<T> : IBsonSerializer
+    public class RelationValueAccessorSerializer<T> : SerializerBase<Func<object, T>>
     {
         private ObjectSerializer serializer = new ObjectSerializer();
         private MongoDatabaseProvider databaseProvider;
@@ -24,26 +24,15 @@ namespace N2.Persistence.MongoDB
             return databaseProvider.GetCollection<T>().FindOne(Query.EQ("_id", (int)id));
         }
 
-        public object Deserialize(BsonReader bsonReader, Type nominalType, Type actualType, IBsonSerializationOptions options)
+        public override Func<object, T> Deserialize(BsonDeserializationContext context, BsonDeserializationArgs args)
         {
-            serializer.Deserialize(bsonReader, typeof(object), typeof(object), options);
-            return (Func<object, T>)Get;
+            serializer.Deserialize(context, new BsonDeserializationArgs { NominalType = typeof(object) });
+            return Get;
         }
 
-        public object Deserialize(BsonReader bsonReader, Type nominalType, IBsonSerializationOptions options)
+        public override void Serialize(BsonSerializationContext context, BsonSerializationArgs args, Func<object, T> value)
         {
-            serializer.Deserialize(bsonReader, typeof(object), options);
-            return (Func<object, T>)Get;
-        }
-
-        public IBsonSerializationOptions GetDefaultSerializationOptions()
-        {
-            return null;
-        }
-
-        public void Serialize(BsonWriter bsonWriter, Type nominalType, object value, IBsonSerializationOptions options)
-        {
-            serializer.Serialize(bsonWriter, typeof(object), null, options);
+            serializer.Serialize(context, new BsonSerializationArgs { NominalType = typeof(object) }, null);
         }
     }
 }

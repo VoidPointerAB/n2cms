@@ -17,7 +17,7 @@ namespace N2.Persistence.MongoDB
             get { return convention.ElementName; }
         }
 
-        public Type GetActualType(BsonReader bsonReader, Type nominalType)
+        public Type GetActualType(IBsonReader bsonReader, Type nominalType)
         {
             return convention.GetActualType(bsonReader, nominalType);
         }
