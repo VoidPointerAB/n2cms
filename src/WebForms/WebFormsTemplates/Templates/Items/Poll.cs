@@ -39,7 +39,10 @@ namespace N2.Templates.Items
                 ? "~/Templates/UI/Parts/Result.ascx"
                 : TemplateUrl;
 
+            // This overload keeps the explicit result template selected above.
+#pragma warning disable CS0618
             return N2.Web.UI.ItemUtility.AddUserControl(templateUrl, container, this);
+#pragma warning restore CS0618
         }
 
         public virtual void AddAnswer(IPersister persister, int selectedItem)

@@ -27,8 +27,12 @@ namespace N2.Templates.UI.Parts
         {
             if (Membership.ValidateUser(LoginBox.UserName, LoginBox.Password))
                 e.Authenticated = Membership.GetUser(LoginBox.UserName).IsApproved;
+            // The forms credentials in Web.config are still supported alongside membership users.
+            // There is no membership API that validates those configured credentials.
+#pragma warning disable CS0618
             else if (FormsAuthentication.Authenticate(LoginBox.UserName, LoginBox.Password))
                 e.Authenticated = true;
+#pragma warning restore CS0618
         }
 
         void LoginBox_LoggedIn(object sender, EventArgs e)
