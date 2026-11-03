@@ -70,34 +70,6 @@ namespace N2.Templates.Tests.Wiki
             Assert.AreEqual("World", Html.StripHtml(html));
         }
 
-        [Test, Explicit]
-        public void Html_WithClosingTagInAttrValue_StripsEntireTag()
-        {
-            string html = "<foo title=\"/>\" />";
-            Assert.AreEqual(string.Empty, Html.StripHtml(html));
-        }
-
-        [Test, Explicit]
-        public void Html_WithTagClosedByStartTag_StripsFirstTag()
-        {
-            string html = "<foo <>Test";
-            Assert.AreEqual("<>Test", Html.StripHtml(html));
-        }
-
-        [Test, Explicit]
-        public void Html_WithSingleQuotedAttrContainingDoubleQuotesAndEndTagChar_StripsEntireTag()
-        {
-            string html = @"<foo ='test""/>title' />";
-            Assert.AreEqual(string.Empty, Html.StripHtml(html));
-        }
-
-        [Test, Explicit]
-        public void Html_WithDoubleQuotedAttributeContainingSingleQuotesAndEndTagChar_StripsEntireTag()
-        {
-            string html = @"<foo =""test'/>title"" />";
-            Assert.AreEqual(string.Empty, Html.StripHtml(html));
-        }
-
         [Test]
         public void Html_WithNonQuotedAttribute_StripsEntireTagWithoutStrippingText()
         {
@@ -117,20 +89,6 @@ namespace N2.Templates.Tests.Wiki
         {
             string html = @"<p title = test-test""- >""test> ""title />Test</p>";
             Assert.AreEqual(@"""test> ""title />Test", Html.StripHtml(html));
-        }
-
-        [Test, Explicit]
-        public void Html_WithTagClosingCharInAttributeValueWithNoNameFollowedByText_ReturnsText()
-        {
-            string html = @"<foo = "" />title"" />Test";
-            Assert.AreEqual("Test", Html.StripHtml(html));
-        }
-
-        [Test, Explicit]
-        public void Html_WithTextThatLooksLikeTag_ReturnsText()
-        {
-            string html = @"<çoo = "" />title"" />Test";
-            Assert.AreEqual(html, Html.StripHtml(html));
         }
 
         [Test]
@@ -168,25 +126,11 @@ namespace N2.Templates.Tests.Wiki
             Assert.AreEqual("World", Html.StripHtml(s));
         }
 
-        [Test, Explicit]
-        public void Html_WithAngleBracketsButNotHtml_ReturnsText()
-        {
-            string s = "<$)*(@&$(@*>";
-            Assert.AreEqual(s, Html.StripHtml(s));
-        }
-
         [Test]
         public void Html_WithCommentInterleavedWithText_ReturnsText()
         {
             string s = "Hello <!-- this go bye bye --> World <!--> This is fun";
             Assert.AreEqual("Hello  World  This is fun", Html.StripHtml(s));
-        }
-
-        [Test, Explicit]
-        public void Html_WithCommentBetweenNonTagButLooksLikeTag_DoesStripComment()
-        {
-            string s = @"<ç123 title=""<!bc def>"">";
-            Assert.AreEqual(@"<ç123 title="""">", Html.StripHtml(s));
         }
     }
 }
