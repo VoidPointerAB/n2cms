@@ -17,7 +17,10 @@ namespace N2.Templates.Mvc.Controllers
 
         public ActionResult Login(string userName, string password, bool? remember)
         {
+            // Preserve login with forms credentials configured in web.config.
+#pragma warning disable CS0618
             if(Membership.ValidateUser(userName, password) || FormsAuthentication.Authenticate(userName, password))
+#pragma warning restore CS0618
             {
                 FormsAuthentication.SetAuthCookie(userName, remember ?? false);
                 if (string.IsNullOrEmpty(Request["returnUrl"]))
