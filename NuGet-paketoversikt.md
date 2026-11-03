@@ -2,7 +2,7 @@
 
 Inventering: 2026-11-03. Underlag: de 26 projektfilerna i `N2.Everything.2026.sln`, deras inkluderade `packages.config` och direkta `HintPath`-referenser till `packages/`.
 
-**Summa:** 26 projekt, 69 unika paket-ID och 75 paket/version-kombinationer. Paket som bara nås via projektreferenser räknas i sitt eget projekt, inte om i beroende projekt. Installerade men oanvända paket i rotens `packages/` ingår inte.
+**Summa:** 26 projekt, 21 aktiva paketfiler, 69 unika paket-ID och 72 paket/version-kombinationer. Paket som bara nås via projektreferenser räknas i sitt eget projekt, inte om i beroende projekt. Installerade men oanvända paket i rotens `packages/` ingår inte.
 
 ## Paket och användande projekt
 
@@ -25,16 +25,13 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | `Lucene.Net.Contrib.Spatial` | `3.0.3` | `N2.Raven` |
 | `Microsoft.AspNet.Identity.Core` | `2.2.2` | `N2.Security.AspNet.Identity` |
 | `Microsoft.AspNet.Mvc` | `5.3.0` | `Dinamico`, `N2`, `N2.Extensions`, `N2.Extensions.Tests`, `N2.Management`, `N2.Management.Targeting`, `N2.Management.Tests`, `N2.Razor`, `N2.ReusableParts`, `N2.Templates.Mvc`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
-| `Microsoft.AspNet.Razor` | `3.2.4` | `N2.Extensions.Tests`, `N2.Razor` |
-| `Microsoft.AspNet.Razor` | `3.3.0` | `Dinamico`, `N2`, `N2.Extensions`, `N2.Management`, `N2.Management.Targeting`, `N2.Management.Tests`, `N2.ReusableParts`, `N2.Templates.Mvc`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
-| `Microsoft.AspNet.WebPages` | `3.2.4` | `N2.Extensions.Tests`, `N2.Razor` |
-| `Microsoft.AspNet.WebPages` | `3.3.0` | `Dinamico`, `N2`, `N2.Extensions`, `N2.Management`, `N2.Management.Targeting`, `N2.Management.Tests`, `N2.ReusableParts`, `N2.Templates.Mvc`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
+| `Microsoft.AspNet.Razor` | `3.3.0` | `Dinamico`, `N2`, `N2.Extensions`, `N2.Extensions.Tests`, `N2.Management`, `N2.Management.Targeting`, `N2.Management.Tests`, `N2.Razor`, `N2.ReusableParts`, `N2.Templates.Mvc`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
+| `Microsoft.AspNet.WebPages` | `3.3.0` | `Dinamico`, `N2`, `N2.Extensions`, `N2.Extensions.Tests`, `N2.Management`, `N2.Management.Targeting`, `N2.Management.Tests`, `N2.Razor`, `N2.ReusableParts`, `N2.Templates.Mvc`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
 | `Microsoft.Bcl.AsyncInterfaces` | `10.0.14` | `N2.Persistence.MongoDB` |
 | `Microsoft.CompilerServices.AsyncTargetingPack` | `1.0.0` | `N2.Raven` |
 | `Microsoft.Extensions.DependencyInjection.Abstractions` | `10.0.14` | `N2.Persistence.MongoDB` |
 | `Microsoft.Extensions.Logging.Abstractions` | `10.0.14` | `N2.Persistence.MongoDB` |
-| `Microsoft.Web.Infrastructure` | `1.0.0.0` | `N2.Razor` |
-| `Microsoft.Web.Infrastructure` | `2.0.0` | `N2`, `N2.Extensions`, `N2.Management`, `N2.Management.Targeting`, `N2.Management.Tests`, `N2.ReusableParts`, `N2.Templates.Mvc`, `N2.Tests` |
+| `Microsoft.Web.Infrastructure` | `2.0.0` | `Dinamico`, `N2`, `N2.Extensions`, `N2.Extensions.Tests`, `N2.Management`, `N2.Management.Targeting`, `N2.Management.Tests`, `N2.Razor`, `N2.ReusableParts`, `N2.Templates.Mvc`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
 | `Microsoft.Win32.Registry` | `5.0.0` | `N2.Persistence.MongoDB` |
 | `mongocsharpdriver` | `2.30.0` | `N2.Persistence.MongoDB` |
 | `MongoDB.Bson` | `2.30.0` | `N2.Persistence.MongoDB` |
@@ -60,18 +57,18 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | `Snappier` | `1.3.1` | `N2.Persistence.MongoDB` |
 | `Spatial4n.Core` | `0.4.1` | `N2.Raven` |
 | `Stub.System.Data.SQLite.Core.NetFramework` | `1.0.119.0` | `AddonCatalog`, `N2.Templates`, `Wiki` |
-| `System.Buffers` | `4.6.1` | `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
+| `System.Buffers` | `4.6.1` | `N2.Extensions.Tests`, `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
 | `System.Data.SQLite.Core` | `1.0.112.0` | `Dinamico`, `N2.Extensions.Tests`, `N2.Management.Tests`, `N2.Templates`†, `N2.Templates.Mvc`, `N2.Templates.Mvc.Tests`, `N2.Tests` |
 | `System.Data.SQLite.Core` | `1.0.119.0` | `AddonCatalog`, `N2.Templates`, `Wiki` |
 | `System.Data.SQLite.Linq` | `1.0.112.0` | `N2.Management` |
 | `System.Diagnostics.DiagnosticSource` | `10.0.14` | `N2.Persistence.MongoDB` |
 | `System.IO` | `4.3.0` | `N2.Persistence.MongoDB` |
 | `System.IO.Pipelines` | `10.0.14` | `N2.Persistence.MongoDB` |
-| `System.Memory` | `4.6.3` | `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
+| `System.Memory` | `4.6.3` | `N2.Extensions.Tests`, `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
 | `System.Net.Http` | `4.3.4` | `N2.Persistence.MongoDB` |
-| `System.Numerics.Vectors` | `4.6.1` | `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
+| `System.Numerics.Vectors` | `4.6.1` | `N2.Extensions.Tests`, `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
 | `System.Runtime` | `4.3.1` | `N2.Persistence.MongoDB` |
-| `System.Runtime.CompilerServices.Unsafe` | `6.1.2` | `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
+| `System.Runtime.CompilerServices.Unsafe` | `6.1.2` | `N2.Extensions.Tests`, `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
 | `System.Runtime.InteropServices.RuntimeInformation` | `4.3.0` | `N2.Persistence.MongoDB` |
 | `System.Security.AccessControl` | `6.0.1` | `N2.Persistence.MongoDB` |
 | `System.Security.Cryptography.Algorithms` | `4.3.1` | `N2.Persistence.MongoDB` |
@@ -82,7 +79,7 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | `System.Text.Encoding.CodePages` | `10.0.14` | `N2.Persistence.MongoDB` |
 | `System.Text.Encodings.Web` | `10.0.14` | `N2.Persistence.MongoDB` |
 | `System.Text.Json` | `10.0.14` | `N2.Persistence.MongoDB` |
-| `System.Threading.Tasks.Extensions` | `4.6.3` | `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
+| `System.Threading.Tasks.Extensions` | `4.6.3` | `N2.Extensions.Tests`, `N2.Management`, `N2.Packaging`, `N2.Persistence.MongoDB`, `N2.Raven`, `N2.Search.Lucene` |
 | `System.ValueTuple` | `4.6.2` | `N2.Persistence.MongoDB` |
 | `ZstdSharp.Port` | `0.8.8` | `N2.Persistence.MongoDB` |
 
@@ -92,17 +89,17 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | --- | --- | --- | ---: | ---: |
 | `N2` | `src/Framework/N2/N2.csproj` | `src/Framework/N2/packages.config` | 10 | 0 |
 | `N2.Extensions` | `src/Framework/Extensions/N2.Extensions.csproj` | `src/Framework/Extensions/packages.config` | 4 | 0 |
-| `N2.Extensions.Tests` | `src/Framework/Extensions.Tests/N2.Extensions.Tests.csproj` | `src/Framework/Extensions.Tests/packages.config` | 9 | 0 |
+| `N2.Extensions.Tests` | `src/Framework/Extensions.Tests/N2.Extensions.Tests.csproj` | `src/Framework/Extensions.Tests/packages.config` | 15 | 0 |
 | `N2.Tests` | `src/Framework/Tests/N2.Tests.csproj` | `src/Framework/Tests/packages.config` | 16 | 0 |
 | `N2.Templates` | `src/WebForms/WebFormsTemplates/N2.Templates.csproj` | `src/WebForms/WebFormsTemplates/packages.config` | 3 | 1 |
-| `N2.Templates.Tests` | `src/WebForms/WebFormsTemplates.Tests/N2.Templates.Tests.csproj` | `src/WebForms/WebFormsTemplates.Tests/packages.config` | 5 | 0 |
+| `N2.Templates.Tests` | `src/WebForms/WebFormsTemplates.Tests/N2.Templates.Tests.csproj` | `src/WebForms/WebFormsTemplates.Tests/packages.config` | 6 | 0 |
 | `AddonCatalog` | `src/WebForms/WebFormsTemplates/AddonCatalog.csproj` | `src/WebForms/WebFormsTemplates/packages.config` | 3 | 0 |
 | `Wiki` | `src/WebForms/WebFormsTemplates/Wiki.csproj` | `src/WebForms/WebFormsTemplates/packages.config` | 3 | 0 |
 | `N2.Templates.UI.Tests` | `src/WebForms/WebFormsTemplates/N2.Templates.UI.Tests.csproj` | — | 0 | 1 |
 | `N2.Templates.Mvc` | `src/Mvc/MvcTemplates/N2.Templates.Mvc.csproj` | `src/Mvc/MvcTemplates/packages.config` | 6 | 0 |
-| `N2.Templates.Mvc.Tests` | `src/Mvc/MvcTemplates.Tests/N2.Templates.Mvc.Tests.csproj` | `src/Mvc/MvcTemplates.Tests/packages.config` | 6 | 0 |
+| `N2.Templates.Mvc.Tests` | `src/Mvc/MvcTemplates.Tests/N2.Templates.Mvc.Tests.csproj` | `src/Mvc/MvcTemplates.Tests/packages.config` | 7 | 0 |
 | `N2.Management.Tests` | `src/Framework/Management.Tests/N2.Management.Tests.csproj` | `src/Framework/Management.Tests/packages.config` | 14 | 0 |
-| `Dinamico` | `src/Mvc/Dinamico/Dinamico.csproj` | `src/Mvc/Dinamico/packages.config` | 4 | 0 |
+| `Dinamico` | `src/Mvc/Dinamico/Dinamico.csproj` | `src/Mvc/Dinamico/packages.config` | 5 | 0 |
 | `N2.Packaging` | `src/Framework/Packaging/N2.Packaging.csproj` | `src/Framework/Packaging/packages.config` | 6 | 0 |
 | `N2.Razor` | `src/Framework/Razor/N2.Razor.csproj` | `src/Framework/Razor/packages.config` | 4 | 0 |
 | `N2.Raven` | `src/Framework/Raven/N2.Raven.csproj` | `src/Framework/Raven/packages.config` | 14 | 1 |
@@ -117,12 +114,20 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | `N2.Security.AspNet.Identity` | `src/Framework/N2.Security.AspNet.Identity/N2.Security.AspNet.Identity.csproj` | `src/Framework/N2.Security.AspNet.Identity/packages.config` | 1 | 0 |
 | `N2.Management.Targeting` | `src/Mvc/MvcTemplates/N2/Targeting/N2.Management.Targeting.csproj` | `src/Mvc/MvcTemplates/N2/Targeting/packages.config` | 4 | 0 |
 
-## Avvikelser att känna till
+## Granskning av paketfiler
 
-- `src/WebForms/WebFormsTemplates/packages.config` är inkluderad i `N2.Templates`, `AddonCatalog` och `Wiki`. Därför visas samma tre deklarerade paket för alla tre, även om projektens DLL-referenser skiljer sig.
+- Alla paketposter i de 21 aktiva `packages.config`-filerna anger nu `targetFramework="net48"`, i linje med de 26 projektfilernas `TargetFrameworkVersion` `v4.8`. En DLL-referens under `lib/net45` eller `lib/net462` kan ändå vara rätt tillgång för ett net48-projekt.
+- `N2.Extensions.Tests` och `N2.Razor` använder nu Razor och WebPages 3.3.0 tillsammans med MVC 5.3.0. `N2.Extensions.Tests` har även samma SharpZipLib-beroenden som övriga projekt som använder SharpZipLib 1.4.2.
+- `Microsoft.Web.Infrastructure` 2.0.0 har lagts till i paketlistorna för `N2.Extensions.Tests`, `Dinamico`, `N2.Templates.Mvc.Tests` och `N2.Templates.Tests`, där WebPages kräver det.
+- `requireReinstallation="true"` finns kvar på sju paketposter i `N2.Extensions.Tests`, `N2.Raven` och `N2.Raven.Tests`. Flaggan kräver en separat NuGet-ominstallation/validering i Visual Studio; ändrad TFM-text ensam gör inte det arbetet.
+
+## Kvarstående avvikelser
+
+- `src/WebForms/WebFormsTemplates/packages.config` är inkluderad i `N2.Templates`, `AddonCatalog` och `Wiki`. Därför visas samma tre deklarerade paket för alla tre, även om projektens DLL-referenser skiljer sig. En uppdelning i projektunika `packages.{projektnamn}.config` behöver provas i Visual Studio.
 - `N2.Templates` refererar `System.Data.SQLite.Core` **1.0.112.0** i projektfilen och importerar dess `.targets`, medan den delade `packages.config` anger **1.0.119.0**. Båda versionerna visas i tabellen.
 - `N2.Templates.UI.Tests` inkluderar ingen `packages.config`, men refererar `log4net` **3.5.0** direkt från `packages/`.
-- `N2.Raven` refererar `RavenDB-Embedded` **1.0.573** direkt från `packages/`; paketet saknas i dess `packages.config`.
+- `N2.Raven` refererar `RavenDB-Embedded` **1.0.573** direkt från `packages/`; paketet saknas i dess `packages.config`. Dess paketmetadata kräver dessutom exakt `Newtonsoft.Json` **4.0.5**, medan nuvarande projekt använder **13.0.4**. Versionskonflikten behöver lösas innan posten kan installeras säkert med NuGet.
+- `N2.Raven.Tests` deklarerar `RavenDB` och `RavenDB-Embedded` **1.0.573** tillsammans med `Newtonsoft.Json` **13.0.4**. Båda RavenDB-paketens metadata kräver exakt **4.0.5**, så paketuppsättningen har en kvarstående NuGet-konflikt.
 - `N2.Search.Remote.Client` och `N2.Search.Remote.Server` har varken inkluderad `packages.config` eller direkt `HintPath` till `packages/`.
 - `src/Mvc/MvcTemplates/N2/packages.N2.Management.config` är inte inkluderad i `N2.Management.csproj` och räknas därför inte.
 
