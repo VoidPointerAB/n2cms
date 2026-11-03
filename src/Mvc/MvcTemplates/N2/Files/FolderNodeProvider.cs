@@ -75,7 +75,7 @@ namespace N2.Management.Files
 
                     if (dir != null)
                     {
-                        foreach (var child in dir.GetChildren(new NullFilter()))
+                        foreach (var child in dir.GetChildPagesUnfiltered())
                         {
                             yield return child;
                         }

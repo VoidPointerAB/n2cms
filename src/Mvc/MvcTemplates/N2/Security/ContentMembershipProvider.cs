@@ -187,7 +187,10 @@ namespace N2.Security
                 case MembershipPasswordFormat.Clear:
                     return password;
                 case MembershipPasswordFormat.Hashed:
+                    // Existing password hashes use this exact SHA1 format.
+#pragma warning disable CS0618
                     return FormsAuthentication.HashPasswordForStoringInConfigFile(password, System.Web.Configuration.FormsAuthPasswordFormat.SHA1.ToString());
+#pragma warning restore CS0618
                 default: // MembershipPasswordFormat.Encrypted
                     return Convert.ToBase64String(base.EncryptPassword(System.Text.Encoding.UTF8.GetBytes(password)));
             }

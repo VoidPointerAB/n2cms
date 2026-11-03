@@ -104,7 +104,7 @@ namespace N2.Edit.FileSystem.Items
 
         IEnumerable<ContentItem> IActiveChildren.GetChildren(Collections.ItemFilter filter)
         {
-            return GetChildren(filter);
+            return GetChildPagesUnfiltered().Where(filter);
         }
 
         #endregion

@@ -22,7 +22,7 @@
     </SccProvider>
     <FileUpgradeFlags>40</FileUpgradeFlags>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <UpgradeBackupLocation>D:\Code\Github\n2cms\Backup32\</UpgradeBackupLocation>
+    <UpgradeBackupLocation>D:\Code\Github\n2cms\Backup33\</UpgradeBackupLocation>
     <OldToolsVersion>Current</OldToolsVersion>
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
@@ -199,6 +199,18 @@
     <Compile Include="Web\UI\Controls\ToolbarPluginDisplay.cs" />
     <Compile Include="Web\UI\Controls\Tree.cs" />
     <Compile Include="Content\Navigation\TreeUtility.cs" />
+    <Compile Include="Tokens\TokenInitializer.cs" />
+    <Compile Include="Content\ViewOptionProvider.cs" />
+    <Compile Include="Content\Globalization\GlobalizationOptionProvider.cs" />
+    <Compile Include="Content\Navigation\SortPlugin.cs" />
+    <Compile Include="Content\Navigation\ChildGroupSource.cs" />
+    <Compile Include="Content\Navigation\ChildrenAjaxService.cs" />
+    <Compile Include="Content\Navigation\MediaBrowserUtils.cs" />
+    <Compile Include="Content\Templates\ContentTemplateRepository.cs" />
+    <Compile Include="Content\Templates\ContentTemplateProvider.cs" />
+    <Compile Include="Content\Wizard\Items\MagicLocation.cs" />
+    <Compile Include="Content\Wizard\LocationWizard.cs" />
+    <Compile Include="Content\Wizard\WizardOptionProvider.cs" />
     <Compile Include="Web\UI\Controls\TreeView.cs" />
     <Compile Include="Web\UrlSelectionPage.cs" />
   </ItemGroup>

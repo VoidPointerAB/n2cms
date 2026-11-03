@@ -85,7 +85,7 @@ namespace N2.Security
             if (users != null)
             {
                 totalRecords = users.Children.Count;
-                foreach(User u in users.GetChildren(new Collections.CountFilter(pageIndex * pageSize, pageSize)))
+                foreach(User u in users.GetChildPagesUnfiltered().Where(new Collections.CountFilter(pageIndex * pageSize, pageSize)))
                     profiles.Add(CreateProfile(u));
             }
             totalRecords = 0;
