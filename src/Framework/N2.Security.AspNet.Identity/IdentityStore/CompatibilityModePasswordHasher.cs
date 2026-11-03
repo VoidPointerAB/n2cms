@@ -39,7 +39,10 @@ namespace N2.Security.AspNet.Identity
             {
                 // classic-membership hashing: (clear and encrypted passwords not supported)
                 // System.Web assembly needed:
+                // Required to verify legacy SHA1 hashes before Identity rehashes them.
+#pragma warning disable CS0618
                 string hashed = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(providedPassword, System.Web.Configuration.FormsAuthPasswordFormat.SHA1.ToString());
+#pragma warning restore CS0618
                 if (hashedPassword == hashed)
                 {
                     result = PasswordVerificationResult.SuccessRehashNeeded;
