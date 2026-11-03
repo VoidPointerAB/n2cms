@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+ <html xmlns:msxsl="urn:schemas-microsoft-com:xslt"><head><meta content="en-us" http-equiv="Content-Language" /><meta content="text/html; charset=utf-16" http-equiv="Content-Type" /><title _locID="ConversionReport0">
+          Migration Report
+        </title><style> 
+                    /* Body style, for the entire document */
+                    body
+                    {
+                        background: #F3F3F4;
+                        color: #1E1E1F;
+                        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+                        padding: 0;
+                        margin: 0;
+                    }
+
+                    /* Header1 style, used for the main title */
+                    h1
+                    {
+                        padding: 10px 0px 10px 10px;
+                        font-size: 21pt;
+                        background-color: #E2E2E2;
+                        border-bottom: 1px #C1C1C2 solid; 
+                        color: #201F20;
+                        margin: 0;
+                        font-weight: normal;
+                    }
+
+                    /* Header2 style, used for "Overview" and other sections */
+                    h2
+                    {
+                        font-size: 18pt;
+                        font-weight: normal;
+                        padding: 15px 0 5px 0;
+                        margin: 0;
+                    }
+
+                    /* Header3 style, used for sub-sections, such as project name */
+                    h3
+                    {
+                        font-weight: normal;
+                        font-size: 15pt;
+                        margin: 0;
+                        padding: 15px 0 5px 0;
+                        background-color: transparent;
+                    }
+
+                    /* Color all hyperlinks one color */
+                    a
+                    {
+                        color: #1382CE;
+                    }
+
+                    /* Table styles */ 
+                    table
+                    {
+                        border-spacing: 0 0;
+                        border-collapse: collapse;
+                        font-size: 10pt;
+                    }
+
+                    table th
+                    {
+                        background: #E7E7E8;
+                        text-align: left;
+                        text-decoration: none;
+                        font-weight: normal;
+                        padding: 3px 6px 3px 6px;
+                    }
+
+                    table td
+                    {
+                        vertical-align: top;
+                        padding: 3px 6px 5px 5px;
+                        margin: 0px;
+                        border: 1px solid #E7E7E8;
+                        background: #F7F7F8;
+                    }
+
+                    /* Local link is a style for hyperlinks that link to file:/// content, there are lots so color them as 'normal' text until the user mouse overs */
+                    .localLink
+                    {
+                        color: #1E1E1F;
+                        background: #EEEEED;
+                        text-decoration: none;
+                    }
+
+                    .localLink:hover
+                    {
+                        color: #1382CE;
+                        background: #FFFF99;
+                        text-decoration: none;
+                    }
+
+                    /* Center text, used in the over views cells that contain message level counts */ 
+                    .textCentered
+                    {
+                        text-align: center;
+                    }
+
+                    /* The message cells in message tables should take up all avaliable space */
+                    .messageCell
+                    {
+                        width: 100%;
+                    }
+
+                    /* Padding around the content after the h1 */ 
+                    #content 
+                    {
+	                    padding: 0px 12px 12px 12px; 
+                    }
+
+                    /* The overview table expands to width, with a max width of 97% */ 
+                    #overview table
+                    {
+                        width: auto;
+                        max-width: 75%; 
+                    }
+
+                    /* The messages tables are always 97% width */
+                    #messages table
+                    {
+                        width: 97%;
+                    }
+
+                    /* All Icons */
+                    .IconSuccessEncoded, .IconInfoEncoded, .IconWarningEncoded, .IconErrorEncoded
+                    {
+                        min-width:18px;
+                        min-height:18px; 
+                        background-repeat:no-repeat;
+                        background-position:center;
+                    }
+
+                    /* Success icon encoded */
+                    .IconSuccessEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconSuccess#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABcElEQVR4Xq2TsUsCURzHv15g8ZJcBWlyiYYgCIWcb9DFRRwMW5TA2c0/QEFwFkxxUQdxVlBwCYWOi6IhWgQhBLHJUCkhLr/BW8S7gvrAg+N+v8/v+x68Z8MGy+XSCyABQAXgBgHGALoASkIIDWSLeLBetdHryMjd5IxQPWT4rn1c/P7+xxp72Cs9m5SZ0Bq2vPnbPFafK2zDvmNHypdC0BPkLlQhxJsCAhQoZwdZU5mwxh720qGo8MzTxTTKZDPCx2HoVzp6lz0Q9tKhyx0kGs8Ny+TkWRKk8lCROwEduhyg9l/6lunOPSfmH3NUH6uQ0KHLAe7JYvJjevm+DAMGJHToKtigE+vwvIidxLamb8IBY9e+C5LiXREkfho3TSd06HJA13/oh6T51MTsfQbHrsMynQ5dDihFjiK8JJAU9AKIWTp76dCVN7HWHrajmUEGvyF9nkbAE6gLIS7kTUyuf2gscLoJrElZo/Mvj+nPz/kLTmfnEwP3tB0AAAAASUVORK5CYII=);
+                    }
+
+                    /* Information icon encoded */
+                    .IconInfoEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconInformation#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHElEQVR4Xs2TsUoDQRRF7wwoziokjZUKadInhdhukR9YP8DMX1hYW+QvdsXa/QHBbcXC7W0CamWTQnclFutceIQJwwaWNLlwm5k5d94M76mmaeCrrmsLYOocY12FcxZFUeozCqKqqgYA8uevv1H6VuPxcwlfk5N92KHBxfFeCSAxxswlYAW/Xr989x/mv9gkhtyMDhcAxgzRsp7flj8B/HF1RsMXq+NZMkopaHe7lbKxQUEIGbKsYNoGn969060hZBkQex/W8oRQwsQaW2o3Ago2SVcJUzAgY3N0lTCZZm+zPS8HB51gMmS1DEYyOz9acKO1D8JWTlafKIMxdhvlfdyT94Vv5h7P8Ky7nQzACmhvKq3zk3PjW9asz9D/1oigecsioooAAAAASUVORK5CYII=);
+                    }
+
+                    /* Warning icon encoded */
+                    .IconWarningEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconWarning#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAx0lEQVR4XpWSMQ7CMAxFf4xAyBMLCxMrO8dhaBcuwdCJS3RJBw7SA/QGTCxdWJgiQYWKXJWKIXHIlyw5lqr34tQgEOdcBsCOx5yZK3hCCKdYXneQkh4pEfqzLfu+wVDSyyzFoJjfz9NB+pAF+eizx2Vruts0k15mPgvS6GYvpVtQhB61IB/dk6AF6fS4Ben0uIX5odtFe8Q/eW1KvFeH4e8khT6+gm5B+t3juyDt7n0jpe+CANTd+oTUjN/U3yVaABnSUjFz/gFq44JaVSCXeQAAAABJRU5ErkJggg==);
+                    }
+
+                    /* Error icon encoded */
+                    .IconErrorEncoded
+                    {
+                        /* Note: Do not delete the comment below. It is used to verify the correctness of the encoded image resource below before the product is released */
+                        /* [---XsltValidateInternal-Base64EncodedImage:IconError#Begin#background-image: url(data:image/png;base64,#Separator#);#End#] */
+                        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABQElEQVR4XqWTvUoEQRCE6wYPZUA80AfwAQz23uCMjA7MDRQEIzPBVEyNTQUFIw00vcQTTMzuAh/AxEQQT8HF/3G/oGGnEUGuoNnd6qoZuqltyKEsyzVJq5I6rnUp6SjGeGhESikzzlc1eL7opfuVbrqbU1Zw9NCgtQMaZpY0eNnaaL2fHusvTK5vKu7sjSS1Y4y3QUA6K3e3Mau5UFDyMP7tYF9o8cAHZv68vipoIJg971PZIZ5HiwdvYGGvFVFHmGmZ2MxwmQYPXubPl9Up0tfoMQGetXd6mRbvhBw+boZ6WF7Mbv1+GsHRk0fQmPAH1GfmZirbCfDJ61tw3Px8/8pZsPAG4jlVhcPgZ7adwNWBB68lkRQWFiTgFlbnLY3DGGM7izIJIyT/jjIvEJw6fdJTc6krDzh6aMwMP9bvDH4ADSsa9uSWVJkAAAAASUVORK5CYII=);
+                    }
+                 </style><script type="text/javascript" language="javascript"> 
+          
+            // Startup 
+            // Hook up the the loaded event for the document/window, to linkify the document content
+            var startupFunction = function() { linkifyElement("messages"); };
+            
+            if(window.attachEvent)
+            {
+              window.attachEvent('onload', startupFunction);
+            }
+            else if (window.addEventListener) 
+            {
+              window.addEventListener('load', startupFunction, false);
+            }
+            else 
+            {
+              document.addEventListener('load', startupFunction, false);
+            } 
+            
+            // Toggles the visibility of table rows with the specified name 
+            function toggleTableRowsByName(name)
+            {
+               var allRows = document.getElementsByTagName('tr');
+               for (i=0; i < allRows.length; i++)
+               {
+                  var currentName = allRows[i].getAttribute('name');
+                  if(!!currentName && currentName.indexOf(name) == 0)
+                  {
+                      var isVisible = allRows[i].style.display == ''; 
+                      isVisible ? allRows[i].style.display = 'none' : allRows[i].style.display = '';
+                  }
+               }
+            }
+            
+            function scrollToFirstVisibleRow(name) 
+            {
+               var allRows = document.getElementsByTagName('tr');
+               for (i=0; i < allRows.length; i++)
+               {
+                  var currentName = allRows[i].getAttribute('name');
+                  var isVisible = allRows[i].style.display == ''; 
+                  if(!!currentName && currentName.indexOf(name) == 0 && isVisible)
+                  {
+                     allRows[i].scrollIntoView(true); 
+                     return true; 
+                  }
+               }
+               
+               return false;
+            }
+            
+            // Linkifies the specified text content, replaces candidate links with html links 
+            function linkify(text)
+            {
+                 if(!text || 0 === text.length)
+                 {
+                     return text; 
+                 }
+
+                 // Find http, https and ftp links and replace them with hyper links 
+                 var urlLink = /(http|https|ftp)\:\/\/[a-zA-Z0-9\-\.]+(:[a-zA-Z0-9]*)?\/?([a-zA-Z0-9\-\._\?\,\/\\\+&%\$#\=~;\{\}])*/gi;
+                 
+                 return text.replace(urlLink, '<a href="$&">$&</a>') ;
+            }
+            
+            // Linkifies the specified element by ID
+            function linkifyElement(id)
+            {
+                var element = document.getElementById(id);
+                if(!!element)
+                {
+                  element.innerHTML = linkify(element.innerHTML); 
+                }
+            }
+            
+            function ToggleMessageVisibility(projectName)
+            {
+              if(!projectName || 0 === projectName.length)
+              {
+                return; 
+              }
+              
+              toggleTableRowsByName("MessageRowClass" + projectName);
+              toggleTableRowsByName('MessageRowHeaderShow' + projectName);
+              toggleTableRowsByName('MessageRowHeaderHide' + projectName); 
+            }
+            
+            function ScrollToFirstVisibleMessage(projectName)
+            {
+              if(!projectName || 0 === projectName.length)
+              {
+                return; 
+              }
+              
+              // First try the 'Show messages' row
+              if(!scrollToFirstVisibleRow('MessageRowHeaderShow' + projectName))
+              {
+                // Failed to find a visible row for 'Show messages', try an actual message row 
+                scrollToFirstVisibleRow('MessageRowClass' + projectName); 
+              }
+            }
+           </script></head><body><h1 _locID="ConversionReport">
+          Migration Report - N2.Everything.2026</h1><div id="content"><h2 _locID="OverviewTitle">Overview</h2><div id="overview"><table><tr><th></th><th _locID="ProjectTableHeader">Project</th><th _locID="PathTableHeader">Path</th><th _locID="ErrorsTableHeader">Errors</th><th _locID="WarningsTableHeader">Warnings</th><th _locID="MessagesTableHeader">Messages</th></tr><tr><td class="IconWarningEncoded" /><td><strong><a href="#N2.Management2">N2.Management2</a></strong></td><td>src\Mvc\MvcTemplates\N2\N2.Management2.csproj</td><td class="textCentered"><a>0</a></td><td class="textCentered"><a href="#N2.Management2Warning">2</a></td><td class="textCentered"><a href="#" onclick="ScrollToFirstVisibleMessage('N2.Management2'); return false;">119</a></td></tr></table></div><h2 _locID="SolutionAndProjectsTitle">Solution and projects</h2><div id="messages"><a name="N2.Management2" /><h3>N2.Management2</h3><table><tr id="N2.Management2HeaderRow"><th></th><th class="messageCell" _locID="MessageTableHeader">Message</th></tr><tr name="WarningRowClassN2.Management2"><td class="IconWarningEncoded"><a name="N2.Management2Warning" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\N2.Management2.csproj:
+        </strong><span>Visual Studio needs to make non-functional changes to this project in order to enable the project to open in released versions of Visual Studio newer than Visual Studio 2010 SP1 without impacting project behavior.</span></td></tr><tr name="WarningRowClassN2.Management2"><td class="IconWarningEncoded"><a name="N2.Management2Warning" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\N2.Management2.csproj:
+        </strong><span>Visual Studio has made non-functional changes to this project in order to enable the project to open in released versions of Visual Studio newer than Visual Studio 2010 SP1 without impacting project behavior.</span></td></tr><tr name="MessageRowHeaderShowN2.Management2"><td class="IconInfoEncoded" /><td class="messageCell"><a _locID="ShowAdditionalMessages" href="#" name="N2.Management2Message" onclick="ToggleMessageVisibility('N2.Management2'); return false;">
+          Show 119 additional messages
+        </a></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\N2.Management2.csproj:
+        </strong><span>Project file successfully backed up as D:\Code\Github\n2cms\Backup34\N2.Management2.csproj</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\N2.Management2.csproj.user:
+        </strong><span>Project user file successfully backed up as D:\Code\Github\n2cms\Backup34\N2.Management2.csproj.user</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\ManagementUtility.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\ManagementUtility.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\PersonalSettings.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\PersonalSettings.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Export\CsvRow.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Export\CsvRow.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Export\DefinitionNotFoundException.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Export\DefinitionNotFoundException.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Export\InvalidXmlException.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Export\InvalidXmlException.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Export\BulkOptionProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Export\BulkOptionProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\NumberOfItemsScheduledAction.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\NumberOfItemsScheduledAction.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Trash\TrashCleanupAgent.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Trash\TrashCleanupAgent.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Versions\VersionInfo.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Versions\VersionInfo.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Templates\TemplateContainer.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Templates\TemplateContainer.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FolderReference.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FolderReference.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\NavigationPage.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\NavigationPage.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\FileSiteMapNode.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\FileSiteMapNode.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\DirectoryNode.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\DirectoryNode.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\FileNode.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\FileNode.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\RootNode.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\RootNode.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\FieldSet.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\FieldSet.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\HelpfulHandler.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\HelpfulHandler.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\ChildGroupContainer.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\ChildGroupContainer.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\SearchControlAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\SearchControlAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\LinkTracker\PermanentRedirect.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\LinkTracker\PermanentRedirect.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Wizard\Settings.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Wizard\Settings.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\InstallationUtility.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\InstallationUtility.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Editables\EditableFolderPathAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Editables\EditableFolderPathAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\CleanZoneNameMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\CleanZoneNameMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\Migrations\UpgradeVersionsMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\Migrations\UpgradeVersionsMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\Migrations\UpdateChildStateMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\Migrations\UpdateChildStateMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\Migrations\UpdateTemplateKeyMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\Migrations\UpdateTemplateKeyMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\Migrations\UpdateAlteredPermissionsMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\Migrations\UpdateAlteredPermissionsMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\Migrations\InsertAncestralTrailMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\Migrations\InsertAncestralTrailMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\Migrations\UpdateAppPathMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\Migrations\UpdateAppPathMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Installation\UpgradeVersionWorker.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Installation\UpgradeVersionWorker.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\EditOptionProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\EditOptionProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Activity\KeepAliveControlPanel.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Activity\KeepAliveControlPanel.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\ManagementItem.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\ManagementItem.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Wizard\Items\Wonderland.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Wizard\Items\Wonderland.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\Items\User.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\Items\User.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\Items\UserList.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\Items\UserList.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\Items\UserExternalLoginInfo.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\Items\UserExternalLoginInfo.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\AccountInfo.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\AccountInfo.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\AccountManager.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\AccountManager.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\Details\EditableRolesAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\Details\EditableRolesAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\EditablePassword.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\EditablePassword.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\ItemBridge.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\ItemBridge.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\ContentMembershipProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\ContentMembershipProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\AccountResources.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\AccountResources.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\MembershipAccountResources.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\MembershipAccountResources.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\MembershipAccountManager.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\MembershipAccountManager.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\ContentProfileProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\ContentProfileProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\ContentRoleProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\ContentRoleProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Security\ContentProfileRepository.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Security\ContentProfileRepository.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Users\MembershipToolbarPluginAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Users\MembershipToolbarPluginAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Activity\ManagementActivity.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Activity\ManagementActivity.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Activity\ActivityNotificationAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Activity\ActivityNotificationAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Pages\ImageSizeCache.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Pages\ImageSizeCache.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Pages\AbstractNode.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Pages\AbstractNode.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Pages\AbstractDirectory.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Pages\AbstractDirectory.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Pages\Directory.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Pages\Directory.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Pages\File.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Pages\File.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Pages\RootDirectory.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Pages\RootDirectory.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Pages\FileSystemNodeAdapter.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Pages\FileSystemNodeAdapter.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystem\Editables\EditableUploadAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystem\Editables\EditableUploadAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FileSystemSource.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FileSystemSource.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\FolderNodeProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\FolderNodeProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\VirtualFolderInitializer.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\VirtualFolderInitializer.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\LinkTracker\Tracker.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\LinkTracker\Tracker.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\UpdateFilePrefixMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\UpdateFilePrefixMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Files\UploadedFilesResizer.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Files\UploadedFilesResizer.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\FontHandler.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\FontHandler.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\AngularLocalizationHandler.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\AngularLocalizationHandler.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\FileSiteMapProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\FileSiteMapProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\MvcOnWebFormPartAdapter.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\MvcOnWebFormPartAdapter.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\ButtonGroup.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\ButtonGroup.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\SplitButtons.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\SplitButtons.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\Alert.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\Alert.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\CancelLink.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\CancelLink.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\ItemLink.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\ItemLink.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\PermissionPanel.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\PermissionPanel.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\InfoLabel.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\InfoLabel.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\ContentLink.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\ContentLink.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\PersistentOnlyPanel.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\PersistentOnlyPanel.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\ResizedImage.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\ResizedImage.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\ToolbarPluginDisplay.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\ToolbarPluginDisplay.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\Tree.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\Tree.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\TreeUtility.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\TreeUtility.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Tokens\TokenInitializer.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Tokens\TokenInitializer.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\ViewOptionProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\ViewOptionProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Globalization\GlobalizationOptionProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Globalization\GlobalizationOptionProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\SortPlugin.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\SortPlugin.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\ChildGroupSource.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\ChildGroupSource.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\ChildrenAjaxService.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\ChildrenAjaxService.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Navigation\MediaBrowserUtils.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Navigation\MediaBrowserUtils.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Templates\ContentTemplateRepository.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Templates\ContentTemplateRepository.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Templates\ContentTemplateProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Templates\ContentTemplateProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Wizard\Items\MagicLocation.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Wizard\Items\MagicLocation.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Wizard\LocationWizard.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Wizard\LocationWizard.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Wizard\WizardOptionProvider.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Wizard\WizardOptionProvider.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\AutoPublish\PublishScheduledAction.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\AutoPublish\PublishScheduledAction.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\ControlPanelEditingSaveAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\ControlPanelEditingSaveAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\ControlPanelDiscardPreviewOrDeleteAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\ControlPanelDiscardPreviewOrDeleteAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\ControlPanelPreviewPublishAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\ControlPanelPreviewPublishAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\LinkTracker\UpdateImagesMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\LinkTracker\UpdateImagesMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\LinkTracker\UpdateLinksMigration.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\LinkTracker\UpdateLinksMigration.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Trash\TrashContainerItem.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Trash\TrashContainerItem.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Trash\TrashHandler.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Trash\TrashHandler.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Trash\AsyncTrashPurger.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Trash\AsyncTrashPurger.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Trash\DeleteInterceptor.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Trash\DeleteInterceptor.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Export\CsvParser.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Export\CsvParser.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Export\N2XmlReader.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Export\N2XmlReader.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Export\N2XmlWriter.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Export\N2XmlWriter.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Tags\TagsAjaxService.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Tags\TagsAjaxService.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Content\Versions\ControlPanelPendingVersionAttribute.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Content\Versions\ControlPanelPendingVersionAttribute.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UI\Controls\TreeView.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UI\Controls\TreeView.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web\UrlSelectionPage.cs:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web\UrlSelectionPage.cs</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\packages.config:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\packages.config</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\Web.config:
+        </strong><span>File successfully backed up as D:\Code\Github\n2cms\Backup34\Web.config</span></td></tr><tr name="MessageRowClassN2.Management2" style="display: none"><td class="IconInfoEncoded"><a name="N2.Management2Message" /></td><td class="messageCell"><strong>src\Mvc\MvcTemplates\N2\N2.Management2.csproj:
+        </strong><span>Project migrated successfully</span></td></tr><tr style="display: none" name="MessageRowHeaderHideN2.Management2"><td class="IconInfoEncoded" /><td class="messageCell"><a _locID="HideAdditionalMessages" href="#" name="N2.Management2Message" onclick="ToggleMessageVisibility('N2.Management2'); return false;">
+          Hide 119 additional messages
+        </a></td></tr></table></div></div></body></html>

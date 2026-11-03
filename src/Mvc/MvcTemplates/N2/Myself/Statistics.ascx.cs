@@ -27,7 +27,10 @@ namespace N2.Management.Myself
         {
             base.OnLoad(e);
 
+            // This view intentionally counts all items and pages.
+#pragma warning disable CS0618
             IList<ContentItem> items = Find.Items.All.Select();
+#pragma warning restore CS0618
             int itemsCount = items.Count;
             lblItems.Text = itemsCount.ToString();
             

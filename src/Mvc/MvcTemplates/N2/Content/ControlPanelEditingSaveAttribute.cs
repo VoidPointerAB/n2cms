@@ -137,7 +137,10 @@ namespace N2.Edit
             #region IItemEditor Members
 
             public event EventHandler<ItemEventArgs> Saved = delegate {};
+			// Required by IItemEditor; this editor does not raise the event.
+#pragma warning disable CS0067
 			public event Action<object, CommandContext> CreatingContext;
+#pragma warning restore CS0067
 
 			#endregion
 		}

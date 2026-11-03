@@ -37,8 +37,11 @@ namespace N2.Edit
         {
             try
             {
+                // Keep support for credentials configured in forms authentication.
+#pragma warning disable CS0618
                 if (FormsAuthentication.Authenticate(Login1.UserName, Login1.Password)
                     || (System.Web.Security.Membership.ValidateUser(Login1.UserName, Login1.Password) && System.Web.Security.Membership.GetUser(Login1.UserName).IsApproved))
+#pragma warning restore CS0618
                 {
                     e.Authenticated = true;
                     //Travis Pettijohn - Oct 2010 - pettijohn.com

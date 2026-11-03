@@ -461,8 +461,11 @@ namespace N2.Edit.Install
         {
             try
             {
+                // Preserve the check for the legacy default forms credentials.
+#pragma warning disable CS0618
                 return FormsAuthentication.Authenticate("admin", "changeme")
                     || System.Web.Security.Membership.ValidateUser("admin", "changeme");
+#pragma warning restore CS0618
             }
             catch (Exception)
             {

@@ -1,0 +1,966 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5EE2B41C-135A-44F5-844E-13F47777E019}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>N2.Management</RootNamespace>
+    <AssemblyName>N2.Management</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UpgradeBackupLocation>D:\Code\Github\n2cms\Backup35\</UpgradeBackupLocation>
+    <OldToolsVersion>Current</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>0c07944a</NuGetPackageImportStamp>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Buffers, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Numerics.Vectors.4.6.1\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Threading.Tasks.Extensions.4.6.3\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Mvc.5.3.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.Razor.3.3.0\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\Microsoft.AspNet.WebPages.3.3.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.112.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.Data.SQLite.Linq.1.0.112.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ManagementUtility.cs" />
+    <Compile Include="Content\PersonalSettings.cs" />
+    <Compile Include="Content\Export\CsvRow.cs" />
+    <Compile Include="Content\Export\DefinitionNotFoundException.cs" />
+    <Compile Include="Content\Export\InvalidXmlException.cs" />
+    <Compile Include="Content\Export\BulkOptionProvider.cs" />
+    <Compile Include="Content\NumberOfItemsScheduledAction.cs" />
+    <Compile Include="Content\Trash\TrashCleanupAgent.cs" />
+    <Compile Include="Content\Versions\VersionInfo.cs" />
+    <Compile Include="Content\Templates\TemplateContainer.cs" />
+    <Compile Include="Files\FolderReference.cs" />
+    <Compile Include="Content\Navigation\NavigationPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Web\FileSiteMapNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\DirectoryNode.cs" />
+    <Compile Include="Web\FileNode.cs" />
+    <Compile Include="Web\RootNode.cs" />
+    <Compile Include="Web\UI\Controls\FieldSet.cs" />
+    <Compile Include="Content\Navigation\HelpfulHandler.cs" />
+    <Compile Include="Content\Navigation\ChildGroupContainer.cs" />
+    <Compile Include="Content\Navigation\SearchControlAttribute.cs" />
+    <Compile Include="Content\LinkTracker\PermanentRedirect.cs" />
+    <Compile Include="Content\Wizard\Settings.cs" />
+    <Compile Include="Installation\InstallationUtility.cs" />
+    <Compile Include="Files\FileSystem\Editables\EditableFolderPathAttribute.cs" />
+    <Compile Include="Installation\CleanZoneNameMigration.cs" />
+    <Compile Include="Installation\Migrations\UpgradeVersionsMigration.cs" />
+    <Compile Include="Installation\Migrations\UpdateChildStateMigration.cs" />
+    <Compile Include="Installation\Migrations\UpdateTemplateKeyMigration.cs" />
+    <Compile Include="Installation\Migrations\UpdateAlteredPermissionsMigration.cs" />
+    <Compile Include="Installation\Migrations\InsertAncestralTrailMigration.cs" />
+    <Compile Include="Installation\Migrations\UpdateAppPathMigration.cs" />
+    <Compile Include="Installation\UpgradeVersionWorker.cs" />
+    <Compile Include="Content\EditOptionProvider.cs" />
+    <Compile Include="Content\Activity\KeepAliveControlPanel.cs" />
+    <Compile Include="ManagementItem.cs" />
+    <Compile Include="Content\Wizard\Items\Wonderland.cs" />
+    <Compile Include="Security\Items\User.cs" />
+    <Compile Include="Security\Items\UserList.cs" />
+    <Compile Include="Security\Items\UserExternalLoginInfo.cs" />
+    <Compile Include="Security\AccountInfo.cs" />
+    <Compile Include="Security\AccountManager.cs" />
+    <Compile Include="Security\Details\EditableRolesAttribute.cs" />
+    <Compile Include="Security\EditablePassword.cs" />
+    <Compile Include="Security\ItemBridge.cs" />
+    <Compile Include="Security\ContentMembershipProvider.cs" />
+    <Compile Include="Security\AccountResources.cs" />
+    <Compile Include="Security\MembershipAccountResources.cs" />
+    <Compile Include="Security\MembershipAccountManager.cs" />
+    <Compile Include="Security\ContentProfileProvider.cs" />
+    <Compile Include="Security\ContentRoleProvider.cs" />
+    <Compile Include="Security\ContentProfileRepository.cs" />
+    <Compile Include="Users\MembershipToolbarPluginAttribute.cs" />
+    <Compile Include="Content\Activity\ManagementActivity.cs" />
+    <Compile Include="Content\Activity\ActivityNotificationAttribute.cs" />
+    <Compile Include="Files\FileSystem\Pages\ImageSizeCache.cs" />
+    <Compile Include="Files\FileSystem\Pages\AbstractNode.cs" />
+    <Compile Include="Files\FileSystem\Pages\AbstractDirectory.cs" />
+    <Compile Include="Files\FileSystem\Pages\Directory.cs" />
+    <Compile Include="Files\FileSystem\Pages\File.cs" />
+    <Compile Include="Files\FileSystem\Pages\RootDirectory.cs" />
+    <Compile Include="Files\FileSystem\Pages\FileSystemNodeAdapter.cs" />
+    <Compile Include="Files\FileSystem\Editables\EditableUploadAttribute.cs" />
+    <Compile Include="Files\FileSystemSource.cs" />
+    <Compile Include="Files\FolderNodeProvider.cs" />
+    <Compile Include="Files\VirtualFolderInitializer.cs" />
+    <Compile Include="Content\LinkTracker\Tracker.cs" />
+    <Compile Include="Files\UpdateFilePrefixMigration.cs" />
+    <Compile Include="Files\UploadedFilesResizer.cs" />
+    <Compile Include="Web\FontHandler.cs" />
+    <Compile Include="Web\AngularLocalizationHandler.cs" />
+    <Compile Include="Web\FileSiteMapProvider.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web\MvcOnWebFormPartAdapter.cs" />
+    <Compile Include="Web\UI\Controls\ButtonGroup.cs" />
+    <Compile Include="Web\UI\Controls\SplitButtons.cs" />
+    <Compile Include="Web\UI\Controls\Alert.cs" />
+    <Compile Include="Web\UI\Controls\CancelLink.cs" />
+    <Compile Include="Web\UI\Controls\ItemLink.cs" />
+    <Compile Include="Web\UI\Controls\PermissionPanel.cs" />
+    <Compile Include="Web\UI\Controls\InfoLabel.cs" />
+    <Compile Include="Web\UI\Controls\ContentLink.cs" />
+    <Compile Include="Web\UI\Controls\PersistentOnlyPanel.cs" />
+    <Compile Include="Web\UI\Controls\ResizedImage.cs" />
+    <Compile Include="Web\UI\Controls\ToolbarPluginDisplay.cs" />
+    <Compile Include="Web\UI\Controls\Tree.cs" />
+    <Compile Include="Content\Navigation\TreeUtility.cs" />
+    <Compile Include="Tokens\TokenInitializer.cs" />
+    <Compile Include="Content\ViewOptionProvider.cs" />
+    <Compile Include="Content\Globalization\GlobalizationOptionProvider.cs" />
+    <Compile Include="Content\Navigation\SortPlugin.cs" />
+    <Compile Include="Content\Navigation\ChildGroupSource.cs" />
+    <Compile Include="Content\Navigation\ChildrenAjaxService.cs" />
+    <Compile Include="Content\Navigation\MediaBrowserUtils.cs" />
+    <Compile Include="Content\Templates\ContentTemplateRepository.cs" />
+    <Compile Include="Content\Templates\ContentTemplateProvider.cs" />
+    <Compile Include="Content\Wizard\Items\MagicLocation.cs" />
+    <Compile Include="Content\Wizard\LocationWizard.cs" />
+    <Compile Include="Content\Wizard\WizardOptionProvider.cs" />
+    <Compile Include="Content\AutoPublish\PublishScheduledAction.cs" />
+    <Compile Include="Content\ControlPanelEditingSaveAttribute.cs" />
+    <Compile Include="Content\ControlPanelDiscardPreviewOrDeleteAttribute.cs" />
+    <Compile Include="Content\ControlPanelPreviewPublishAttribute.cs" />
+    <Compile Include="Content\LinkTracker\UpdateImagesMigration.cs" />
+    <Compile Include="Content\LinkTracker\UpdateLinksMigration.cs" />
+    <Compile Include="Content\Trash\TrashContainerItem.cs" />
+    <Compile Include="Content\Trash\TrashHandler.cs" />
+    <Compile Include="Content\Trash\AsyncTrashPurger.cs" />
+    <Compile Include="Content\Trash\DeleteInterceptor.cs" />
+    <Compile Include="Content\Export\CsvParser.cs" />
+    <Compile Include="Content\Export\N2XmlReader.cs" />
+    <Compile Include="Content\Export\N2XmlWriter.cs" />
+    <Compile Include="Content\Tags\TagsAjaxService.cs" />
+    <Compile Include="Content\Versions\ControlPanelPendingVersionAttribute.cs" />
+    <Compile Include="..\..\..\Framework\AssemblyVersion.cs">
+      <Link>AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="Externals\ExternalContentRepository.cs" />
+    <Compile Include="Externals\ExternalItem.cs" />
+    <Compile Include="Installation\Migrations\ConvertEnumsMigration.cs" />
+    <Compile Include="Installation\Migrations\FixZoneNamePartsMigration.cs" />
+    <Compile Include="Installation\Migrations\RebuildImageSizesMigration.cs" />
+    <Compile Include="Installation\Migrations\RecordedAssemblyVersionMigration.cs" />
+    <Compile Include="Installation\Migrations\EditableItemMigration.cs" />
+    <Compile Include="Installation\Migrations\FixStateMigration.cs" />
+    <Compile Include="Installation\Migrations\UpdateTranslationKeyMigration.cs" />
+    <Compile Include="Myself\Analytics\Controllers\ManageAnalyticsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Myself\Analytics\Models\AnalyticsPartBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Myself\Analytics\Models\ManageAnalyticsPart.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Myself\RootBase.cs" />
+    <Compile Include="Myself\RootPartBase.cs" />
+    <Compile Include="Resources\Js\DirectoryCompiler.cs" />
+    <Compile Include="Resources\KeepAlive\Pinger.cs" />
+    <Compile Include="Collaboration\Ping.ashx.cs">
+      <DependentUpon>Ping.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Activity\RecentActivity.ascx.cs">
+      <DependentUpon>RecentActivity.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Activity\RecentActivity.ascx.designer.cs">
+      <DependentUpon>RecentActivity.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\AffectedItems.ascx.cs">
+      <DependentUpon>AffectedItems.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\AffectedItems.ascx.designer.cs">
+      <DependentUpon>AffectedItems.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\AvailableZones.ascx.cs">
+      <DependentUpon>AvailableZones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\AvailableZones.ascx.designer.cs">
+      <DependentUpon>AvailableZones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\MediaBrowser.aspx.cs">
+      <DependentUpon>MediaBrowser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Navigation\MediaBrowser.aspx.designer.cs">
+      <DependentUpon>MediaBrowser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\MediaBrowserHandler.ashx.cs">
+      <DependentUpon>MediaBrowserHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\EditSingle.aspx.cs">
+      <DependentUpon>EditSingle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\EditSingle.aspx.designer.cs">
+      <DependentUpon>EditSingle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Copy.aspx.cs">
+      <DependentUpon>Copy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Copy.aspx.designer.cs">
+      <DependentUpon>Copy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Delete.aspx.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Delete.aspx.designer.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DiscardPreview.aspx.cs">
+      <DependentUpon>DiscardPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\DiscardPreview.aspx.designer.cs">
+      <DependentUpon>DiscardPreview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\EditRecursive.aspx.cs">
+      <DependentUpon>EditRecursive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\EditRecursive.aspx.designer.cs">
+      <DependentUpon>EditRecursive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Export\App_LocalResources\ItemXmlImport.ascx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ItemXmlImport.ascx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Export\BulkEditing.aspx.cs">
+      <DependentUpon>BulkEditing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Export\BulkEditing.aspx.designer.cs">
+      <DependentUpon>BulkEditing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Export\CsvImport.ascx.cs">
+      <DependentUpon>CsvImport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Export\CsvImport.ascx.designer.cs">
+      <DependentUpon>CsvImport.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Export\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Export\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Export\Export.aspx.cs">
+      <DependentUpon>Export.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Export\Export.aspx.designer.cs">
+      <DependentUpon>Export.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Export\ItemXmlImport.ascx.cs">
+      <DependentUpon>ItemXmlImport.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Export\ItemXmlImport.ascx.designer.cs">
+      <DependentUpon>ItemXmlImport.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\LinkTracker\UpdateReferences.aspx.cs">
+      <DependentUpon>UpdateReferences.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\LinkTracker\UpdateReferences.aspx.designer.cs">
+      <DependentUpon>UpdateReferences.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\LinkTracker\UpdateReferencesTo.ashx.cs">
+      <DependentUpon>UpdateReferencesTo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Templates\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Templates\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Versions\RecentVersions.ascx.cs">
+      <DependentUpon>RecentVersions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Versions\RecentVersions.ascx.designer.cs">
+      <DependentUpon>RecentVersions.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Framed.master.cs">
+      <DependentUpon>Framed.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Framed.master.designer.cs">
+      <DependentUpon>Framed.master</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Globalization\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Globalization\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Globalization\LanguageMenu.ascx.cs">
+      <DependentUpon>LanguageMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Globalization\LanguageMenu.ascx.designer.cs">
+      <DependentUpon>LanguageMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Globalization\Languages.ascx.cs">
+      <DependentUpon>Languages.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Globalization\Languages.ascx.designer.cs">
+      <DependentUpon>Languages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Globalization\Translate.aspx.cs">
+      <DependentUpon>Translate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Globalization\Translate.aspx.designer.cs">
+      <DependentUpon>Translate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ItemInfo.ascx.cs">
+      <DependentUpon>ItemInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\ItemInfo.ascx.designer.cs">
+      <DependentUpon>ItemInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Externals\External.ascx.cs">
+      <DependentUpon>External.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Externals\External.ascx.designer.cs">
+      <DependentUpon>External.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\Crop.aspx.cs">
+      <DependentUpon>Crop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\Crop.aspx.designer.cs">
+      <DependentUpon>Crop.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\FileSystem\Export.aspx.cs">
+      <DependentUpon>Export.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\FileSystem\Export.aspx.designer.cs">
+      <DependentUpon>Export.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\FileSystem\Directory.aspx.cs">
+      <DependentUpon>Directory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\FileSystem\Directory.aspx.designer.cs">
+      <DependentUpon>Directory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\FileSystem\File.aspx.cs">
+      <DependentUpon>File.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\FileSystem\File.aspx.designer.cs">
+      <DependentUpon>File.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\FileSystem\FileUpload.ascx.cs">
+      <DependentUpon>FileUpload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\FileSystem\FileUpload.ascx.designer.cs">
+      <DependentUpon>FileUpload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\Rebuild.aspx.cs">
+      <DependentUpon>Rebuild.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Files\Rebuild.aspx.designer.cs">
+      <DependentUpon>Rebuild.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Files\FileSystem\UploadFile.ashx.cs">
+      <DependentUpon>UploadFile.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\Relations.aspx.cs">
+      <DependentUpon>Relations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\Relations.aspx.designer.cs">
+      <DependentUpon>Relations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\UpgradeVersion.ashx.cs">
+      <DependentUpon>UpgradeVersion.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\UpgradeVersions.aspx.cs">
+      <DependentUpon>UpgradeVersions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\UpgradeVersions.aspx.designer.cs">
+      <DependentUpon>UpgradeVersions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\Rebase.aspx.cs">
+      <DependentUpon>Rebase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\Rebase.aspx.designer.cs">
+      <DependentUpon>Rebase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Roles\Roles.aspx.designer.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Roles\New.aspx.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Roles\New.aspx.designer.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Roles\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Roles\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Roles\Roles.aspx.cs">
+      <DependentUpon>Roles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Myself\EditPassword.aspx.cs">
+      <DependentUpon>EditPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Myself\EditPassword.aspx.designer.cs">
+      <DependentUpon>EditPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\IconHandler.ashx.cs">
+      <DependentUpon>IconHandler.ashx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Resources\MessageSink.ashx.cs">
+      <DependentUpon>MessageSink.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\RedirectHandler.ashx.cs">
+      <DependentUpon>RedirectHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Search\IndexInfo.ashx.cs">
+      <DependentUpon>IndexInfo.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Search\ManageIndex.ascx.cs">
+      <DependentUpon>ManageIndex.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search\ManageIndex.ascx.designer.cs">
+      <DependentUpon>ManageIndex.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Simple.master.cs">
+      <DependentUpon>Simple.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Simple.master.designer.cs">
+      <DependentUpon>Simple.master</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\Begin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\Begin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\Diagnose.aspx.cs">
+      <DependentUpon>Diagnose.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\Diagnose.aspx.designer.cs">
+      <DependentUpon>Diagnose.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\Fix.aspx.cs">
+      <DependentUpon>Fix.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\Fix.aspx.designer.cs">
+      <DependentUpon>Fix.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\FixClass.aspx.cs">
+      <DependentUpon>FixClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\FixClass.aspx.designer.cs">
+      <DependentUpon>FixClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Installation\Upgrade.aspx.cs">
+      <DependentUpon>Upgrade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Installation\Upgrade.aspx.designer.cs">
+      <DependentUpon>Upgrade.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Activity.ascx.cs">
+      <DependentUpon>Activity.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Activity.ascx.designer.cs">
+      <DependentUpon>Activity.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Languages.ascx.cs">
+      <DependentUpon>Languages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Languages.ascx.designer.cs">
+      <DependentUpon>Languages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Root.aspx.cs">
+      <DependentUpon>Root.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Myself\Root.aspx.designer.cs">
+      <DependentUpon>Root.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Statistics.ascx.cs">
+      <DependentUpon>Statistics.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Statistics.ascx.designer.cs">
+      <DependentUpon>Statistics.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Wizards.ascx.cs">
+      <DependentUpon>Wizards.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Myself\Wizards.ascx.designer.cs">
+      <DependentUpon>Wizards.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Js\jquery.ui.ashx.cs">
+      <DependentUpon>jquery.ui.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Js\plugins.ashx.cs">
+      <DependentUpon>plugins.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\KeepAlive\Ping.ashx.cs">
+      <DependentUpon>Ping.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\LinkTracker\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\LinkTracker\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Top.master.cs">
+      <DependentUpon>Top.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Top.master.designer.cs">
+      <DependentUpon>Top.master</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Activity.aspx.cs">
+      <DependentUpon>Activity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Activity.aspx.designer.cs">
+      <DependentUpon>Activity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\New.aspx.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\New.aspx.designer.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Password.aspx.cs">
+      <DependentUpon>Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Password.aspx.designer.cs">
+      <DependentUpon>Password.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Move.aspx.cs">
+      <DependentUpon>Move.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Move.aspx.designer.cs">
+      <DependentUpon>Move.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\ContextMenu.ascx.cs">
+      <DependentUpon>ContextMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Navigation\ContextMenu.ascx.designer.cs">
+      <DependentUpon>ContextMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\LoadTree.ashx.cs">
+      <DependentUpon>LoadTree.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Navigation\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\SortDown.ashx.cs">
+      <DependentUpon>SortDown.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\SortUp.ashx.cs">
+      <DependentUpon>SortUp.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Navigation\Tree.aspx.cs">
+      <DependentUpon>Tree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Navigation\Tree.aspx.designer.cs">
+      <DependentUpon>Tree.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\paste.aspx.cs">
+      <DependentUpon>Paste.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\paste.aspx.designer.cs">
+      <DependentUpon>Paste.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\New.aspx.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\New.aspx.designer.cs">
+      <DependentUpon>New.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\PublishPreview.aspx.cs">
+      <DependentUpon>PublishPreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\PublishPreview.aspx.designer.cs">
+      <DependentUpon>PublishPreview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ReferencingItems.ascx.cs">
+      <DependentUpon>ReferencingItems.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\ReferencingItems.ascx.designer.cs">
+      <DependentUpon>ReferencingItems.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Security\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Security\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Settings\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Settings\SettingsEditor.ascx.cs">
+      <DependentUpon>SettingsEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Settings\SettingsEditor.ascx.designer.cs">
+      <DependentUpon>SettingsEditor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Trash\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Trash\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Versions\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Versions\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Wizard\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Wizard\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Content\Wizard\Details\EditableDefinitionAttribute.cs" />
+    <Compile Include="Web\UI\Controls\TreeView.cs" />
+    <Compile Include="Web\UrlSelectionPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <Content Include="Collaboration\Ping.ashx" />
+    <Content Include="Content\Activity\RecentActivity.ascx" />
+    <Content Include="Content\AffectedItems.ascx" />
+    <Content Include="Content\EditSingle.aspx" />
+    <Content Include="Content\Copy.aspx" />
+    <Content Include="Content\EditRecursive.aspx" />
+    <Content Include="Content\Export\BulkEditing.aspx" />
+    <Content Include="Content\Export\CsvImport.ascx" />
+    <Content Include="Content\Export\Export.aspx" />
+    <Content Include="Content\Export\ItemXmlImport.ascx" />
+    <Content Include="Content\LinkTracker\UpdateReferences.aspx" />
+    <Content Include="Content\Navigation\MediaBrowser.aspx" />
+    <Content Include="Content\Versions\RecentVersions.ascx" />
+    <Content Include="Externals\External.ascx" />
+    <Content Include="Files\Crop.aspx" />
+    <Content Include="Files\FileSystem\FileUpload.ascx" />
+    <Content Include="Files\FileSystem\Export.aspx" />
+    <Content Include="Files\Rebuild.aspx" />
+    <Content Include="Installation\Relations.aspx" />
+    <Content Include="Installation\UpgradeVersions.aspx" />
+    <Content Include="Installation\Rebase.aspx" />
+    <Content Include="Resources\IconHandler.ashx" />
+    <Content Include="Roles\New.aspx" />
+    <Content Include="Roles\Edit.aspx" />
+    <Content Include="Roles\Roles.aspx" />
+    <Content Include="Search\ManageIndex.ascx" />
+    <Content Include="Content\Default.aspx" />
+    <Content Include="Content\Delete.aspx" />
+    <Content Include="Content\Edit.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Content\Move.aspx" />
+    <Content Include="Content\New.aspx" />
+    <Content Include="Users\Activity.aspx" />
+    <Content Include="Myself\EditPassword.aspx" />
+    <Content Include="Files\FileSystem\UploadFile.ashx" />
+    <Content Include="Content\LinkTracker\UpdateReferencesTo.ashx" />
+    <Content Include="Content\Navigation\MediaBrowserHandler.ashx" />
+    <Content Include="Simple.master" />
+    <Content Include="Top.master" />
+    <Content Include="Resources\KeepAlive\Ping.ashx" />
+    <Content Include="Search\IndexInfo.ashx" />
+    <Content Include="Resources\RedirectHandler.ashx" />
+    <Content Include="Resources\MessageSink.ashx" />
+    <Content Include="Installation\UpgradeVersion.ashx" />
+    <Content Include="Content\AvailableZones.ascx" />
+    <Content Include="Content\ItemInfo.ascx" />
+    <Content Include="Content\Framed.master" />
+    <Content Include="Content\Navigation\ContextMenu.ascx" />
+    <Content Include="Content\Navigation\Search.aspx" />
+    <Content Include="Content\Navigation\Tree.aspx" />
+    <Content Include="Content\Paste.aspx" />
+    <Content Include="Content\ReferencingItems.ascx" />
+    <Content Include="Content\Settings\Default.aspx" />
+    <Content Include="Resources\Js\plugins.ashx" />
+    <Content Include="Resources\Js\jquery.ui.ashx" />
+    <Content Include="Content\Security\Default.aspx" />
+    <Content Include="Content\Versions\Default.aspx" />
+    <Content Include="Content\Navigation\LoadTree.ashx" />
+    <Content Include="Content\Navigation\SortUp.ashx" />
+    <Content Include="Content\Export\Default.aspx" />
+    <Content Include="Users\Edit.aspx" />
+    <Content Include="Users\New.aspx" />
+    <Content Include="Users\Password.aspx" />
+    <Content Include="Users\Users.aspx" />
+    <Content Include="Content\Navigation\SortDown.ashx" />
+    <Content Include="Content\Globalization\Default.aspx" />
+    <Content Include="Content\Globalization\LanguageMenu.ascx" />
+    <Content Include="Content\Globalization\Languages.ascx" />
+    <Content Include="Content\LinkTracker\Default.aspx" />
+    <Content Include="Content\Trash\Default.aspx" />
+    <Content Include="Content\Wizard\Default.aspx" />
+    <Content Include="Content\Globalization\Translate.aspx" />
+    <Content Include="Content\DiscardPreview.aspx" />
+    <Content Include="Content\PublishPreview.aspx" />
+    <Content Include="Content\Settings\SettingsEditor.ascx" />
+    <Content Include="Files\Default.aspx" />
+    <Content Include="Files\FileSystem\Directory.aspx" />
+    <Content Include="Files\FileSystem\File.aspx" />
+    <Content Include="Installation\Begin\Default.aspx" />
+    <Content Include="Installation\Default.aspx" />
+    <Content Include="Installation\Diagnose.aspx" />
+    <Content Include="Installation\Fix.aspx" />
+    <Content Include="Installation\FixClass.aspx" />
+    <Content Include="Installation\Upgrade.aspx" />
+    <Content Include="Myself\Activity.ascx" />
+    <Content Include="Myself\Languages.ascx" />
+    <Content Include="Myself\Root.aspx" />
+    <Content Include="Myself\Statistics.ascx" />
+    <Content Include="Myself\Wizards.ascx" />
+    <Content Include="Content\Templates\Default.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\N2\N2.csproj">
+      <Project>{F3C813FE-C51B-4C10-85E2-FD2560E73E72}</Project>
+      <Name>N2</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63864/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

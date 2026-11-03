@@ -36,7 +36,10 @@ namespace N2.Management.Myself
         {
             base.OnInit(e);
 
+            // MaxResults limits the activity query before it is displayed.
+#pragma warning disable CS0618
             rptLatestChanges.DataSource = Find.Items.All.MaxResults(CurrentItem.LatestChangesMaxCount).OrderBy.Updated.Desc.Select();
+#pragma warning restore CS0618
             rptDrafts.DataSource = Engine.Resolve<N2.Edit.Versioning.DraftRepository>().FindDrafts(0, CurrentItem.DraftsMaxCount);
             rptDrafts.ItemCommand += new System.Web.UI.WebControls.RepeaterCommandEventHandler(rptDrafts_ItemCommand);
             DataBind();

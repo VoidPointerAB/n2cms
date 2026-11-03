@@ -45,7 +45,10 @@ namespace N2.Edit.Install.Begin
             System.Configuration.Configuration cfg;
             try
             {
+                // The installer also checks the legacy forms credentials.
+#pragma warning disable CS0618
                 if (FormsAuthentication.Authenticate("admin", "changeme"))
+#pragma warning restore CS0618
                     needsPasswordChange = true;
                 else
                 {

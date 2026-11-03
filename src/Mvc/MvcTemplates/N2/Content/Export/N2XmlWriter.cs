@@ -135,7 +135,7 @@ namespace N2.Xml
             {
                 xtw.WriteString(detail.LinkedItem.ID.ToString());
             }
-            else if (detail.Value == typeof(string))
+            else if (detail.ValueType == typeof(string))
                 xtw.WriteCData(detail.StringValue);
             else
                 xtw.WriteString(detail.Value.ToString());
