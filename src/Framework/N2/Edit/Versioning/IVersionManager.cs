@@ -18,6 +18,7 @@ namespace N2.Edit.Versioning
 
         /// <summary>Creates a "previous" version of an item. This must be called before the item item is modified.</summary>
         /// <param name="item">The item to create a old version of.</param>
+        /// <param name="asPreviousVersion">Whether to add the item as a previous version.</param>
         /// <returns>The old version.</returns>
         ContentItem AddVersion(ContentItem item, bool asPreviousVersion = true);
 
@@ -33,7 +34,9 @@ namespace N2.Edit.Versioning
 
         /// <summary>Retrieves all versions of an item including the master version.</summary>
         /// <param name="publishedItem">The item whose versions to get.</param>
-        /// <param name="count">The number of versions to get.</param>
+        /// <param name="skip">Number of versions to skip.</param>
+        /// <param name="take">Maximum number of versions to return.</param>
+        /// <param name="stateFilter">Optional content state filter.</param>
         /// <returns>A list of versions of the item.</returns>
 		IEnumerable<VersionInfo> GetVersionsOf(ContentItem publishedItem, int skip = 0, int take = 1000, ContentState? stateFilter = null);
 

@@ -138,7 +138,6 @@ namespace N2.Engine
 
         /// <summary>Iterates all assemblies in the AppDomain and if it's name matches the configured patterns add it to our list.</summary>
         /// <param name="previouslyAddedAssemblyNames"></param>
-        /// <param name="assemblies"></param>
         protected IEnumerable<Assembly> GetAssembliesInAppDomain(HashSet<string> previouslyAddedAssemblyNames)
         {
             var assemblies = new List<Assembly>();

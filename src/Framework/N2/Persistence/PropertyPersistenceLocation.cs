@@ -20,7 +20,7 @@ namespace N2.Persistence
         /// <summary>The property is stored as a child to the content item. Only <see cref="ContentItem"/> is allowed for this persistence location.</summary>
         Child,
 
-        /// <summary>The attribute implements <see cref="IValueAccessor"/> and provides get/set functionality.</summary>
+        /// <summary>The attribute implements <see cref="Proxying.IValueAccessor"/> and provides get/set functionality.</summary>
         ValueAccessor
     }
 }

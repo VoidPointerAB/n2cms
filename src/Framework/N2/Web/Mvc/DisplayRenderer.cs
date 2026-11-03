@@ -55,7 +55,7 @@ namespace N2.Web.Mvc
         }
 
         /// <summary>Control whether this property can be edited via the the UI when navigating using the drag-drop mode.</summary>
-        /// <param name="isEditable"></param>
+        /// <param name="hideExceptions">Whether to suppress rendering exceptions.</param>
         /// <returns>The same object.</returns>
         public DisplayRenderer<T> SwallowExceptions(bool hideExceptions = true)
         {

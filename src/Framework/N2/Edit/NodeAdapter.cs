@@ -107,6 +107,7 @@ namespace N2.Edit
 
 		/// <summary>Gets the node representation used to build the tree hierarchy in the management UI.</summary>
 		/// <param name="item">The item to link to.</param>
+		/// <param name="allowDraft">Whether to allow a draft version.</param>
 		/// <returns>Tree node data.</returns>
 		public virtual TreeNode GetTreeNode(ContentItem item, bool allowDraft = true)
 		{
@@ -214,8 +215,7 @@ namespace N2.Edit
 		}
 
 		/// <summary>Gets the children of the given item for the given user interface.</summary>
-		/// <param name="parent">The item whose children to get.</param>
-		/// <param name="userInterface">The interface where the children are displayed.</param>
+		/// <param name="query">The query used to select children.</param>
 		/// <returns>An enumeration of the children.</returns>
 		public virtual IEnumerable<ContentItem> GetChildren(Query query)
 		{

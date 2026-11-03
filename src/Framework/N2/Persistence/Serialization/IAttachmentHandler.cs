@@ -15,6 +15,7 @@ namespace N2.Persistence.Serialization
 
         /// <summary>Imports an attachment into the host system.</summary>
         /// <param name="attachment">The attachment to import.</param>
+        /// <param name="fs">The file system used for the import.</param>
         void Import(IFileSystem fs, Attachment attachment);
     }
 }

@@ -9,7 +9,6 @@ namespace N2.Definitions
     /// Transforms an objects into another shape.
     /// </summary>
     /// <typeparam name="TIn">The type of object that is to be transformed.</typeparam>
-    /// <typeparam name="TOut">The type of object to be transformed into.</typeparam>
     public abstract class AttributeTransformerBase<TIn> : TransformerBase<IUniquelyNamed>
     {
         public override bool IsTransformable(object value)

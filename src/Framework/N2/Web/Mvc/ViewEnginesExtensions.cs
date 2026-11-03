@@ -9,9 +9,12 @@ namespace N2.Web.Mvc
 {
     public static class ViewEnginesExtensions
     {
-        /// <summary>Register the <see cref="ThemeViewEngine"/> which redirects view renderings to a themed counterpart if available.</summary>
+        /// <summary>Register the <see cref="ThemeViewEngine{T}"/> which redirects view renderings to a themed counterpart if available.</summary>
         /// <typeparam name="T">The type of view engine to use as base.</typeparam>
         /// <param name="viewEngines">Placeholder.</param>
+        /// <param name="themeFolderPath">The theme folder path.</param>
+        /// <param name="fileExtensions">The view file extensions.</param>
+        /// <param name="masterExtensions">The master view file extensions.</param>
         /// <returns>The theme view engine that was inserted.</returns>
         public static ThemeViewEngine<T> RegisterThemeViewEngine<T>(this ViewEngineCollection viewEngines, string themeFolderPath, string[] fileExtensions, string[] masterExtensions) 
             where T : VirtualPathProviderViewEngine, new()
@@ -23,9 +26,10 @@ namespace N2.Web.Mvc
             return tve;
         }
 
-        /// <summary>Register the <see cref="ThemeViewEngine"/> which redirects view renderings to a themed counterpart if available.</summary>
+        /// <summary>Register the <see cref="ThemeViewEngine{T}"/> which redirects view renderings to a themed counterpart if available.</summary>
         /// <typeparam name="T">The type of view engine to use as base.</typeparam>
         /// <param name="viewEngines">Placeholder.</param>
+        /// <param name="themeFolderPath">The theme folder path.</param>
         /// <returns>The theme view engine that was inserted.</returns>
         public static ThemeViewEngine<T> RegisterThemeViewEngine<T>(this ViewEngineCollection viewEngines, string themeFolderPath = "~/Themes/") 
             where T : VirtualPathProviderViewEngine, new()

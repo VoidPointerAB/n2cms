@@ -221,7 +221,6 @@ namespace N2.Definitions.Runtime
 
 		/// <summary>
 		/// Specifices usage of an <see cref="System.Web.UI.WebControls.TextBox"/> web control as editor.</summary>
-		/// <example>
 		public static EditableBuilder<EditableTextAttribute> Text(this IPropertyRegistration<string> registration, string title = null)
 		{
 			return registration.Registration.RegisterEditable<EditableTextAttribute>(registration.PropertyName, title);
@@ -229,7 +228,6 @@ namespace N2.Definitions.Runtime
 
 		/// <summary>
 		/// Specifices usage of an <see cref="System.Web.UI.WebControls.TextBox"/> web control as editor for the contents within a html element.</summary>
-		/// <example>
 		public static EditableBuilder<EditableHtmlElementAttribute> HtmlElement(this IPropertyRegistration<string> registration, string tagName, string title = null)
 		{
 			return registration.Registration.RegisterEditable<EditableHtmlElementAttribute>(registration.PropertyName, title)

@@ -47,7 +47,7 @@ namespace N2.Edit
         /// <param name="item">The specific item being added.</param>
         /// <param name="container">The container onto which to add editors.</param>
         /// <param name="user">The user to filter access by.</param>
-        /// <param name="containerNameFilter">Only add editors within this container name.</param>
+        /// <param name="containerTypeFilter">Only add editors within this container type.</param>
         /// <returns>A editor name to control map of added editors.</returns>
         [Obsolete("Use overload with editableNameFilter parameter")]
         public virtual IDictionary<string, Control> AddDefinedEditors(ItemDefinition definition, ContentItem item, Control container, IPrincipal user, Type containerTypeFilter)
@@ -60,7 +60,7 @@ namespace N2.Edit
         /// <param name="item">The specific item being added.</param>
         /// <param name="container">The container onto which to add editors.</param>
         /// <param name="user">The user to filter access by.</param>
-        /// <param name="containerNameFilter">Only add editors with these names.</param>
+        /// <param name="editableNameFilter">Only add editors with these names.</param>
         /// <param name="containerTypeFilter">Only add editors within this container type.</param>
         /// <returns>A editor name to control map of added editors.</returns>
         public virtual IDictionary<string, Control> AddDefinedEditors(ItemDefinition definition, ContentItem item, Control container, IPrincipal user, Type containerTypeFilter, IEnumerable<string> editableNameFilter)
@@ -72,6 +72,7 @@ namespace N2.Edit
         /// <param name="item">The item containing values.</param>
         /// <param name="addedEditors">A map of editors to update (may have been filtered by access).</param>
         /// <param name="user">The user to filter access by.</param>
+        /// <param name="definition">The definition containing editor information.</param>
         public virtual void LoadAddedEditors(ItemDefinition definition, ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
         {
             EditManager.UpdateEditors(definition, item, addedEditors, user);
@@ -81,6 +82,7 @@ namespace N2.Edit
         /// <param name="item">The item to update.</param>
         /// <param name="addedEditors">Editors containing interesting values.</param>
         /// <param name="user">The user to filter access by.</param>
+        /// <param name="definition">The definition containing editor information.</param>
         /// <returns>Detail names that were updated.</returns>
         public virtual string[] UpdateItem(ItemDefinition definition, ContentItem item, IDictionary<string, Control> addedEditors, IPrincipal user)
         {

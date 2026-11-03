@@ -131,7 +131,8 @@ namespace N2.Edit.Versioning
         }
 
         /// <summary>Publishes the given version.</summary>
-        /// <param name="version">The version to publish.</param>
+        /// <param name="versionManager">The version manager.</param>
+        /// <param name="versionToPublish">The version to make current.</param>
         /// <returns>The published (master) version.</returns>
         public static ContentItem MakeMasterVersion(this IVersionManager versionManager, ContentItem versionToPublish)
         {

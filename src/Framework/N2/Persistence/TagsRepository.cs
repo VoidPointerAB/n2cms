@@ -60,6 +60,7 @@ namespace N2.Persistence
         /// <summary>Finds items with a certain tag.</summary>
         /// <param name="ancestor"></param>
         /// <param name="tagGroup"></param>
+        /// <param name="tagName">The HTML tag name.</param>
         /// <returns></returns>
         public virtual IEnumerable<ContentItem> FindTagged(ContentItem ancestor, string tagGroup, string tagName)
         {

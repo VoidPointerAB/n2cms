@@ -46,7 +46,7 @@ namespace N2.Web.Mvc
         }
 
         /// <summary>Gets the controller associated with a given content type.</summary>
-        /// <param name="contentType">The type of content item whose controller to get.</param>
+        /// <param name="type">The type of content item whose controller to get.</param>
         /// <returns>A controller name if a controller was found.</returns>
         public string GetControllerName(Type type)
         {

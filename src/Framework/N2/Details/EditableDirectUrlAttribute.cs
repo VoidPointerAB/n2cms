@@ -30,7 +30,7 @@ using N2.Edit;
 namespace N2.Details
 {
     /// <summary>
-    /// Attribute used to mark the DirectUrl property of an <see cref="Definition.IUrlSource"/> 
+    /// Attribute used to mark the DirectUrl property of an <see cref="N2.Definitions.IUrlSource"/> 
     /// as editable. This editor is predefined to set constraints relating to url sources.
     /// <example>
     /// public class TextPage : ContentItem, N2.Definitions.IUrlSource
@@ -39,6 +39,7 @@ namespace N2.Details
     ///     public virtual string DirectUrl { get; set; }
     /// }
     /// </example>
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class EditableDirectUrlAttribute : EditableTextAttribute
     {

@@ -73,6 +73,7 @@ namespace N2.Persistence
         /// Finds entities from persistence store with matching parameter expression.
         /// </summary>
         /// <param name="parameters">The parameters to match.</param>
+        /// <param name="properties">Names of properties to select.</param>
         /// <returns>Entities with matching values.</returns>
         IEnumerable<IDictionary<string, object>> Select(IParameter parameters, params string[] properties);
 

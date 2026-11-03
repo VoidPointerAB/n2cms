@@ -50,6 +50,7 @@ namespace N2.Engine
         /// <summary>Sets the current container to the given container.</summary>
         /// <param name="container">An previously prepared service container.</param>
         /// <param name="broker"></param>
+        /// <param name="configurer">The container configurer.</param>
         public ContentEngine(IServiceContainer container, EventBroker broker, ContainerConfigurer configurer)
         {
             this.container = container;
@@ -60,6 +61,8 @@ namespace N2.Engine
         /// <param name="config">The configuration to use.</param>
         /// <param name="sectionGroup">The configuration section to retrieve configuration from</param>
         /// <param name="broker">Web ap event provider</param>
+        /// <param name="container">The service container.</param>
+        /// <param name="configurer">The container configurer.</param>
         public ContentEngine(System.Configuration.Configuration config, string sectionGroup, IServiceContainer container, EventBroker broker, ContainerConfigurer configurer)
         {
             if (config == null) throw new ArgumentNullException("config");

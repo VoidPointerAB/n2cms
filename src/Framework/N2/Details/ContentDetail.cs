@@ -394,6 +394,7 @@ namespace N2.Details
         /// <param name="item">The item that will enclose the new detail.</param>
         /// <param name="name">The name of the detail.</param>
         /// <param name="value">The value of the detail. This will determine what type of content detail will be returned.</param>
+        /// <param name="meta">Optional metadata associated with the detail.</param>
         /// <returns>A new content detail whose type depends on the type of value.</returns>
         public static ContentDetail New(ContentItem item, string name, object value, string meta = null)
         {
@@ -416,7 +417,6 @@ namespace N2.Details
         }
 
         /// <summary>Creates a new content detail with multiple values.</summary>
-        /// <param name="enclosingItem">The item that will enclose the new detail.</param>
         /// <param name="name">The name of the detail.</param>
         /// <param name="booleanValue">Boolean value.</param>
         /// <param name="dateTimeValue">Date time value.</param>

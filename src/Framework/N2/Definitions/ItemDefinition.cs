@@ -47,6 +47,7 @@ namespace N2.Definitions
         #region Constructors
         /// <summary>Creates a new a instance of the ItemDefinition class loading the supplied type.</summary>
         /// <param name="itemType">The item type to define.</param>
+        /// <param name="explorer">The attribute explorer used to inspect the item type.</param>
         [Obsolete("Attribute explorer can no longer be passed in", true)]
         public ItemDefinition(Type itemType, AttributeExplorer explorer)
             : this(itemType)

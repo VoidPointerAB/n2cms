@@ -77,7 +77,7 @@ namespace N2.Web
         }
 
         /// <summary>Gets the site with the given start page ID.</summary>
-        /// <param name="startPageId">The id of the site's start page.</param>
+        /// <param name="startPageID">The id of the site's start page.</param>
         /// <returns>The site or null if no start page with that id exists.</returns>
         public Site GetSite(int startPageID)
         {

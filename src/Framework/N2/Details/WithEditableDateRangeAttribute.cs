@@ -39,7 +39,7 @@ namespace N2.Details
             set { betweenText = value; }
         }
 
-        /// <summary>From date placehodlder text. This is equivalent to <see cref="Placeholder"/>.</summary>
+        /// <summary>From date placehodlder text. This is equivalent to <see cref="AbstractEditableAttribute.Placeholder"/>.</summary>
         public string FromDatePlaceholder
         {
             get { return Placeholder; }

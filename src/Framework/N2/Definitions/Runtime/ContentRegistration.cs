@@ -99,8 +99,8 @@ namespace N2.Definitions.Runtime
 
 		public ICollection<ISortableRefiner> Refiners { get; set; }
 		
-		[Obsolete("Use Definition.Title")]
 		/// <summary>Immediately maps to the definition title.</summary>
+		[Obsolete("Use Definition.Title")]
 		public string Title 
 		{
 			get { return Definition.Title; }

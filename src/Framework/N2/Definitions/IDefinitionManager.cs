@@ -76,7 +76,7 @@ namespace N2.Definitions
         IList<ItemDefinition> GetAllowedChildren(ContentItem parentItem, string zoneName, IPrincipal user);
 
         /// <summary>Gets a list of children allowed below a certain type of item and zone by a user.</summary>
-        /// <param name="definition">The parent definition whose allowed children to get.</param>
+        /// <param name="parentDefinition">The parent definition whose allowed children to get.</param>
         /// <param name="zoneName">The zone name.</param>
         /// <param name="user">The user to use for filtering by access rights.</param>
         /// <returns>A list of definitions allowed by the given criterias.</returns>

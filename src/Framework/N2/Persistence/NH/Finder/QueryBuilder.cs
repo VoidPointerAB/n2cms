@@ -442,7 +442,7 @@ namespace N2.Persistence.NH.Finder
         }
 
         /// <summary>Selects items defined by the given criterias and selects only the properties specified by the selector.</summary>
-        /// <param name="selector">An object defining which properties on the item to retrieve.</param>
+        /// <param name="propertyOrDetail">An object defining which properties on the item to retrieve.</param>
         public virtual IEnumerable<object> Select<T>(string propertyOrDetail) where T : ContentItem
         {
             if (Filters != null && Filters.Count > 0)
@@ -460,7 +460,7 @@ namespace N2.Persistence.NH.Finder
         }
 
         /// <summary>Selects items defined by the given criterias and selects only the properties specified by the selector.</summary>
-        /// <param name="selector">An object defining which properties on the item to retrieve.</param>
+        /// <param name="propertiesOrDetails">An object defining which properties on the item to retrieve.</param>
         public virtual IEnumerable<IDictionary<string, object>> Select<T>(params string[] propertiesOrDetails) where T : ContentItem
         {
             if (Filters != null && Filters.Count > 0)

@@ -82,6 +82,8 @@ namespace N2.Edit
         /// <summary>Referesh the selected frames after loading the page.</summary>
         /// <param name="item"></param>
         /// <param name="area"></param>
+        /// <param name="page">The ASP.NET page.</param>
+        /// <param name="force">Whether to force the refresh.</param>
         public static void RefreshFrames(this Page page, ContentItem item, ToolbarArea area, bool force = true)
         {
             string script = GetRefreshFramesScript(page, item, area, force);

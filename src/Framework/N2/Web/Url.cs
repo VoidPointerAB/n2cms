@@ -743,6 +743,7 @@ namespace N2.Web
 
 		/// <summary>Converts a virtual path to a relative path, e.g. /myapp/path/to/a/page.aspx -> ~/path/to/a/page.aspx</summary>
 		/// <param name="path">The virtual path.</param>
+		/// <param name="applicationPath">The application root path.</param>
 		/// <returns>A relative path</returns>
 		public static string ToRelative(string applicationPath, string path)
 		{
@@ -985,7 +986,7 @@ namespace N2.Web
 			return toAppPath + currentPath.Substring(fromAppPath.Length);
 		}
 
-		/// <summary>Gets a replacement used by <see cref="ResolveTokens"/>.</summary>
+		/// <summary>Gets a replacement used by <see cref="ResolveTokens(string)"/>.</summary>
 		/// <param name="token"></param>
 		/// <returns></returns>
 		public static string GetToken(string token)
@@ -995,7 +996,7 @@ namespace N2.Web
 			return value;
 		}
 
-		/// <summary>Adds a replacement used by <see cref="ResolveTokens"/>.</summary>
+		/// <summary>Adds a replacement used by <see cref="ResolveTokens(string)"/>.</summary>
 		/// <param name="token">They token to replace.</param>
 		/// <param name="value">The value to replace the token with.</param>
 		public static void SetToken(string token, string value)
@@ -1047,7 +1048,6 @@ namespace N2.Web
 		/// <summary>
 		/// Removes anything from the url that doesn't affect the content to be returned.
 		/// </summary>
-		/// <param name="url"></param>
 		/// <returns>Normalized url.</returns>
 		public Url GetNormalizedContentUrl()
 		{

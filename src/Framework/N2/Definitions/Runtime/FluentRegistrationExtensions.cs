@@ -14,6 +14,8 @@ namespace N2.Definitions.Runtime
 		/// <summary>Begins registration of a property on the content type.</summary>
 		/// <typeparam name="TProperty">The property type of the property.</typeparam>
 		/// <param name="expression">An expression defining the property, e.g. item =&gt; item.Text</param>
+		/// <param name="registration">The content registration to extend.</param>
+		/// <typeparam name="TModel">The content model type.</typeparam>
 		/// <returns>A property registration object.</returns>
 		public static PropertyRegistration<TModel, TProperty> On<TModel, TProperty>(this IContentRegistration<TModel> registration, Expression<Func<TModel, TProperty>> expression)
 		{

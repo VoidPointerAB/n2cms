@@ -17,7 +17,7 @@ namespace N2.Details
     /// <example>
     /// // model decoration
     /// [EditableTags(ContainerName = Tabs.Advanced)]
-    /// public virtual IEnumerable<string> Tags { get; set; }
+    /// public virtual IEnumerable&lt;string&gt; Tags { get; set; }
     /// 
     /// // locating the tags repository
     /// var repository = N2.Context.Current.Resolve&lt;N2.Persistence.TagsRepository&gt;();

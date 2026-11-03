@@ -20,6 +20,8 @@ namespace N2.Definitions
         /// </summary>
         /// <typeparam name="T">The type of attribute to find.</typeparam>
         /// <param name="typeToExplore">The type to explore</param>
+        /// <param name="onClass">Whether to inspect attributes on the class.</param>
+        /// <param name="onProperties">Whether to inspect attributes on properties.</param>
         /// <returns>A list of attributes defined on the class or it's properties.</returns>
         public IList<T> Find<T>(Type typeToExplore, bool onClass = true, bool onProperties = true) where T : IUniquelyNamed
         {

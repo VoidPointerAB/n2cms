@@ -48,7 +48,6 @@ namespace N2.Definitions.Runtime
 
         /// <summary>Analyzes views in the controllers's view folder looking for dynamic template registrations.</summary>
         /// <typeparam name="T">The type of controller to analyze.</typeparam>
-        /// <param name="engine">The engine from which to resolve the <see cref="ViewTemplateRegistrator"/>.</param>
         /// <returns>The singleton <see cref="ViewTemplateRegistrator"/> instance.</returns>
         public ViewTemplateRegistrator Add<T>() where T : IController
         {
@@ -57,7 +56,6 @@ namespace N2.Definitions.Runtime
 
         /// <summary>Analyzes views in the controllers's view folder looking for dynamic template registrations.</summary>
         /// <typeparam name="T">The type of controller to analyze.</typeparam>
-        /// <param name="engine">The engine from which to resolve the <see cref="ViewTemplateRegistrator"/>.</param>
         /// <param name="viewFileExtension">The type of view file to analyze. By the default .cshtml files are analyzed.</param>
         /// <returns>The singleton <see cref="ViewTemplateRegistrator"/> instance.</returns>
         public ViewTemplateRegistrator Add<T>(string viewFileExtension) where T : IController

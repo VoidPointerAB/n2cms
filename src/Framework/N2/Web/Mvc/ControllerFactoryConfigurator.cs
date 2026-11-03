@@ -21,7 +21,7 @@ namespace N2.Web.Mvc
         }
 
         /// <summary>Sets the controller used when no controller is found.</summary>
-        /// <param name="notFoundControllerSelector">A type selector methosd.</param>
+        /// <param name="expression">A type selector methosd.</param>
         /// <returns>The same object for fluent registration.</returns>
         public virtual ControllerFactoryConfigurator NotFound<T>(Expression<Func<T, ActionResult>> expression) where T : IController
         {

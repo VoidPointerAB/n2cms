@@ -24,7 +24,6 @@ namespace N2.Persistence.Proxying
         /// <summary>Gets the value from the context's instance.</summary>
         /// <param name="context">The context containing the instance to get the value from.</param>
         /// <param name="propertyName">The property whose value to get.</param>
-        /// <param name="value">The value to get.</param>
         /// <returns>The value of the property.</returns>
         object GetValue(ValueAccessorContext context, string propertyName);
         

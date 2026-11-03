@@ -38,6 +38,8 @@ namespace N2.Web.Mvc
         /// File extensions are only assigned when using ASP.NET MVC 3.0 or greater.
         /// </summary>
         /// <param name="fileExtensions"></param>
+        /// <param name="themeFolderPath">The theme folder path.</param>
+        /// <param name="masterExtensions">File extensions used for master pages.</param>
         public ThemeViewEngine(string themeFolderPath, string[] fileExtensions, string[] masterExtensions)
         {
             this.themeFolderPath = themeFolderPath;

@@ -200,6 +200,8 @@ namespace N2.Edit
 
         /// <summary>Gets the url to the edit page where to edit an existing item.</summary>
         /// <param name="item">The item to edit.</param>
+        /// <param name="returnUrl">URL to return to after editing.</param>
+        /// <param name="alternativeEditorPath">Optional path to an alternative editor.</param>
         /// <returns>The url to the edit page</returns>
         public virtual string GetEditExistingItemUrl(ContentItem item, string returnUrl = null, string alternativeEditorPath = null)
         {

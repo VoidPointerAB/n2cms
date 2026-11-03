@@ -37,6 +37,7 @@ namespace N2.Details
         /// <param name="detailName">The detail name on the item.</param>
         /// <param name="cssClass">The css class to applky to the image element.</param>
         /// <param name="altText">Alt alternative text to apply to the image element.</param>
+        /// <param name="preferredSize">The preferred image size.</param>
         /// <returns>An image control.</returns>
         public static Control AddImage(Control container, ContentItem item, string detailName, string preferredSize, string cssClass, string altText)
         {
@@ -61,6 +62,9 @@ namespace N2.Details
         /// <param name="item">The item containing the data.</param>
         /// <param name="detailName">The name of the property to write.</param>
         /// <param name="writer">The writer to write to.</param>
+        /// <param name="preferredSize">The preferred image size.</param>
+        /// <param name="alt">Alternative text for the image.</param>
+        /// <param name="cssClass">The CSS class for the image.</param>
         public static void WriteImage(ContentItem item, string detailName, string preferredSize, string alt, string cssClass, System.IO.TextWriter writer)
         {
             WriteImage(item, detailName, string.IsNullOrEmpty(preferredSize) ? new string[0] : new string[] { preferredSize }, alt, cssClass, writer);
@@ -70,6 +74,9 @@ namespace N2.Details
         /// <param name="item">The item containing the data.</param>
         /// <param name="detailName">The name of the property to write.</param>
         /// <param name="writer">The writer to write to.</param>
+        /// <param name="preferredSizes">Preferred image sizes.</param>
+        /// <param name="alt">Alternative text for the image.</param>
+        /// <param name="cssClass">The CSS class for the image.</param>
         public static void WriteImage(ContentItem item, string detailName, IEnumerable<string> preferredSizes, string alt, string cssClass, System.IO.TextWriter writer)
         {
             string imageUrl = item[detailName] as string;

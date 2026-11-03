@@ -12,6 +12,7 @@ namespace N2.Details
 		/// <summary>Initializes a new instance of the EditableHtmlElementAttribute class.</summary>
 		/// <param name="title">The label displayed to editors</param>
 		/// <param name="sortOrder">The order of this editor</param>
+		/// <param name="tagName">The HTML tag name.</param>
 		public EditableHtmlElementAttribute(string title, string tagName = "span", int sortOrder = 0)
 			: base(title, sortOrder)
 		{

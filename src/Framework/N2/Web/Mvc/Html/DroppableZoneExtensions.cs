@@ -8,10 +8,10 @@ namespace N2.Web.Mvc.Html
     public static class DroppableZoneExtensions
     {
         /// <summary>
-        /// Gets the HTML for all items in the Zone of the given name from the item held by the <see cref="container" />.
+        /// Gets the HTML for all items in the Zone of the given name from the current item.
         /// </summary>
-        /// <remarks>This extension method at the moment does not implement the drag & drop functionality.</remarks>
-        /// <param name="container"></param>
+        /// <remarks>This extension method at the moment does not implement the drag &amp; drop functionality.</remarks>
+        /// <param name="helper">The HTML helper.</param>
         /// <param name="zoneName"></param>
         /// <returns></returns>
         public static DroppableZoneHelper DroppableZone(this HtmlHelper helper, string zoneName)
@@ -20,10 +20,11 @@ namespace N2.Web.Mvc.Html
         }
 
         /// <summary>
-        /// Gets the HTML for all items in the Zone of the given name from the <see cref="item" /> given.
+        /// Gets the HTML for all items in the Zone of the given name from the <paramref name="item" /> given.
         /// </summary>
-        /// <remarks>This extension method at the moment does not implement the drag & drop functionality.</remarks>
-        /// <param name="container"></param>
+        /// <remarks>This extension method at the moment does not implement the drag &amp; drop functionality.</remarks>
+        /// <param name="helper">The HTML helper.</param>
+        /// <param name="item">The content item.</param>
         /// <param name="zoneName"></param>
         /// <returns></returns>
         public static DroppableZoneHelper DroppableZone(this HtmlHelper helper, ContentItem item, string zoneName)

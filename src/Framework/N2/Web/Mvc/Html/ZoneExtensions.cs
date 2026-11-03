@@ -5,7 +5,7 @@ namespace N2.Web.Mvc.Html
     public static class ZoneExtensions
     {
         /// <summary>
-        /// Gets the HTML for all items in the Zone of the given name from the item held by the <see cref="container" />.
+        /// Gets the HTML for all items in the Zone of the given name from the current item.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="zoneName"></param>
@@ -16,7 +16,7 @@ namespace N2.Web.Mvc.Html
         }
 
         /// <summary>
-        /// Gets the HTML for all items in the Zone of the given name from the <see cref="item" /> given.
+        /// Gets the HTML for all items in the Zone of the given name from the <paramref name="item" /> given.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="zoneName"></param>
@@ -28,7 +28,7 @@ namespace N2.Web.Mvc.Html
         }
 
         /// <summary>
-        /// Renders all items in the Zone of the given name from the item held by the <see cref="container" />.
+        /// Renders all items in the Zone of the given name from the current item.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="zoneName"></param>
@@ -39,7 +39,7 @@ namespace N2.Web.Mvc.Html
         }
 
         /// <summary>
-        /// Renders all items in the Zone of the given name from the <see cref="item" /> given.
+        /// Renders all items in the Zone of the given name from the <paramref name="item" /> given.
         /// </summary>
         /// <param name="helper"></param>
         /// <param name="zoneName"></param>

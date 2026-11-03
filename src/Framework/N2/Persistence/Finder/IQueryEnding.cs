@@ -13,8 +13,8 @@ namespace N2.Persistence.Finder
         /// <summary>Orders result by the given expression.</summary>
         IOrderBy OrderBy { get; }
 
-        [Obsolete("Querying previous versions is no longer supported", true)]
         /// <summary>Defines wether previous versions are included in the query. By default previous versions are excluded.</summary>
+        [Obsolete("Querying previous versions is no longer supported", true)]
         IQueryEnding PreviousVersions(VersionOption option);
 
         /// <summary>Sets the first result index for the query to return.</summary>

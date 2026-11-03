@@ -54,6 +54,7 @@ namespace N2.Web
 
         /// <summary>Provides the id for the list item elements in the resulting html.</summary>
         /// <param name="ulIdProvider">Returns an id for the list element given a content item and hierarchy depth.</param>
+        /// <param name="liIdProvider">Provides an ID for each list item.</param>
         /// <returns>The same <see cref="Tree"/> instance.</returns>
         public Tree IdProvider(Func<HierarchyNode<ContentItem>, string> ulIdProvider, Func<HierarchyNode<ContentItem>, string> liIdProvider)
         {

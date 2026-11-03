@@ -124,20 +124,17 @@ namespace N2.Persistence.Search
             return new Query { Text = textQuery };
         }
 
-        /// <summary>Gets a search query for the given search expression.</summary>
-        /// <param name="textQuery">The text to search for.</param>
+        /// <summary>Gets a search query for the given content types.</summary>
+        /// <param name="types">The content types to include.</param>
         /// <returns>A <see cref="Query"/> object.</returns>
         public static Query For(params Type[] types)
         {
             return new Query { Types = types.Select(t => t.Name).ToArray() };
         }
 
-        /// <summary>
-        /// Allows querying for specific 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="comparisons"></param>
-        /// <returns></returns>
+        /// <summary>Gets a search query for items of the specified type.</summary>
+        /// <typeparam name="T">The content type to include.</typeparam>
+        /// <returns>A typed search query.</returns>
         public static Query<T> For<T>()
         {
             return new Query<T> { Types = new[] { typeof(T).Name } };
@@ -153,7 +150,7 @@ namespace N2.Persistence.Search
         }
 
         /// <summary>Restricts the search query to items below the given item.</summary>
-        /// <param name="ancestor">The ancestor below which to find items.</param>
+        /// <param name="ancestorTrail">The ancestor below which to find items.</param>
         /// <returns>The query itself.</returns>
         public Query Below(string ancestorTrail)
         {
@@ -227,7 +224,7 @@ namespace N2.Persistence.Search
         }
 
         /// <summary>Restrict the search results to certain types.</summary>
-        /// <param name="types">The types the search result should belong to.</param>
+        /// <param name="typeNames">The types the search result should belong to.</param>
         /// <returns>The query itself.</returns>
         public Query OfType(params string[] typeNames)
         {

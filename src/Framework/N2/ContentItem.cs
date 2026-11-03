@@ -375,7 +375,7 @@ namespace N2
 		/// <summary>
 		///     Gets or sets all a collection of child items of this item ignoring permissions. If you want the children the
 		///     current user has permission to use <see cref="GetChildPagesUnfiltered()" /> and
-		///     <see cref="GetChildPartsUnfiltered()" /> instead.
+		///     <see cref="GetChildPartsUnfiltered(string)" /> instead.
 		/// </summary>
 		[NonInterceptable]
 		public virtual IContentItemList<ContentItem> Children
@@ -1081,6 +1081,8 @@ namespace N2
 
 		/// <summary>Creates a copy of this item including details and authorized roles resetting ID.</summary>
 		/// <param name="includeChildren">Wether this item's child items also should be cloned.</param>
+		/// <param name="includeIdentifier">Whether to include the item identifier in the clone.</param>
+		/// <param name="includeParent">Whether to include the parent in the clone.</param>
 		/// <returns>The cloned item with or without cloned child items.</returns>
 		[NonInterceptable]
 		public virtual ContentItem Clone(bool includeChildren = false, bool includeIdentifier = false,

@@ -78,7 +78,8 @@ namespace N2.Collections
         }
 
         /// <summary>Filters by all the provided filters.</summary>
-        /// <param name="filters">The filters to aggregate.</param>
+        /// <param name="first">The first filter to apply.</param>
+        /// <param name="alsoRequired">Additional required filters.</param>
         /// <returns>A filter.</returns>
         public ItemFilter All(ItemFilter first, IEnumerable<ItemFilter> alsoRequired)
         {
@@ -87,6 +88,7 @@ namespace N2.Collections
 
         /// <summary>Filters by all the provided filters.</summary>
         /// <param name="filters">The filters to aggregate.</param>
+        /// <param name="first">The first filter to apply.</param>
         /// <returns>A filter.</returns>
         public ItemFilter Any(ItemFilter first, IEnumerable<ItemFilter> filters)
         {
@@ -225,7 +227,7 @@ namespace N2.Collections
         }
 
         /// <summary>Inverses the given filter.</summary>
-        /// <param name="itemFilter">The filter to inverse.</param>
+        /// <param name="filterToInverse">The filter to inverse.</param>
         /// <returns>A filter that does the inverse of the given filter.</returns>
         public ItemFilter Not(ItemFilter filterToInverse)
         {

@@ -49,6 +49,9 @@ namespace N2.Persistence.Search
         /// <param name="query">The query text.</param>
         /// <param name="skip">A number of items to skip.</param>
         /// <param name="take">A number of items to take.</param>
+        /// <param name="onlyPages">Whether to restrict results to pages.</param>
+        /// <param name="types">Content types to include.</param>
+        /// <param name="totalRecords">The total number of matching records.</param>
         /// <returns>An enumeration of items matching the search query.</returns>
         public IEnumerable<ContentItem> Search(string ancestor, string query, int skip, int take, bool? onlyPages, string[] types, out int totalRecords)
         {

@@ -156,12 +156,12 @@ namespace N2.Web
             return data;
         }
 
-        [Obsolete("Use FindPath")]
         /// <summary>Finds the path associated with an url.</summary>
         /// <param name="url">The url to the template to locate.</param>
         /// <param name="startNode">The node to start finding path from if none supplied will start from StartNode</param>
         /// <param name="remainingPath">The remaining path to search</param>
         /// <returns>A PathData object. If no template was found the object will have empty properties.</returns>
+        [Obsolete("Use FindPath")]
         public PathData ResolvePath(Url url, ContentItem startNode = null, string remainingPath = null)
         {
             return FindPath(url, startNode, remainingPath);

@@ -65,13 +65,13 @@ namespace N2.Web
         }
 
         /// <summary>
-        /// Creates slug from <see cref="text"/>
+        /// Creates slug from <paramref name="text"/>
         /// </summary>
         /// <param name="text">
         /// The text.
         /// </param>
         /// <returns>
-        /// Slug created from <see cref="text"/>
+        /// Slug created from <paramref name="text"/>
         /// </returns>
         public virtual string Create(string text)
         {
@@ -116,7 +116,7 @@ namespace N2.Web
         /// True if produced slug should be lowercase
         /// </param>
         /// <returns>
-        /// Slug generated from <see cref="text"/>.
+        /// Slug generated from <paramref name="text"/>.
         /// </returns>
         private static string Create(
             string text,

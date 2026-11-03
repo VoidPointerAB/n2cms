@@ -45,8 +45,8 @@ namespace N2.Web.Drawing
         public const string Separator = "_";
 
         /// <summary>Gets the path of a resized version of the image, if it exists, otherwise the given image url.</summary>
-        /// <param name="url">The base url of an image.</param>
-        /// <param name="resizedSuffix">The size suffix to append before the extension.</param>
+        /// <param name="imageUrl">The base url of an image.</param>
+        /// <param name="preferredSize">The size suffix to append before the extension.</param>
         /// <returns>A resized image url if it exists.</returns>
         public static string GetExistingImagePath(string imageUrl, string preferredSize)
         {
@@ -54,8 +54,9 @@ namespace N2.Web.Drawing
         }
 
         /// <summary>Gets the path of a resized version of the image, if it exists, otherwise the given image url.</summary>
-        /// <param name="url">The base url of an image.</param>
-        /// <param name="resizedSuffix">The size suffix to append before the extension.</param>
+        /// <param name="imageUrl">The base url of an image.</param>
+        /// <param name="preferredSize">The size suffix to append before the extension.</param>
+        /// <param name="preferredSizeExists">Whether an image with the preferred size exists.</param>
         /// <returns>A resized image url if it exists.</returns>
         public static string GetExistingImagePath(string imageUrl, string preferredSize, out bool preferredSizeExists)
         {
@@ -64,8 +65,8 @@ namespace N2.Web.Drawing
 
         /// <summary>Gets the path of a resized version of the image, if it exists, otherwise the given image url.</summary>
         /// <param name="fs">The file system used to check file existence.</param>
-        /// <param name="url">The base url of an image.</param>
-        /// <param name="resizedSuffix">The size suffix to append before the extension.</param>
+        /// <param name="imageUrl">The base url of an image.</param>
+        /// <param name="preferredSize">The size suffix to append before the extension.</param>
         /// <returns>A resized image url if it exists.</returns>
         public static string GetExistingImagePath(this IFileSystem fs, string imageUrl, string preferredSize)
         {
@@ -75,8 +76,9 @@ namespace N2.Web.Drawing
 
         /// <summary>Gets the path of a resized version of the image, if it exists, otherwise the given image url.</summary>
         /// <param name="fs">The file system used to check file existence.</param>
-        /// <param name="url">The base url of an image.</param>
-        /// <param name="resizedSuffix">The size suffix to append before the extension.</param>
+        /// <param name="imageUrl">The base url of an image.</param>
+        /// <param name="preferredSize">The size suffix to append before the extension.</param>
+        /// <param name="preferredSizeExists">Whether an image with the preferred size exists.</param>
         /// <returns>A resized image url if it exists.</returns>
         public static string GetExistingImagePath(this IFileSystem fs, string imageUrl, string preferredSize, out bool preferredSizeExists)
         {

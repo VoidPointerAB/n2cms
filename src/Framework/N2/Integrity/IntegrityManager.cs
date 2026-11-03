@@ -25,7 +25,7 @@ namespace N2.Integrity
         #region Constructor
         /// <summary>Creates a new instance of the <see cref="IntegrityManager"/>.</summary>
         /// <param name="definitions">The definition manager.</param>
-        /// <param name="finder"></param>
+        /// <param name="repository"></param>
         /// <param name="urlParser"></param>
         public IntegrityManager(Definitions.IDefinitionManager definitions, IContentItemRepository repository, Web.IUrlParser urlParser)
         {

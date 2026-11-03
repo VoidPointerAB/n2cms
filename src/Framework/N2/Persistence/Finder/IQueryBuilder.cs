@@ -50,8 +50,8 @@ namespace N2.Persistence.Finder
         /// <summary>Find items with a certain visibility.</summary>
         ICriteria<bool> Visible { get; }
 
-        [Obsolete("Querying version is no longer supported")]
         /// <summary>Find previous versions of an item.</summary>
+        [Obsolete("Querying version is no longer supported")]
         ICriteria<ContentItem> VersionOf { get; }
 
         /// <summary>Find items by who saved them.</summary>
@@ -73,7 +73,7 @@ namespace N2.Persistence.Finder
         ICriteria<Type> Type { get; }
 
         /// <summary>Finds items with a [Persistable] property named.</summary>
-        /// <param name="propertyName">The name of the property.</param>
+        /// <param name="persistablePropertyName">The name of the property.</param>
         IPropertyCriteria Property(string persistablePropertyName);
     }
 }

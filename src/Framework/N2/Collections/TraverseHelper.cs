@@ -71,6 +71,7 @@ namespace N2.Collections
         /// <summary>Ancestors of a given item.</summary>
         /// <param name="item"></param>
         /// <param name="filter"></param>
+        /// <param name="lastAncestor">The last ancestor to include.</param>
         /// <returns></returns>
         public IEnumerable<ContentItem> Ancestors(ContentItem item = null, ItemFilter filter = null, ContentItem lastAncestor = null)
         {
@@ -98,7 +99,6 @@ namespace N2.Collections
         }
 
         /// <summary>Children of the current item.</summary>
-        /// <param name="filter"></param>
         /// <returns></returns>
         public IEnumerable<ContentItem> Children()
         {
@@ -198,6 +198,7 @@ namespace N2.Collections
 
         /// <summary>Parts in a given zone below the current item.</summary>
         /// <param name="zoneName"></param>
+        /// <param name="parent">The parent whose parts to find.</param>
         /// <returns></returns>
         public IEnumerable<ContentItem> ChildParts(ContentItem parent, string zoneName)
         {
@@ -242,8 +243,7 @@ namespace N2.Collections
         }
 
         /// <summary>Siblings of a given item.</summary>
-        /// <param name="item"></param>
-        /// <param name="filter"></param>
+        /// <param name="sibling"></param>
         /// <returns></returns>
         public IEnumerable<ContentItem> Siblings(ContentItem sibling)
         {
@@ -251,7 +251,6 @@ namespace N2.Collections
         }
 
         /// <summary>Siblings of the current item.</summary>
-        /// <param name="item"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
         public IEnumerable<ContentItem> Siblings(ItemFilter filter)
@@ -321,6 +320,7 @@ namespace N2.Collections
 
         /// <summary>The item at a given level from the start page.</summary>
         /// <param name="levelIndex"></param>
+        /// <param name="fallbackToClosest">Return the closest ancestor if the requested level is unavailable.</param>
         /// <returns></returns>
         public ContentItem AncestorAtLevel(int levelIndex, bool fallbackToClosest = false)
         {

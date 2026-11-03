@@ -40,12 +40,12 @@ namespace N2.Web
         /// <returns>A PathData object. If no template was found the object will have empty properties.</returns>
         PathData FindPath(Url url, ContentItem startNode = null, string remainingPath = null);
 
-        [Obsolete("Use FindPath")]
         /// <summary>Finds the content item and the template associated with an url.</summary>
         /// <param name="url">The url to the template to locate.</param>
         /// <param name="startNode">The node to start finding path from if none supplied will start from StartNode</param>
         /// <param name="remainingPath">The remaining path to search</param>
         /// <returns>A PathData object. If no template was found the object will have empty properties.</returns>
+        [Obsolete("Use FindPath")]
         PathData ResolvePath(Url url, ContentItem startNode = null, string remainingPath = null);
 
         /// <summary>Finds an item by traversing names from the starting point root.</summary>

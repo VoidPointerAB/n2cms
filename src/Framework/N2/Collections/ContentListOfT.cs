@@ -180,19 +180,19 @@ namespace N2.Collections
 
         /// <summary>Determines whether the list contains an element with the specified key.</summary>
         /// <param name="key">The key to locate in the list.</param>
-        /// <returns>true if the System.Collections.Generic.IDictionary<TKey,TValue> contains an element with the key; otherwise, false.</returns>
+        /// <returns>true if the System.Collections.Generic.IDictionary&lt;TKey,TValue&gt; contains an element with the key; otherwise, false.</returns>
         public bool ContainsKey(string key)
         {
             return Inner.Any(i => i.Name == key);
         }
 
-        /// <summary>Gets an System.Collections.Generic.ICollection<T> containing the keys of the System.Collections.Generic.IDictionary<TKey,TValue>.</summary>
+        /// <summary>Gets an System.Collections.Generic.ICollection&lt;T&gt; containing the keys of the System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.</summary>
         public ICollection<string> Keys
         {
             get { return Inner.Select(i => i.Name).ToList(); }
         }
 
-        /// <summary>Removes the element with the specified key from the System.Collections.Generic.IDictionary<TKey,TValue>.</summary>
+        /// <summary>Removes the element with the specified key from the System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.</summary>
         /// <param name="key">The key of the element to remove.</param>
         /// <returns>true if the element is successfully removed; otherwise, false. This method also returns false if key was not found in the original list.</returns>
         public bool Remove(string key)
@@ -213,7 +213,7 @@ namespace N2.Collections
             return value != null;
         }
 
-        /// <summary>Gets an System.Collections.Generic.ICollection<T> containing the values in the System.Collections.Generic.IDictionary<TKey,TValue>.</summary>
+        /// <summary>Gets an System.Collections.Generic.ICollection&lt;T&gt; containing the values in the System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.</summary>
         public ICollection<T> Values
         {
             get { return Inner.ToList(); }

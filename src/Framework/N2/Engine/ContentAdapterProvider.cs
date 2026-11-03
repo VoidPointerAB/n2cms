@@ -69,7 +69,7 @@ namespace N2.Engine
         }
 
         /// <summary>Removes an adapter from the list of adapters.</summary>
-        /// <param name="descriptorsToAdd">The adapter to add.</param>
+        /// <param name="adaptersToRemove">The adapters to unregister.</param>
         public void UnregisterAdapter(params AbstractContentAdapter[] adaptersToRemove)
         {
             lock (this)

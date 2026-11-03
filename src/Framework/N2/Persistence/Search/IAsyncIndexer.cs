@@ -29,7 +29,7 @@ namespace N2.Persistence.Search
         void Reindex(int itemID, bool affectsChildren);
 
         /// <summary>Reindexes an item and it's descendants.</summary>
-        /// <param name="root"></param>
+        /// <param name="rootID"></param>
         /// <param name="clearBeforeReindex"></param>
         void ReindexDescendants(int rootID, bool clearBeforeReindex);
     }

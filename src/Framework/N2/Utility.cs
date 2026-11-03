@@ -523,6 +523,7 @@ namespace N2
 		/// <param name="item">The item affected by this operation.</param>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="finalAction">The default action to execute if the event didn't signal cancel.</param>
+		/// <param name="postHandlers">Handlers invoked after the action.</param>
 		public static void InvokeEvent(EventHandler<CancellableItemEventArgs> preHandlers, ContentItem item, object sender,
 			Action<ContentItem> finalAction, EventHandler<ItemEventArgs> postHandlers)
 		{
@@ -554,6 +555,7 @@ namespace N2
 		/// <param name="destination">The destination of this operation.</param>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="finalAction">The default action to execute if the event didn't signal cancel.</param>
+		/// <param name="postHandler">Handler invoked after the action.</param>
 		/// <returns>The result of the action (if any).</returns>
 		public static ContentItem InvokeEvent(EventHandler<CancellableDestinationEventArgs> handler, object sender,
 			ContentItem source, ContentItem destination, Func<ContentItem, ContentItem, ContentItem> finalAction,
@@ -723,6 +725,7 @@ namespace N2
 
 		/// <summary>Renders a file size (in bytes) in MB (base 10) or MiB (base 2).</summary>
 		/// <param name="p">File size in bytes</param>
+		/// <param name="base10">Whether to use decimal file size units.</param>
 		/// <returns></returns>
 		public static string GetFileSizeString(long p, bool base10)
 		{

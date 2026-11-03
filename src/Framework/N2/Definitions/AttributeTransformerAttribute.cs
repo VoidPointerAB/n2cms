@@ -11,7 +11,7 @@ namespace N2.Definitions
     /// </summary>
     /// <example>
     /// [AttributeTransformer]
-    /// public class ExampleTransformer : AttributeTransformerBase<EditableTextAttribute>
+    /// public class ExampleTransformer : AttributeTransformerBase&lt;EditableTextAttribute&gt;
     /// {
     ///     public override IUniquelyNamed Transform(EditableTextAttribute value)
     ///     {

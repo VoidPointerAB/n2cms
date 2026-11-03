@@ -44,6 +44,7 @@ namespace N2.Edit.Web
         /// <summary>Referesh the selected frames after loading the page.</summary>
         /// <param name="item"></param>
         /// <param name="area"></param>
+        /// <param name="force">Whether to force the refresh.</param>
         protected virtual void Refresh(ContentItem item, ToolbarArea area, bool force = true)
         {
             Page.RefreshFrames(item, area, force);

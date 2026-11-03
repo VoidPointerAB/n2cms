@@ -324,7 +324,7 @@ namespace N2.Web.Mvc.Html
             }
 
             /// <summary>Is used to instruct the control panel helper not to refresh navigation to the current page.</summary>
-            /// <param name="refreshNavigation"></param>
+            /// <param name="forceRefreshNavigation"></param>
             /// <returns></returns>
             public ControlPanelHelper ForceRefreshNavigation(bool forceRefreshNavigation = true)
             {

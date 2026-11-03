@@ -66,7 +66,7 @@ namespace N2.Collections
 
         /// <summary>Initializes an instance of the ItemList class adding the items matching the supplied filter.</summary>
         /// <param name="items">The full enumeration of items to initialize with.</param>
-        /// <param name="filters">The filters that should be applied to the full collection.</param>
+        /// <param name="filter">The filters that should be applied to the full collection.</param>
         public ItemList(ICollection<T> items, ItemFilter filter)
             : this()
         {

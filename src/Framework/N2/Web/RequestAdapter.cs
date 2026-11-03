@@ -66,6 +66,7 @@ namespace N2.Web
 
         /// <summary>Inject the current page into the page handler.</summary>
         /// <param name="handler">The handler executing the request.</param>
+        /// <param name="path">The path of the content item.</param>
         public virtual void InjectCurrentPage(PathData path, IHttpHandler handler)
         {
             IContentTemplate template = handler as IContentTemplate;
@@ -77,6 +78,7 @@ namespace N2.Web
 
         /// <summary>Authorize the user against the current content item. Throw an exception if not authorized.</summary>
         /// <param name="user">The user for which to authorize the request.</param>
+        /// <param name="path">The path of the content item.</param>
         public virtual void AuthorizeRequest(PathData path, IPrincipal user)
         {
             SecurityEnforcer.AuthorizeRequest(user, path.CurrentPage, Permission.Read);

@@ -732,7 +732,7 @@ namespace TinyIoC
             /// Make registration a singleton (single instance) if possible
             /// </summary>
             /// <returns>RegisterOptions</returns>
-            /// <exception cref="TinyIoCInstantiationTypeException"></exception>
+            /// <exception cref="TinyIoCRegistrationException"></exception>
             public RegisterOptions AsSingleton()
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
@@ -747,7 +747,7 @@ namespace TinyIoC
             /// Make registration multi-instance if possible
             /// </summary>
             /// <returns>RegisterOptions</returns>
-            /// <exception cref="TinyIoCInstantiationTypeException"></exception>
+            /// <exception cref="TinyIoCRegistrationException"></exception>
             public RegisterOptions AsMultiInstance()
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
@@ -762,7 +762,7 @@ namespace TinyIoC
             /// Make registration hold a weak reference if possible
             /// </summary>
             /// <returns>RegisterOptions</returns>
-            /// <exception cref="TinyIoCInstantiationTypeException"></exception>
+            /// <exception cref="TinyIoCRegistrationException"></exception>
             public RegisterOptions WithWeakReference()
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
@@ -777,7 +777,7 @@ namespace TinyIoC
             /// Make registration hold a strong reference if possible
             /// </summary>
             /// <returns>RegisterOptions</returns>
-            /// <exception cref="TinyIoCInstantiationTypeException"></exception>
+            /// <exception cref="TinyIoCRegistrationException"></exception>
             public RegisterOptions WithStrongReference()
             {
                 var currentFactory = _Container.GetCurrentFactory(_Registration);
@@ -861,7 +861,7 @@ namespace TinyIoC
             /// Make registration a singleton (single instance) if possible
             /// </summary>
             /// <returns>RegisterOptions</returns>
-            /// <exception cref="TinyIoCInstantiationTypeException"></exception>
+            /// <exception cref="TinyIoCRegistrationException"></exception>
             public MultiRegisterOptions AsSingleton()
             {
                 _RegisterOptions = ExecuteOnAllRegisterOptions(ro => ro.AsSingleton());
@@ -872,7 +872,7 @@ namespace TinyIoC
             /// Make registration multi-instance if possible
             /// </summary>
             /// <returns>MultiRegisterOptions</returns>
-            /// <exception cref="TinyIoCInstantiationTypeException"></exception>
+            /// <exception cref="TinyIoCRegistrationException"></exception>
             public MultiRegisterOptions AsMultiInstance()
             {
                 _RegisterOptions = ExecuteOnAllRegisterOptions(ro => ro.AsMultiInstance());
@@ -1163,7 +1163,7 @@ namespace TinyIoC
         /// <summary>
         /// Creates/replaces a container class registration with default options.
         /// </summary>
-        /// <typeparam name="RegisterImplementation">Type to register</typeparam>
+        /// <typeparam name="RegisterType">Type to register</typeparam>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType>()
             where RegisterType : class
@@ -1174,7 +1174,7 @@ namespace TinyIoC
         /// <summary>
         /// Creates/replaces a named container class registration with default options.
         /// </summary>
-        /// <typeparam name="RegisterImplementation">Type to register</typeparam>
+        /// <typeparam name="RegisterType">Type to register</typeparam>
         /// <param name="name">Name of registration</param>
         /// <returns>RegisterOptions for fluent API</returns>
         public RegisterOptions Register<RegisterType>(string name)
@@ -1598,7 +1598,6 @@ namespace TinyIoC
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
-        /// <param name="name">Name of registration</param>
         /// <returns>Bool indicating whether the type can be resolved</returns>
         public bool CanResolve(Type resolveType)
         {
@@ -1611,6 +1610,7 @@ namespace TinyIoC
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
+        /// <param name="name">Name of registration</param>
         /// <returns>Bool indicating whether the type can be resolved</returns>
         private bool CanResolve(Type resolveType, string name)
         {
@@ -1623,7 +1623,6 @@ namespace TinyIoC
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
         /// <param name="resolveType">Type to resolve</param>
-        /// <param name="name">Name of registration</param>
         /// <param name="options">Resolution options</param>
         /// <returns>Bool indicating whether the type can be resolved</returns>
         public bool CanResolve(Type resolveType, ResolveOptions options)
@@ -1719,7 +1718,6 @@ namespace TinyIoC
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
-        /// <param name="name">Name of registration</param>
         /// <returns>Bool indicating whether the type can be resolved</returns>
         public bool CanResolve<ResolveType>()
             where ResolveType : class
@@ -1746,7 +1744,6 @@ namespace TinyIoC
         /// Note: Resolution may still fail if user defined factory registations fail to construct objects when called.
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
-        /// <param name="name">Name of registration</param>
         /// <param name="options">Resolution options</param>
         /// <returns>Bool indicating whether the type can be resolved</returns>
         public bool CanResolve<ResolveType>(ResolveOptions options)
@@ -1845,7 +1842,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the default options
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
         public bool TryResolve(Type resolveType, out object resolvedType)
@@ -1865,7 +1862,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the given options
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
@@ -1886,7 +1883,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the default options and given name
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="name">Name of registration</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
@@ -1907,7 +1904,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the given options and name
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="name">Name of registration</param>
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
@@ -1929,7 +1926,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the default options and supplied constructor parameters
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="parameters">User specified constructor parameters</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
         /// <returns>True if resolved sucessfully, false otherwise</returns>
@@ -1950,7 +1947,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the default options and supplied name and constructor parameters
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="name">Name of registration</param>
         /// <param name="parameters">User specified constructor parameters</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
@@ -1972,8 +1969,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the supplied options and constructor parameters
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
-        /// <param name="name">Name of registration</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="parameters">User specified constructor parameters</param>
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
@@ -1995,7 +1991,7 @@ namespace TinyIoC
         /// <summary>
         /// Attemps to resolve a type using the supplied name, options and constructor parameters
         /// </summary>
-        /// <param name="ResolveType">Type to resolve</param>
+        /// <param name="resolveType">Type to resolve</param>
         /// <param name="name">Name of registration</param>
         /// <param name="parameters">User specified constructor parameters</param>
         /// <param name="options">Resolution options</param>
@@ -2152,7 +2148,6 @@ namespace TinyIoC
         /// Attemps to resolve a type using the supplied options and constructor parameters
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolve</typeparam>
-        /// <param name="name">Name of registration</param>
         /// <param name="parameters">User specified constructor parameters</param>
         /// <param name="options">Resolution options</param>
         /// <param name="resolvedType">Resolved type or default if resolve fails</param>
@@ -2199,7 +2194,7 @@ namespace TinyIoC
         /// <summary>
         /// Returns all registrations of a type
         /// </summary>
-        /// <param name="ResolveType">Type to resolveAll</param>
+        /// <param name="resolveType">Type to resolveAll</param>
         /// <param name="includeUnnamed">Whether to include un-named (default) registrations</param>
         /// <returns>IEnumerable</returns>
         public IEnumerable<object> ResolveAll(Type resolveType, bool includeUnnamed)
@@ -2210,7 +2205,7 @@ namespace TinyIoC
         /// <summary>
         /// Returns all registrations of a type, both named and unnamed
         /// </summary>
-        /// <param name="ResolveType">Type to resolveAll</param>
+        /// <param name="resolveType">Type to resolveAll</param>
         /// <returns>IEnumerable</returns>
         public IEnumerable<object> ResolveAll(Type resolveType)
         {
@@ -2233,7 +2228,6 @@ namespace TinyIoC
         /// Returns all registrations of a type, both named and unnamed
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolveAll</typeparam>
-        /// <param name="includeUnnamed">Whether to include un-named (default) registrations</param>
         /// <returns>IEnumerable</returns>
         public IEnumerable<ResolveType> ResolveAll<ResolveType>()
             where ResolveType : class
@@ -2245,7 +2239,6 @@ namespace TinyIoC
         /// Returns all registrations of a assignable to a type, both named and unnamed
         /// </summary>
         /// <typeparam name="ResolveType">Type to resolveAll</typeparam>
-        /// <param name="includeUnnamed">Whether to include un-named (default) registrations</param>
         /// <returns>IEnumerable</returns>
         public IEnumerable<ResolveType> ResolveAllAssignableFrom<ResolveType>()
         {

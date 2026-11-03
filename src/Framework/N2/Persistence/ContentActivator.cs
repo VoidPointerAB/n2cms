@@ -44,6 +44,8 @@ namespace N2.Persistence
         /// <param name="itemType">Type of item to create</param>
         /// <param name="parentItem">Parent of the item to create.</param>
         /// <param name="templateKey">The type of template the item is associated with.</param>
+        /// <param name="asProxy">Whether to create a proxy.</param>
+        /// <param name="invokeBehaviors">Whether to invoke item behaviors.</param>
         /// <returns>A new instance of an item.</returns>
         public virtual ContentItem CreateInstance(Type itemType, ContentItem parentItem, string templateKey, bool asProxy = false, bool invokeBehaviors = true)
         {
@@ -95,7 +97,7 @@ namespace N2.Persistence
             interceptor.Initialize(contentTypes);
         }
 
-        /// <summary>Notifies subscriber that an item was created through a <see cref="CreateInstance"/> method.</summary>
+        /// <summary>Notifies subscriber that an item was created through a <see cref="CreateInstance(Type, ContentItem)"/> method.</summary>
         public event EventHandler<ItemEventArgs> ItemCreated;
     }
 }

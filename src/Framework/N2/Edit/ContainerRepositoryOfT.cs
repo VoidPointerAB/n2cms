@@ -23,9 +23,10 @@ namespace N2.Edit
         public bool Navigate { get; set; }
 
         /// <summary>Stores dependencies</summary>
-        /// <param name="finder"></param>
         /// <param name="repository"></param>
         /// <param name="activator"></param>
+        /// <param name="host">The current host.</param>
+        /// <param name="map">The content definition map.</param>
         public ContainerRepository(IRepository<ContentItem> repository, IHost host, ContentActivator activator, DefinitionMap map)
         {
             this.repository = repository;
@@ -66,6 +67,7 @@ namespace N2.Edit
 
         /// <summary>Gets a container or null if no container exists.</summary>
         /// <param name="containerContainer"></param>
+        /// <param name="name">The optional container name.</param>
         /// <returns></returns>
         public virtual T Get(ContentItem containerContainer, string name = null) 
         {
@@ -90,6 +92,7 @@ namespace N2.Edit
         /// <summary>Gets or creates a container.</summary>
         /// <param name="containerContainer"></param>
         /// <param name="setupCreatedItem"></param>
+        /// <param name="name">The optional container name.</param>
         /// <returns></returns>
         public virtual T GetOrCreate(ContentItem containerContainer, Action<T> setupCreatedItem, string name = null)
         {
@@ -99,6 +102,7 @@ namespace N2.Edit
         /// <summary>Creates a container.</summary>
         /// <param name="containerContainer"></param>
         /// <param name="setupCreatedItem"></param>
+        /// <param name="name">The optional container name.</param>
         /// <returns></returns>
         protected virtual T Create(ContentItem containerContainer, Action<T> setupCreatedItem, string name = null)
         {

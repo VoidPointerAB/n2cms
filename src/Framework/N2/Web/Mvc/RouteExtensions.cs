@@ -38,6 +38,7 @@ namespace N2.Web.Mvc
         /// <param name="family">The group to associate external content to.</param>
         /// <param name="key">The key of this particular external content.</param>
         /// <param name="url">The url on which this external content item is displayed.</param>
+        /// <param name="contentType">The content item type.</param>
         /// <returns>The external content item itself.</returns>
         public static ContentItem ApplyExternalContent(this RouteData data, string family, string key, string url, Type contentType = null)
         {

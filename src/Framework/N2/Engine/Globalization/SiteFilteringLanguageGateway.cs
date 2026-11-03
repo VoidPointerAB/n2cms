@@ -63,6 +63,7 @@ namespace N2.Engine.Globalization
         /// <summary>Gets an enumeration of translation options for edit mode.</summary>
         /// <param name="item">The item beeing edited.</param>
         /// <param name="includeCurrent">Wether to include the current item in the enumeratin.</param>
+        /// <param name="generateNonTranslated">Whether to include untranslated items.</param>
         /// <returns>An enumeration of translation definitions.</returns>
         public IEnumerable<TranslateSpecification> GetEditTranslations(ContentItem item, bool includeCurrent, bool generateNonTranslated)
         {

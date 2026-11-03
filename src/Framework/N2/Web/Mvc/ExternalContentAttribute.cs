@@ -32,13 +32,12 @@ namespace N2.Web.Mvc
         string keyRouteParameter;
 
         /// <summary>Creates external content defining the controller name as key for the external item.</summary>
-        /// <param name="keyParameter"></param>
         public ExternalContentAttribute()
         {
         }
 
         /// <summary>Creates external content defining which route parameter should be used to determine they key for the external item.</summary>
-        /// <param name="keyParameter"></param>
+        /// <param name="keyRouteParameter"></param>
         public ExternalContentAttribute(string keyRouteParameter)
         {
             this.keyRouteParameter = keyRouteParameter;

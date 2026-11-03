@@ -32,7 +32,7 @@ namespace N2.Engine
         }
 
         /// <summary>Gets an existing or creates a new cached value.</summary>
-        /// <param name="valueFactory">The method that creates the value when it is null.</param>
+        /// <param name="valueFactoryMethod">The method that creates the value when it is null.</param>
         /// <returns>The value.</returns>
         public virtual T GetValue(Func<T> valueFactoryMethod)
         {
