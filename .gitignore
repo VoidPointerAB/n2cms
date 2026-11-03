@@ -88,3 +88,8 @@ src/Framework/Extensions/x86/
 *.pdf
 /.vs
 /src/Mvc/MvcTemplates/N2.Web_LOG.txt
+/src/Framework/Extensions.Tests/.vs
+/src/Framework/Extensions.Tests/.vs
+/src/Framework/Extensions.Tests/.vs
+/src/Framework/MongoDB/.vs
+/src/Mvc/MvcTemplates/N2/Targeting/.vs
