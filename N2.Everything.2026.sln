@@ -195,8 +195,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N2.Management.Targeting", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebbApp", "TestWebbApp\TestWebbApp.csproj", "{E767D1E9-8E08-4870-A0E0-9CABECB1AB7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N2.Management2", "src\Mvc\MvcTemplates\N2\N2.Management2.csproj", "{5EE2B41C-135A-44F5-844E-13F47777E019}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -307,10 +305,6 @@ Global
 		{E767D1E9-8E08-4870-A0E0-9CABECB1AB7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E767D1E9-8E08-4870-A0E0-9CABECB1AB7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E767D1E9-8E08-4870-A0E0-9CABECB1AB7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EE2B41C-135A-44F5-844E-13F47777E019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EE2B41C-135A-44F5-844E-13F47777E019}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EE2B41C-135A-44F5-844E-13F47777E019}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EE2B41C-135A-44F5-844E-13F47777E019}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -355,7 +349,6 @@ Global
 		{4B5FC4F4-9AA8-4A42-B52E-2F287E4A7B2F} = {D652AD73-CA2A-4EFA-A46D-0F7FCAC84AE2}
 		{1F422E4F-8B5F-4B50-A521-AC5ED047AFEE} = {D652AD73-CA2A-4EFA-A46D-0F7FCAC84AE2}
 		{E767D1E9-8E08-4870-A0E0-9CABECB1AB7C} = {D652AD73-CA2A-4EFA-A46D-0F7FCAC84AE2}
-		{5EE2B41C-135A-44F5-844E-13F47777E019} = {D652AD73-CA2A-4EFA-A46D-0F7FCAC84AE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A7A57813-130C-450E-852E-CDB2D568FCD5}
