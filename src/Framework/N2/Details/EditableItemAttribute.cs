@@ -107,6 +107,8 @@ namespace N2.Details
             if (childEditor.UpdateObject(parentEditor.BinderContext.CreateNestedContext(childEditor, childItem, childEditor.GetDefinition())))
             {
                 parentItem[Name] = childItem;
+                if (!parentItem.Children.Contains(childItem))
+                    childItem.AddTo(parentItem, childItem.ZoneName);
                 return true;
             }
             

@@ -223,6 +223,7 @@ namespace N2.Tests.Details
 		public static ItemDefinition Define(this ItemDefinition definition)
 		{
 			definition.IsDefined = true;
+			definition.AllowedIn = N2.Integrity.AllowedZones.All;
 			return definition;
 		}
 	}

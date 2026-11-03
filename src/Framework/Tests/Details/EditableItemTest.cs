@@ -73,8 +73,14 @@ namespace N2.Tests.Details
             var editor = AddEditorAndInit(item, editable, page, enclosingEditor);
 
             editable.UpdateEditor(item, editor);
-            
-            ItemUtility.FindInChildren<NameEditor>(editor).Single().Text = "Hello child";
+
+            var childEditor = (ItemEditor)editor;
+            Assert.That(page.User, Is.Not.Null, "The test page needs a user for editor authorization");
+            Assert.That(childEditor.CurrentItem, Is.TypeOf<OtherItem>(), "The child item was not initialized");
+            Assert.That(childEditor.GetDefinition().Editables.Any(e => e.Name == "Name"), Is.True, "The child definition has no Name editable");
+            Assert.That(childEditor.AddedEditors, Is.Not.Null, "The child editor was not built");
+            Assert.That(childEditor.AddedEditors.ContainsKey("Name"), Is.True, "The Name editable was filtered out");
+            ((NameEditor)childEditor.AddedEditors["Name"]).Text = "Hello child";
 
             var ctx = new CommandContext(definition, item, Interfaces.Editing, engine.RequestContext.User);
             enclosingEditor.UpdateObject(ctx);
@@ -163,9 +169,8 @@ namespace N2.Tests.Details
             page.Controls.Add(enclosingEditor);
             enclosingEditor.Page = page;
             enclosingEditor.CurrentItem = item;
-            var editor = editable.AddTo(enclosingEditor);
             page.InitRecursive();
-            return editor;
+            return enclosingEditor.AddedEditors[editable.Name];
         }
     }
 }

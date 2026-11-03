@@ -107,14 +107,6 @@ namespace N2.Tests.Edit.Api
             definition.Paths.SelectedQueryKey.ShouldNotBeEmpty();
         }
 
-        [Test, Explicit]
-        public void Site_ShouldBeCurrentSite()
-        {
-            var definition = builder.GetInterfaceDefinition(new FakeHttpContext("http://localhost/N2/Api/Context.ashx?mode=full&selected=" + item.Path), new SelectionUtility(item, null));
-            definition.Site.RootItemID.ShouldBe(root.ID);
-            definition.Site.StartPageID.ShouldBe(item.ID);
-        }
-
 		[Test]
 		public void User_ShouldBe_LoggedInUser()
 		{

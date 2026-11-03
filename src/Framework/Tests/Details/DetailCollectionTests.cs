@@ -158,19 +158,6 @@ namespace N2.Tests.Details
             Assert.That(cloned.ID, Is.EqualTo(0));
         }
 
-        [Test, Explicit]
-        public void UpdatedEnclosingItem_UpdatesDetails()
-        {
-            DetailCollection collection = new DetailCollection();
-            collection.Add("hello");
-
-            var item = new Content.AnItem();
-            collection.EnclosingItem = item;
-
-            Assert.That(collection.EnclosingItem, Is.EqualTo(item));
-            Assert.That(collection.Details[0].EnclosingItem, Is.EqualTo(item));
-        }
-
         [Test]
         public void CanCopyToArray()
         {

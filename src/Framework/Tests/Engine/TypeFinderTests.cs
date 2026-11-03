@@ -21,6 +21,7 @@ namespace N2.Tests.Engine
             assemblyCache = new TypeCache(new N2.Persistence.BasicTemporaryFileHelper(new ThreadContext()));
             var config = new N2.Configuration.EngineSection();
             config.Assemblies.SkipLoadingPattern = "nothing";
+            config.Assemblies.RestrictToLoadingPattern = "^(?!NUnit3\\.TestAdapter)";
             config.Assemblies.Remove(new N2.Configuration.AssemblyElement("N2.Management"));
             config.Assemblies.EnableTypeCache = false;
             typeFinder = new WebAppTypeFinder(assemblyCache, config);
