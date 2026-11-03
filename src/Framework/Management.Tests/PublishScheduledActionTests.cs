@@ -82,12 +82,13 @@ namespace N2.Management.Tests
             unpublished.Title.ShouldBe("Original");
         }
 
-        [Test, Explicit]
-        public void VersionToBePublished_IsNotStoredInVersionList()
+        [Test]
+        public void ScheduledVersion_IsStoredSeparatelyFromContentItems()
         {
+            ExternalItem item;
             using (engine.SecurityManager.Disable())
             {
-                var item = new ExternalItem { Title = "Original", State = ContentState.Published, Published = N2.Utility.CurrentTime().AddSeconds(-10) };
+                item = new ExternalItem { Title = "Original", State = ContentState.Published, Published = N2.Utility.CurrentTime().AddSeconds(-10) };
                 engine.Persister.Save(item);
 
                 var version = new ExternalItem { Title = "ToBePublished", State = ContentState.Published, Published = N2.Utility.CurrentTime().AddSeconds(-10), VersionOf = item };
@@ -95,10 +96,12 @@ namespace N2.Management.Tests
                 engine.Persister.Save(version);
             }
 
+            engine.Persister.Repository.Find().Count().ShouldBe(1);
+            engine.Resolve<ContentVersionRepository>().GetVersions(item).Count().ShouldBe(1);
+
             action.Execute();
 
-            var all = engine.Persister.Repository.Find();
-            all.Count().ShouldBe(2);
+            engine.Persister.Repository.Find().Count().ShouldBe(1);
         }
     }
 }

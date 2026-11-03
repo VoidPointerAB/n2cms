@@ -34,7 +34,7 @@ namespace N2.Tests.Security
         protected InterceptingProxyFactory proxyFactory;
         protected Type[] persistedTypes = new[] { typeof(RootBase), typeof(UserList), typeof(User), typeof(UserOverride) };
         
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public virtual void TestFixtureSetUp()
         {
             TestSupport.Setup(out definitions, out activator, out notifier, out sessionProvider, out finder, out schemaCreator, out proxyFactory, persistedTypes);
@@ -48,7 +48,7 @@ namespace N2.Tests.Security
         {
             base.SetUp();
 
-            schemaCreator.Execute(/*script*/false, /*export*/true, /*justDrop*/false, sessionProvider.OpenSession.Connection, null);
+            schemaCreator.Execute(/*script*/false, /*export*/true, /*justDrop*/false, sessionProvider.OpenSession.Session.Connection, null);
 
 			var root = new N2.Management.Myself.RootBase();
 			persister.Save(root);

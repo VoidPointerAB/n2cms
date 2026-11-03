@@ -19,7 +19,7 @@ namespace N2.Edit.Tests.Trash
         TrashContainerItem trash;
         Func<DateTime> currentTimeBackup;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
             engine = new ContentEngine();
@@ -41,7 +41,7 @@ namespace N2.Edit.Tests.Trash
             trash = ((TrashHandler)engine.Resolve<ITrashHandler>()).GetTrashContainer(true);
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void TestFixtureTearDown()
         {
             engine.Persister.Repository.Delete(root);
