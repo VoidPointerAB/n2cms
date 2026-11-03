@@ -115,8 +115,11 @@ namespace Dinamico.Models
 			if (string.IsNullOrEmpty(userName)) throw new ArgumentException("Value cannot be null or empty.", "userName");
 			if (string.IsNullOrEmpty(password)) throw new ArgumentException("Value cannot be null or empty.", "password");
 
+			// Keep support for the forms credentials configured in web.config.
+#pragma warning disable CS0618
 			return (_provider.ValidateUser(userName, password) && _provider.GetUser(userName, false).IsApproved)
 			       || FormsAuthentication.Authenticate(userName, password);
+#pragma warning restore CS0618
 		}
 
 		public MembershipCreateStatus CreateUser(string userName, string password, string email)
