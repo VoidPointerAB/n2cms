@@ -8,11 +8,10 @@ namespace N2.Templates.Tests.Wiki
         public FakeUrlParser()
         {
             PageNotFound += delegate { };
-            BuiltUrl += delegate { };
         }
 
         public event EventHandler<PageNotFoundEventArgs> PageNotFound;
-        public event EventHandler<UrlEventArgs> BuiltUrl;
+        public event EventHandler<UrlEventArgs> BuiltUrl { add { } remove { } }
 
         public void InvokePageNotFound(PageNotFoundEventArgs e)
         {
@@ -74,7 +73,7 @@ namespace N2.Templates.Tests.Wiki
             return path;
         }
 
-        public event EventHandler<UrlEventArgs> BuildingUrl;
+        public event EventHandler<UrlEventArgs> BuildingUrl { add { } remove { } }
 
         public PathData ResolvePath(Url url, ContentItem startNode = null, string remainingPath = null)
         {
