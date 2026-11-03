@@ -2,7 +2,7 @@
 
 Inventering: 2026-11-03. Underlag: de 26 projektfilerna i `N2.Everything.2026.sln`, deras inkluderade `packages.config` och direkta `HintPath`-referenser till `packages/`.
 
-**Summa:** 26 projekt, 69 unika paket-ID och 76 paket/version-kombinationer. Paket som bara nås via projektreferenser räknas i sitt eget projekt, inte om i beroende projekt. Installerade men oanvända paket i rotens `packages/` ingår inte.
+**Summa:** 26 projekt, 69 unika paket-ID och 75 paket/version-kombinationer. Paket som bara nås via projektreferenser räknas i sitt eget projekt, inte om i beroende projekt. Installerade men oanvända paket i rotens `packages/` ingår inte.
 
 ## Paket och användande projekt
 
@@ -46,9 +46,8 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | `NHibernate` | `5.7.1` | `N2`, `N2.Management.Tests`, `N2.Tests` |
 | `NLog` | `2.0.0.2000` | `N2.Raven.Tests` |
 | `NLog` | `6.2.2` | `N2.Raven` |
-| `NUnit` | `2.5.10.11092` | `N2.Raven.Tests` |
-| `NUnit` | `3.6.0` | `N2.Extensions.Tests`, `N2.Management.Tests`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
-| `NUnit3TestAdapter` | `3.16.1` | `N2.Management.Tests`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
+| `NUnit` | `3.6.0` | `N2.Extensions.Tests`, `N2.Management.Tests`, `N2.Raven.Tests`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
+| `NUnit3TestAdapter` | `3.16.1` | `N2.Extensions.Tests`, `N2.Management.Tests`, `N2.Raven.Tests`, `N2.Templates.Mvc.Tests`, `N2.Templates.Tests`, `N2.Tests` |
 | `RavenDB` | `1.0.573` | `N2.Raven.Tests` |
 | `RavenDB-Embedded` | `1.0.573` | `N2.Raven`†, `N2.Raven.Tests` |
 | `Remotion.Linq` | `2.2.0` | `N2`, `N2.Management.Tests`, `N2.Tests` |
@@ -93,7 +92,7 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | --- | --- | --- | ---: | ---: |
 | `N2` | `src/Framework/N2/N2.csproj` | `src/Framework/N2/packages.config` | 10 | 0 |
 | `N2.Extensions` | `src/Framework/Extensions/N2.Extensions.csproj` | `src/Framework/Extensions/packages.config` | 4 | 0 |
-| `N2.Extensions.Tests` | `src/Framework/Extensions.Tests/N2.Extensions.Tests.csproj` | `src/Framework/Extensions.Tests/packages.config` | 8 | 0 |
+| `N2.Extensions.Tests` | `src/Framework/Extensions.Tests/N2.Extensions.Tests.csproj` | `src/Framework/Extensions.Tests/packages.config` | 9 | 0 |
 | `N2.Tests` | `src/Framework/Tests/N2.Tests.csproj` | `src/Framework/Tests/packages.config` | 16 | 0 |
 | `N2.Templates` | `src/WebForms/WebFormsTemplates/N2.Templates.csproj` | `src/WebForms/WebFormsTemplates/packages.config` | 3 | 1 |
 | `N2.Templates.Tests` | `src/WebForms/WebFormsTemplates.Tests/N2.Templates.Tests.csproj` | `src/WebForms/WebFormsTemplates.Tests/packages.config` | 5 | 0 |
@@ -107,7 +106,7 @@ Märkningen `†` betyder att paket/version finns som DLL-referens i projektfile
 | `N2.Packaging` | `src/Framework/Packaging/N2.Packaging.csproj` | `src/Framework/Packaging/packages.config` | 6 | 0 |
 | `N2.Razor` | `src/Framework/Razor/N2.Razor.csproj` | `src/Framework/Razor/packages.config` | 4 | 0 |
 | `N2.Raven` | `src/Framework/Raven/N2.Raven.csproj` | `src/Framework/Raven/packages.config` | 14 | 1 |
-| `N2.Raven.Tests` | `src/Framework/Raven.Tests/N2.Raven.Tests.csproj` | `src/Framework/Raven.Tests/packages.config` | 9 | 0 |
+| `N2.Raven.Tests` | `src/Framework/Raven.Tests/N2.Raven.Tests.csproj` | `src/Framework/Raven.Tests/packages.config` | 10 | 0 |
 | `N2.Management` | `src/Mvc/MvcTemplates/N2/N2.Management.csproj` | `src/Mvc/MvcTemplates/N2/packages.config` | 12 | 0 |
 | `N2.ReusableParts` | `src/Framework/ReusableParts/N2.ReusableParts.csproj` | `src/Framework/ReusableParts/packages.config` | 4 | 0 |
 | `N2.Search.Lucene` | `src/Framework/Search.Lucene/N2.Search.Lucene.csproj` | `src/Framework/Search.Lucene/packages.config` | 8 | 0 |
